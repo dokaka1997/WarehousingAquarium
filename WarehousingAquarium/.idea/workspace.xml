@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a8f3785b-034b-48bd-95ee-43573ccffb30" name="Default Changelist" comment="init">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/warehousing/aquarium/entity/AccountEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/warehousing/aquarium/model/request/CreateUserRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.classpath" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dvdo/SpringBootJWTApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/warehousing/aquarium/WarehousingAquarium.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dvdo/config/JwtAuthenticationEntryPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/warehousing/aquarium/config/JwtAuthenticationEntryPoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dvdo/config/JwtRequestFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/warehousing/aquarium/config/JwtRequestFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dvdo/config/JwtTokenUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/warehousing/aquarium/config/JwtTokenUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dvdo/config/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/warehousing/aquarium/config/WebSecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dvdo/controller/HelloWorldController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/warehousing/aquarium/controller/HelloWorldController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dvdo/controller/JwtAuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/warehousing/aquarium/controller/JwtAuthenticationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dvdo/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/warehousing/aquarium/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dvdo/model/entity/UserEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dvdo/model/request/JwtRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/warehousing/aquarium/model/request/JwtRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dvdo/model/request/UserRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dvdo/model/response/JwtResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/warehousing/aquarium/model/response/JwtResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dvdo/model/response/UserResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/warehousing/aquarium/model/response/UserResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dvdo/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/warehousing/aquarium/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dvdo/service/JwtUserDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/warehousing/aquarium/service/JwtUserDetailsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dvdo/service/TokenService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/warehousing/aquarium/service/TokenService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dvdo/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/warehousing/aquarium/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dvdo/service/impl/TokenServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/warehousing/aquarium/service/impl/TokenServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/dvdo/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/warehousing/aquarium/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dvdo/SpringBootJWTApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dvdo/config/JwtAuthenticationEntryPoint.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dvdo/config/JwtRequestFilter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dvdo/config/JwtTokenUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dvdo/config/WebSecurityConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dvdo/controller/HelloWorldController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dvdo/controller/JwtAuthenticationController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dvdo/controller/UserController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dvdo/model/entity/UserEntity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dvdo/model/request/JwtRequest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dvdo/model/request/UserRequest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dvdo/model/response/JwtResponse.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dvdo/model/response/UserResponse.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dvdo/repository/UserRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dvdo/service/JwtUserDetailsService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dvdo/service/TokenService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dvdo/service/UserService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dvdo/service/impl/TokenServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dvdo/service/impl/UserServiceImpl.class" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="myId2FirstActivated">
+      <map>
+        <entry key="JPA Inspector" value="true" />
+        <entry key="JPA Palette" value="true" />
+        <entry key="JPA Structure" value="true" />
+      </map>
+    </option>
+    <option name="myId2Visible">
+      <map>
+        <entry key="JPA Inspector" value="false" />
+        <entry key="JPA Palette" value="false" />
+        <entry key="JPA Structure" value="false" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
+  </component>
+  <component name="ProjectId" id="1vLDe3yuVdNRx8C1EgqRO7J2Mrn" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+  </component>
+  <component name="RunManager" selected="Spring Boot.WarehousingAquarium (1)">
+    <configuration name="WarehousingAquarium (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="WarehousingAquarium" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.warehousing.aquarium.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.warehousing.aquarium.WarehousingAquarium" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WarehousingAquarium" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="WarehousingAquarium" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.dvdo.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.dvdo.WarehousingAquarium" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WarehousingAquarium" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="WarehousingAquarium" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.dvdo.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.dvdo.WarehousingAquarium" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.WarehousingAquarium (1)" />
+        <item itemvalue="Spring Boot.WarehousingAquarium" />
+        <item itemvalue="Spring Boot.WarehousingAquarium" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a8f3785b-034b-48bd-95ee-43573ccffb30" name="Default Changelist" comment="" />
+      <created>1626332569156</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1626332569156</updated>
+      <workItem from="1626332570588" duration="1817000" />
+      <workItem from="1626335338312" duration="16379000" />
+      <workItem from="1626414363941" duration="326000" />
+      <workItem from="1626414719642" duration="712000" />
+      <workItem from="1626415451949" duration="6464000" />
+      <workItem from="1626656381680" duration="782000" />
+      <workItem from="1646317628403" duration="3326000" />
+      <workItem from="1646402127001" duration="544000" />
+      <workItem from="1646402772611" duration="6080000" />
+      <workItem from="1646488970762" duration="10542000" />
+      <workItem from="1646579877070" duration="576000" />
+      <workItem from="1646580473540" duration="1327000" />
+      <workItem from="1646582191575" duration="241000" />
+      <workItem from="1646584310479" duration="24000" />
+      <workItem from="1646584562851" duration="102000" />
+    </task>
+    <task id="LOCAL-00001" summary="init">
+      <created>1626413618569</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1626413618569</updated>
+    </task>
+    <task id="LOCAL-00002" summary="init">
+      <created>1626413730083</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1626413730083</updated>
+    </task>
+    <task id="LOCAL-00003" summary="init">
+      <created>1626413806862</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1626413806862</updated>
+    </task>
+    <task id="LOCAL-00004" summary="init">
+      <created>1626416430685</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1626416430685</updated>
+    </task>
+    <task id="LOCAL-00005" summary="init">
+      <created>1626416497134</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1626416497134</updated>
+    </task>
+    <task id="LOCAL-00006" summary="init">
+      <created>1626416576379</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1626416576379</updated>
+    </task>
+    <task id="LOCAL-00007" summary="init">
+      <created>1626416668535</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1626416668535</updated>
+    </task>
+    <task id="LOCAL-00008" summary="init">
+      <created>1626416749470</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1626416749470</updated>
+    </task>
+    <task id="LOCAL-00009" summary="init">
+      <created>1626416823469</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1626416823469</updated>
+    </task>
+    <task id="LOCAL-00010" summary="init">
+      <created>1626416877646</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1626416877646</updated>
+    </task>
+    <task id="LOCAL-00011" summary="init">
+      <created>1626416938256</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1626416938256</updated>
+    </task>
+    <task id="LOCAL-00012" summary="init">
+      <created>1626417061508</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1626417061508</updated>
+    </task>
+    <task id="LOCAL-00013" summary="init">
+      <created>1626417115792</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1626417115792</updated>
+    </task>
+    <task id="LOCAL-00014" summary="init">
+      <created>1626417164367</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1626417164367</updated>
+    </task>
+    <task id="LOCAL-00015" summary="init">
+      <created>1626417228112</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1626417228112</updated>
+    </task>
+    <task id="LOCAL-00016" summary="init">
+      <created>1626417297967</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1626417297967</updated>
+    </task>
+    <task id="LOCAL-00017" summary="init">
+      <created>1626417356282</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1626417356282</updated>
+    </task>
+    <task id="LOCAL-00018" summary="init">
+      <created>1626417424217</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1626417424217</updated>
+    </task>
+    <task id="LOCAL-00019" summary="init">
+      <created>1626417491288</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1626417491288</updated>
+    </task>
+    <task id="LOCAL-00020" summary="init">
+      <created>1626417553323</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1626417553323</updated>
+    </task>
+    <task id="LOCAL-00021" summary="init">
+      <created>1626417607681</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1626417607681</updated>
+    </task>
+    <task id="LOCAL-00022" summary="init">
+      <created>1626417672473</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1626417672473</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="init" />
+    <option name="LAST_COMMIT_MESSAGE" value="init" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/warehousing/aquarium/service/impl/TokenServiceImpl.java</url>
+          <line>68</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/warehousing/aquarium/service/impl/TokenServiceImpl.java</url>
+          <line>72</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="org.springframework.data.domain.PageRequest" memberName="sort" />
+      </pinned-members>
+    </pin-to-top-manager>
+  </component>
+</project>
