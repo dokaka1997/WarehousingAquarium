@@ -10,4 +10,6 @@ public interface UserRepository extends JpaRepository<AccountEntity, Long> {
     Optional<AccountEntity> getByUsernameAndPassword(String username, String password);
 
     Optional<AccountEntity> getByUsername(String username);
+
+    Optional<AccountEntity> getFirstByEmail(String email);
 }

@@ -25,6 +25,7 @@ public class AccountEntity {
     private boolean isActive;
     private String avatar;
     private int roleId;
+    private String token;
 
     @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL)
     @EqualsAndHashCode.Exclude
