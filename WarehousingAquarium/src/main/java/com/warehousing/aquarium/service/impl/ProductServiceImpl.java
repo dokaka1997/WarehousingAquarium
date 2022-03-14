@@ -24,15 +24,17 @@ public class ProductServiceImpl implements ProductService {
     UnitRepository unitRepository;
     UserRepository userRepository;
     SupplierRepository supplierRepository;
+    CategoryRepository categoryRepository;
 
     @Autowired
     public ProductServiceImpl(ProductRepository productRepository, BrandRepository brandRepository,
-                              UnitRepository unitRepository, UserRepository userRepository, SupplierRepository supplierRepository) {
+                              UnitRepository unitRepository, UserRepository userRepository, SupplierRepository supplierRepository, CategoryRepository categoryRepository) {
         this.productRepository = productRepository;
         this.brandRepository = brandRepository;
         this.unitRepository = unitRepository;
         this.userRepository = userRepository;
         this.supplierRepository = supplierRepository;
+        this.categoryRepository = categoryRepository;
     }
 
 
@@ -49,7 +51,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Boolean createProduct(ProductRequest product) {
-        ProductEntity productEntity;
+        ProductEntity productEntity = new ProductEntity();
 
         Optional<BrandEntity> optionalBrand = brandRepository.findById(product.getBrandId());
 
@@ -59,17 +61,37 @@ public class ProductServiceImpl implements ProductService {
 
         Optional<SupplierEntity> optionalSupplier = supplierRepository.findById(product.getSupplierId());
 
+        Optional<CategoryEntity> optionalCategory = categoryRepository.findById(product.getCategoryId());
+
         if (!optionalAccount.isPresent() || !optionalBrand.isPresent()
-                || !optionalUnit.isPresent() || !optionalSupplier.isPresent()) {
+                || !optionalUnit.isPresent() || !optionalSupplier.isPresent() || !optionalCategory.isPresent()) {
             throw new MissingFieldException("Missing value");
         }
-        ModelMapper mapper = new ModelMapper();
-        productEntity = mapper.map(product, ProductEntity.class);
+        productEntity.setProductName(product.getProductName());
+        productEntity.setCreatedDate(product.getCreatedDate());
+        productEntity.setProductCode(product.getProductCode());
+        productEntity.setBarCode(product.getBarCode());
+        productEntity.setUnitPrice(product.getUnitPrice());
+        productEntity.setRetailPrice(product.getRetailPrice());
+        productEntity.setWholesalePrice(product.getWholesalePrice());
+        productEntity.setModifyCreate(product.getModifyCreate());
+        productEntity.setDescription(product.getDescription());
+        productEntity.setTag(product.getTag());
+        productEntity.setSale(product.isSale());
+        productEntity.setSaleQuantity(product.getSaleQuantity());
+        productEntity.setStockQuantity(product.getStockQuantity());
+
         productEntity.setBrandId(optionalBrand.get());
         productEntity.setUnitId(optionalUnit.get());
         productEntity.setUserId(optionalAccount.get());
         productEntity.setSupplierId(optionalSupplier.get());
-        productRepository.save(productEntity);
+        productEntity.setCategoryId(optionalCategory.get());
+
+        try {
+            productRepository.save(productEntity);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
         return true;
     }
 }

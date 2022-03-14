@@ -55,4 +55,8 @@ public class ProductEntity {
     @ManyToOne()
     @JoinColumn(name = "supplierId")
     SupplierEntity supplierId;
+
+    @ManyToOne()
+    @JoinColumn(name = "categoryId")
+    CategoryEntity categoryId;
 }

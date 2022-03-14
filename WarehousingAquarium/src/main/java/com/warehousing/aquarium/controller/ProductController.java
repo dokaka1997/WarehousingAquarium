@@ -17,7 +17,7 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
-    @GetMapping("")
+    @GetMapping()
     public ResponseEntity<List<ProductDTO>> getAllProducts(@RequestParam int pageIndex, @RequestParam int pageSize) {
         return ResponseEntity.ok(productService.getAllProducts(pageIndex, pageSize));
     }
