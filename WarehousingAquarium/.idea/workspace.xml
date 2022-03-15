@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a8f3785b-034b-48bd-95ee-43573ccffb30" name="Default Changelist" comment="init">
-      <change beforePath="$PROJECT_DIR$/../API Document.docx" beforeDir="false" afterPath="$PROJECT_DIR$/../API Document.docx" afterDir="false" />
-    </list>
+    <list default="true" id="a8f3785b-034b-48bd-95ee-43573ccffb30" name="Default Changelist" comment="init" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -156,7 +154,8 @@
       <workItem from="1646625480561" duration="5000" />
       <workItem from="1647192884838" duration="3713000" />
       <workItem from="1647244324029" duration="671000" />
-      <workItem from="1647268503665" duration="2866000" />
+      <workItem from="1647268503665" duration="3462000" />
+      <workItem from="1647358408309" duration="4600000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1626413618569</created>

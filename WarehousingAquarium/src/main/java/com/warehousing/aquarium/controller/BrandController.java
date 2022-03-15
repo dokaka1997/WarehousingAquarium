@@ -1,8 +1,9 @@
 package com.warehousing.aquarium.controller;
 
+import com.warehousing.aquarium.entity.BrandEntity;
 import com.warehousing.aquarium.entity.CategoryEntity;
-import com.warehousing.aquarium.model.response.CategoryDTO;
-import com.warehousing.aquarium.service.CategoryService;
+import com.warehousing.aquarium.model.response.BrandDTO;
+import com.warehousing.aquarium.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -14,18 +15,17 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("category")
-public class CategoryController {
-
-    CategoryService categoryService;
+@RequestMapping("brand")
+public class BrandController {
+    BrandService brandService;
 
     @Autowired
-    public CategoryController(CategoryService categoryService) {
-        this.categoryService = categoryService;
+    public BrandController(BrandService brandService) {
+        this.brandService = brandService;
     }
 
     @GetMapping
-    public ResponseEntity<List<CategoryDTO>> getAllCategory() {
-        return ResponseEntity.ok(categoryService.getAllCategory());
+    public ResponseEntity<List<BrandDTO>> getAllBrand() {
+        return ResponseEntity.ok(brandService.getAllBrand());
     }
 }
