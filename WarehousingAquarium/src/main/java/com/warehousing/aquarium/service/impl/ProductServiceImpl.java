@@ -1,18 +1,16 @@
 package com.warehousing.aquarium.service.impl;
 
 import com.warehousing.aquarium.entity.*;
-import com.warehousing.aquarium.exception.MissingFieldException;
 import com.warehousing.aquarium.mapper.ProductMapper;
 import com.warehousing.aquarium.model.request.ProductRequest;
 import com.warehousing.aquarium.model.response.ProductDTO;
 import com.warehousing.aquarium.repository.*;
 import com.warehousing.aquarium.service.ProductService;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,9 +37,30 @@ public class ProductServiceImpl implements ProductService {
 
 
     @Override
-    public List<ProductDTO> getAllProducts(int pageIndex, int pageSize) {
-        Page<ProductEntity> productEntities = productRepository.findAll(PageRequest.of(pageIndex, pageSize));
-        return ProductMapper.mapListProductEntityToDTO(productEntities.getContent());
+    public List<ProductDTO> getAllProducts(int pageIndex, int pageSize, String search) {
+        List<ProductEntity> productEntities;
+        if (search.isEmpty()) {
+            productEntities = productRepository.findAll(PageRequest.of(pageIndex, pageSize)).getContent();
+        } else {
+            productEntities = productRepository.findAllByBarCodeOrProductCodeOrProductName(search, search, search);
+            if (productEntities.size() <= pageSize) {
+                return ProductMapper.mapListProductEntityToDTO(productEntities);
+            } else {
+                List<ProductEntity> rs = new ArrayList<>();
+                int start = pageIndex * pageSize;
+                for (int i = 0; i < productEntities.size(); i++) {
+                    if (i >= start && i < start + pageSize) {
+                        if (i > start + pageSize) {
+                            break;
+                        }
+                        rs.add(productEntities.get(i));
+                    }
+                }
+                return ProductMapper.mapListProductEntityToDTO(rs);
+            }
+        }
+
+        return ProductMapper.mapListProductEntityToDTO(productEntities);
     }
 
     @Override
@@ -63,10 +82,6 @@ public class ProductServiceImpl implements ProductService {
 
         Optional<CategoryEntity> optionalCategory = categoryRepository.findById(product.getCategoryId());
 
-        if (!optionalAccount.isPresent() || !optionalBrand.isPresent()
-                || !optionalUnit.isPresent() || !optionalSupplier.isPresent() || !optionalCategory.isPresent()) {
-            throw new MissingFieldException("Missing value");
-        }
         productEntity.setProductName(product.getProductName());
         productEntity.setCreatedDate(product.getCreatedDate());
         productEntity.setProductCode(product.getProductCode());
@@ -80,12 +95,20 @@ public class ProductServiceImpl implements ProductService {
         productEntity.setSale(product.isSale());
         productEntity.setSaleQuantity(product.getSaleQuantity());
         productEntity.setStockQuantity(product.getStockQuantity());
+        productEntity.setColor(product.getColor());
+        productEntity.setImage(product.getImage());
+        productEntity.setSttId(product.getSttId());
+        productEntity.setClassifyId(product.getClassifyId());
 
-        productEntity.setBrandId(optionalBrand.get());
-        productEntity.setUnitId(optionalUnit.get());
-        productEntity.setUserId(optionalAccount.get());
-        productEntity.setSupplierId(optionalSupplier.get());
-        productEntity.setCategoryId(optionalCategory.get());
+        optionalBrand.ifPresent(productEntity::setBrandId);
+
+        optionalUnit.ifPresent(productEntity::setUnitId);
+
+        optionalAccount.ifPresent(productEntity::setUserId);
+
+        optionalSupplier.ifPresent(productEntity::setSupplierId);
+
+        optionalCategory.ifPresent(productEntity::setCategoryId);
 
         try {
             productRepository.save(productEntity);

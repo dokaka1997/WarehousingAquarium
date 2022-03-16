@@ -1,6 +1,5 @@
 package com.warehousing.aquarium.controller;
 
-import com.warehousing.aquarium.entity.CategoryEntity;
 import com.warehousing.aquarium.model.response.CategoryDTO;
 import com.warehousing.aquarium.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;

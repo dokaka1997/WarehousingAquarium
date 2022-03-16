@@ -1,7 +1,5 @@
 package com.warehousing.aquarium.controller;
 
-import com.warehousing.aquarium.entity.BrandEntity;
-import com.warehousing.aquarium.entity.CategoryEntity;
 import com.warehousing.aquarium.model.response.BrandDTO;
 import com.warehousing.aquarium.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;

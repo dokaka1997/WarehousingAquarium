@@ -20,7 +20,7 @@ public class ProductEntity {
 
     private String productCode;
 
-    private int barCode;
+    private String barCode;
 
     private double unitPrice;
 
@@ -39,6 +39,14 @@ public class ProductEntity {
     private int saleQuantity;
 
     private int stockQuantity;
+
+    private String image;
+
+    private String color;
+
+    private int classifyId;
+
+    private int sttId;
 
     @ManyToOne()
     @JoinColumn(name = "brandId")

@@ -18,8 +18,8 @@ public class ProductController {
     ProductService productService;
 
     @GetMapping()
-    public ResponseEntity<List<ProductDTO>> getAllProducts(@RequestParam int pageIndex, @RequestParam int pageSize) {
-        return ResponseEntity.ok(productService.getAllProducts(pageIndex, pageSize));
+    public ResponseEntity<List<ProductDTO>> getAllProducts(@RequestParam int pageIndex, @RequestParam int pageSize, @RequestParam String search) {
+        return ResponseEntity.ok(productService.getAllProducts(pageIndex, pageSize, search));
     }
 
     @GetMapping("/{id}")
@@ -31,4 +31,5 @@ public class ProductController {
     public ResponseEntity<Boolean> getProductById(@RequestBody ProductRequest productRequest) {
         return ResponseEntity.ok(productService.createProduct(productRequest));
     }
+
 }

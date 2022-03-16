@@ -13,7 +13,7 @@ public class ProductRequest {
 
     private String productCode;
 
-    private int barCode;
+    private String barCode;
 
     private double unitPrice;
 
@@ -32,6 +32,14 @@ public class ProductRequest {
     private int saleQuantity;
 
     private int stockQuantity;
+
+    private String image;
+
+    private String color;
+
+    private int classifyId;
+
+    private int sttId;
 
     Long brandId;
 

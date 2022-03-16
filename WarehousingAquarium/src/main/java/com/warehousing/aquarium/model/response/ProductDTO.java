@@ -1,9 +1,5 @@
 package com.warehousing.aquarium.model.response;
 
-import com.warehousing.aquarium.entity.AccountEntity;
-import com.warehousing.aquarium.entity.BrandEntity;
-import com.warehousing.aquarium.entity.SupplierEntity;
-import com.warehousing.aquarium.entity.UnitEntity;
 import lombok.Data;
 
 import java.util.Date;
@@ -19,7 +15,7 @@ public class ProductDTO {
 
     private String productCode;
 
-    private int barCode;
+    private String barCode;
 
     private double unitPrice;
 
@@ -38,6 +34,14 @@ public class ProductDTO {
     private int saleQuantity;
 
     private int stockQuantity;
+
+    private String image;
+
+    private String color;
+
+    private int classifyId;
+
+    private int sttId;
 
     BrandDTO brandId;
 

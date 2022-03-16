@@ -7,7 +7,7 @@ import com.warehousing.aquarium.model.response.ProductDTO;
 import java.util.List;
 
 public interface ProductService {
-    List<ProductDTO> getAllProducts(int pageIndex, int pageSize);
+    List<ProductDTO> getAllProducts(int pageIndex, int pageSize, String search);
 
     ProductDTO getProductById(Long id);
 
