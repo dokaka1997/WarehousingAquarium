@@ -17,11 +17,13 @@ public class ProductMapper {
             UnitDTO unitId = mapper.map(entity.getUnitId(), UnitDTO.class);
             AccountDTO userId = mapper.map(entity.getUserId(), AccountDTO.class);
             SupplierDTO supplierId = mapper.map(entity.getSupplierId(), SupplierDTO.class);
+            CategoryDTO categoryId = mapper.map(entity.getCategoryId(), CategoryDTO.class);
             ProductDTO dto = new ProductDTO();
             dto.setBrandId(brandId);
             dto.setUnitId(unitId);
             dto.setUserId(userId);
             dto.setSupplierId(supplierId);
+            dto.setCategoryDTO(categoryId);
             dto.setProductId(entity.getProductId());
             dto.setProductCode(entity.getProductCode());
             dto.setProductName(entity.getProductName());
@@ -40,6 +42,7 @@ public class ProductMapper {
             dto.setColor(entity.getColor());
             dto.setSttId(entity.getSttId());
             dto.setClassifyId(entity.getClassifyId());
+
             products.add(dto);
         }
         return products;

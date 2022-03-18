@@ -117,4 +117,15 @@ public class ProductServiceImpl implements ProductService {
         }
         return true;
     }
+
+    @Override
+    public Boolean deleteProductById(Long id) {
+        try {
+            productRepository.deleteById(id);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 }

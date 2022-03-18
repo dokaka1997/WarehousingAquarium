@@ -47,9 +47,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean login(LoginUserRequest loginUserRequest) {
+    public AccountEntity login(LoginUserRequest loginUserRequest) {
         Optional<AccountEntity> userEntity = userRepository.getByUsernameAndPassword(loginUserRequest.getUsername(), loginUserRequest.getPassword());
-        return userEntity.isPresent();
+        return userEntity.get();
     }
 
     @Override
@@ -75,6 +75,7 @@ public class UserServiceImpl implements UserService {
         if (accountEntity.isPresent()) {
             AccountEntity account = accountEntity.get();
             if (account.getToken().equals(token)) {
+                account.setToken("");
                 account.setPassword(newPassword);
                 userRepository.save(account);
                 return true;

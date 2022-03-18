@@ -13,4 +13,6 @@ public interface ProductService {
 
     Boolean createProduct (ProductRequest product) throws MissingFieldException;
 
+    Boolean deleteProductById(Long id);
+
 }

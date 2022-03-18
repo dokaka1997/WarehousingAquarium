@@ -2,6 +2,7 @@ package com.warehousing.aquarium.service.impl;
 
 
 import com.warehousing.aquarium.config.JwtTokenUtil;
+import com.warehousing.aquarium.entity.AccountEntity;
 import com.warehousing.aquarium.model.request.JwtRequest;
 import com.warehousing.aquarium.model.request.LoginUserRequest;
 import com.warehousing.aquarium.model.response.JwtResponse;
@@ -53,13 +54,12 @@ public class TokenServiceImpl implements TokenService {
         LoginUserRequest userRequest = new LoginUserRequest();
         userRequest.setUsername(authenticationRequest.getUsername());
         userRequest.setPassword(authenticationRequest.getPassword());
-        if (userService.login(userRequest)) {
+        AccountEntity account = userService.login(userRequest);
+        if (account != null) {
             final UserDetails userDetails = jwtInMemoryUserDetailsService
                     .loadUserByUsername(authenticationRequest.getUsername());
             final String token = jwtTokenUtil.generateToken(userDetails);
-            String refreshToken = "";
-            //todo : get refreshToken
-            return new JwtResponse(token, refreshToken, userDetails.getUsername());
+            return new JwtResponse(token, account);
         } else {
             throw new UsernameNotFoundException(userRequest.getUsername());
         }
