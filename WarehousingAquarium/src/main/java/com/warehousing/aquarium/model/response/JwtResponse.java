@@ -10,10 +10,10 @@ public class JwtResponse implements Serializable {
 
     private static final long serialVersionUID = -8091879091924046844L;
     private final String jwtToken;
-    AccountEntity account;
+    AccountDTO account;
 
 
-    public JwtResponse(String jwtToken, AccountEntity account) {
+    public JwtResponse(String jwtToken, AccountDTO account) {
         this.jwtToken = jwtToken;
         this.account = account;
     }

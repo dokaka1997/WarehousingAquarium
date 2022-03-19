@@ -5,6 +5,7 @@ import com.warehousing.aquarium.config.JwtTokenUtil;
 import com.warehousing.aquarium.entity.AccountEntity;
 import com.warehousing.aquarium.model.request.JwtRequest;
 import com.warehousing.aquarium.model.request.LoginUserRequest;
+import com.warehousing.aquarium.model.response.AccountDTO;
 import com.warehousing.aquarium.model.response.JwtResponse;
 import com.warehousing.aquarium.service.TokenService;
 import com.warehousing.aquarium.service.UserService;
@@ -59,7 +60,19 @@ public class TokenServiceImpl implements TokenService {
             final UserDetails userDetails = jwtInMemoryUserDetailsService
                     .loadUserByUsername(authenticationRequest.getUsername());
             final String token = jwtTokenUtil.generateToken(userDetails);
-            return new JwtResponse(token, account);
+            AccountDTO accountDTO = new AccountDTO();
+            accountDTO.setUserId(account.getUserId());
+            accountDTO.setUsername(account.getUsername());
+            accountDTO.setPassword(account.getPassword());
+            accountDTO.setName(account.getName());
+            accountDTO.setDob(account.getDob());
+            accountDTO.setEmail(account.getEmail());
+            accountDTO.setPhone(account.getPhone());
+            accountDTO.setAddress(account.getAddress());
+            account.setActive(account.isActive());
+            accountDTO.setAvatar(account.getAvatar());
+            accountDTO.setRoleId(account.getRoleId());
+            return new JwtResponse(token, accountDTO);
         } else {
             throw new UsernameNotFoundException(userRequest.getUsername());
         }
