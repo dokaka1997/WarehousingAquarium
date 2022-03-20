@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a8f3785b-034b-48bd-95ee-43573ccffb30" name="Default Changelist" comment="init">
-      <change beforePath="$PROJECT_DIR$/../~$I Document.docx" beforeDir="false" />
-    </list>
+    <list default="true" id="a8f3785b-034b-48bd-95ee-43573ccffb30" name="Default Changelist" comment="init" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -161,7 +159,9 @@
       <workItem from="1647441556906" duration="3891000" />
       <workItem from="1647527350143" duration="3656000" />
       <workItem from="1647619103558" duration="528000" />
-      <workItem from="1647707520735" duration="363000" />
+      <workItem from="1647707520735" duration="417000" />
+      <workItem from="1647713797456" duration="101000" />
+      <workItem from="1647793952273" duration="220000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1626413618569</created>
@@ -340,6 +340,20 @@
     <option name="LAST_COMMIT_MESSAGE" value="init" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/warehousing/aquarium/controller/ProductController.java</url>
+          <line>21</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/warehousing/aquarium/service/impl/ProductServiceImpl.java</url>
+          <line>41</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="org.springframework.data.domain.PageRequest" memberName="sort" />
