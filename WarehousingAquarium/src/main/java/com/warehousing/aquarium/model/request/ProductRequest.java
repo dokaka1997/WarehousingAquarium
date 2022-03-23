@@ -6,6 +6,7 @@ import java.util.Date;
 
 @Data
 public class ProductRequest {
+    private Long productId;
 
     private String productName;
 

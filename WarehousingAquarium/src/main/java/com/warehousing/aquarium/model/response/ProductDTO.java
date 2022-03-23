@@ -51,6 +51,6 @@ public class ProductDTO {
 
     SupplierDTO supplierId;
 
-    CategoryDTO categoryDTO;
+    CategoryDTO categoryId;
 
 }

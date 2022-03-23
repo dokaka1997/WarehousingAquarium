@@ -36,7 +36,7 @@ public class ProductMapper {
             }
             if (entity.getCategoryId() != null) {
                 CategoryDTO categoryId = mapper.map(entity.getCategoryId(), CategoryDTO.class);
-                dto.setCategoryDTO(categoryId);
+                dto.setCategoryId(categoryId);
             }
 
             dto.setProductId(entity.getProductId());

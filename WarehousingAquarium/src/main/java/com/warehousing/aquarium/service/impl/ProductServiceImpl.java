@@ -71,16 +71,28 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Boolean createProduct(ProductRequest product) {
         ProductEntity productEntity = new ProductEntity();
+        if (product.getBrandId() != null) {
+            Optional<BrandEntity> optionalBrand = brandRepository.findById(product.getBrandId());
+            optionalBrand.ifPresent(productEntity::setBrandId);
+        }
+        if(product.getUnitId() != null){
+            Optional<UnitEntity> optionalUnit = unitRepository.findById(product.getUnitId());
+            optionalUnit.ifPresent(productEntity::setUnitId);
+        }
 
-        Optional<BrandEntity> optionalBrand = brandRepository.findById(product.getBrandId());
+        if(product.getUserId() != null){
+            Optional<AccountEntity> optionalAccount = userRepository.findById(product.getUserId());
+            optionalAccount.ifPresent(productEntity::setUserId);
+        }
 
-        Optional<UnitEntity> optionalUnit = unitRepository.findById(product.getUnitId());
-
-        Optional<AccountEntity> optionalAccount = userRepository.findById(product.getUserId());
-
-        Optional<SupplierEntity> optionalSupplier = supplierRepository.findById(product.getSupplierId());
-
-        Optional<CategoryEntity> optionalCategory = categoryRepository.findById(product.getCategoryId());
+        if(product.getSupplierId() != null){
+            Optional<SupplierEntity> optionalSupplier = supplierRepository.findById(product.getSupplierId());
+            optionalSupplier.ifPresent(productEntity::setSupplierId);
+        }
+        if(product.getCategoryId() != null){
+            Optional<CategoryEntity> optionalCategory = categoryRepository.findById(product.getCategoryId());
+            optionalCategory.ifPresent(productEntity::setCategoryId);
+        }
 
         productEntity.setProductName(product.getProductName());
         productEntity.setCreatedDate(product.getCreatedDate());
@@ -99,17 +111,9 @@ public class ProductServiceImpl implements ProductService {
         productEntity.setImage(product.getImage());
         productEntity.setSttId(product.getSttId());
         productEntity.setClassifyId(product.getClassifyId());
-
-        optionalBrand.ifPresent(productEntity::setBrandId);
-
-        optionalUnit.ifPresent(productEntity::setUnitId);
-
-        optionalAccount.ifPresent(productEntity::setUserId);
-
-        optionalSupplier.ifPresent(productEntity::setSupplierId);
-
-        optionalCategory.ifPresent(productEntity::setCategoryId);
-
+        if(product.getProductId() != null){
+            productEntity.setProductId(product.getProductId());
+        }
         try {
             productRepository.save(productEntity);
         } catch (Exception exception) {
