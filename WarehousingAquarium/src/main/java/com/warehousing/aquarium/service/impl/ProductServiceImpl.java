@@ -42,7 +42,7 @@ public class ProductServiceImpl implements ProductService {
         if (search.isEmpty()) {
             productEntities = productRepository.findAll(PageRequest.of(pageIndex, pageSize)).getContent();
         } else {
-            productEntities = productRepository.findAllByBarCodeOrProductCodeOrProductName(search, search, search);
+            productEntities = productRepository.findAllByBarCodeContainingOrProductCodeContainingOrProductNameContaining(search, search, search);
             if (productEntities.size() <= pageSize) {
                 return ProductMapper.mapListProductEntityToDTO(productEntities);
             } else {
@@ -75,21 +75,21 @@ public class ProductServiceImpl implements ProductService {
             Optional<BrandEntity> optionalBrand = brandRepository.findById(product.getBrandId());
             optionalBrand.ifPresent(productEntity::setBrandId);
         }
-        if(product.getUnitId() != null){
+        if (product.getUnitId() != null) {
             Optional<UnitEntity> optionalUnit = unitRepository.findById(product.getUnitId());
             optionalUnit.ifPresent(productEntity::setUnitId);
         }
 
-        if(product.getUserId() != null){
+        if (product.getUserId() != null) {
             Optional<AccountEntity> optionalAccount = userRepository.findById(product.getUserId());
             optionalAccount.ifPresent(productEntity::setUserId);
         }
 
-        if(product.getSupplierId() != null){
+        if (product.getSupplierId() != null) {
             Optional<SupplierEntity> optionalSupplier = supplierRepository.findById(product.getSupplierId());
             optionalSupplier.ifPresent(productEntity::setSupplierId);
         }
-        if(product.getCategoryId() != null){
+        if (product.getCategoryId() != null) {
             Optional<CategoryEntity> optionalCategory = categoryRepository.findById(product.getCategoryId());
             optionalCategory.ifPresent(productEntity::setCategoryId);
         }
@@ -109,9 +109,9 @@ public class ProductServiceImpl implements ProductService {
         productEntity.setStockQuantity(product.getStockQuantity());
         productEntity.setColor(product.getColor());
         productEntity.setImage(product.getImage());
-        productEntity.setSttId(product.getSttId());
+        productEntity.setStatus(product.getSttId());
         productEntity.setClassifyId(product.getClassifyId());
-        if(product.getProductId() != null){
+        if (product.getProductId() != null) {
             productEntity.setProductId(product.getProductId());
         }
         try {

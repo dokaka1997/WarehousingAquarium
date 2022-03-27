@@ -46,7 +46,7 @@ public class ProductEntity {
 
     private int classifyId;
 
-    private int sttId;
+    private int status;
 
     @ManyToOne()
     @JoinColumn(name = "brandId")

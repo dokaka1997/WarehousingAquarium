@@ -55,7 +55,7 @@ public class ProductMapper {
             dto.setStockQuantity(entity.getStockQuantity());
             dto.setImage(entity.getImage());
             dto.setColor(entity.getColor());
-            dto.setSttId(entity.getSttId());
+            dto.setSttId(entity.getStatus());
             dto.setClassifyId(entity.getClassifyId());
 
             products.add(dto);
@@ -65,15 +65,33 @@ public class ProductMapper {
 
     public static ProductDTO mapProductEntityToDTO(ProductEntity entity) {
         ModelMapper mapper = new ModelMapper();
-        BrandDTO brandId = mapper.map(entity.getBrandId(), BrandDTO.class);
-        UnitDTO unitId = mapper.map(entity.getUnitId(), UnitDTO.class);
-        AccountDTO userId = mapper.map(entity.getUserId(), AccountDTO.class);
-        SupplierDTO supplierId = mapper.map(entity.getSupplierId(), SupplierDTO.class);
+
         ProductDTO dto = new ProductDTO();
-        dto.setBrandId(brandId);
-        dto.setUnitId(unitId);
-        dto.setUserId(userId);
-        dto.setSupplierId(supplierId);
+
+        if (entity.getBrandId() != null) {
+            BrandDTO brandId = mapper.map(entity.getBrandId(), BrandDTO.class);
+            dto.setBrandId(brandId);
+        }
+
+        if (entity.getUnitId() != null) {
+            UnitDTO unitId = mapper.map(entity.getUnitId(), UnitDTO.class);
+            dto.setUnitId(unitId);
+        }
+
+        if (entity.getUserId() != null) {
+            AccountDTO userId = mapper.map(entity.getUserId(), AccountDTO.class);
+            dto.setUserId(userId);
+        }
+
+        if (entity.getSupplierId() != null) {
+            SupplierDTO supplierId = mapper.map(entity.getSupplierId(), SupplierDTO.class);
+            dto.setSupplierId(supplierId);
+        }
+        if (entity.getCategoryId() != null) {
+            CategoryDTO categoryId = mapper.map(entity.getCategoryId(), CategoryDTO.class);
+            dto.setCategoryId(categoryId);
+        }
+
         dto.setProductId(entity.getProductId());
         dto.setProductCode(entity.getProductCode());
         dto.setProductName(entity.getProductName());
