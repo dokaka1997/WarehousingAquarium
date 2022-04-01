@@ -123,6 +123,64 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public Boolean updateListProduct(List<ProductRequest> productRequests) {
+        List<ProductEntity> list = new ArrayList<>();
+        for (ProductRequest product : productRequests) {
+            ProductEntity productEntity = new ProductEntity();
+            if (product.getBrandId() != null) {
+                Optional<BrandEntity> optionalBrand = brandRepository.findById(product.getBrandId());
+                optionalBrand.ifPresent(productEntity::setBrandId);
+            }
+            if (product.getUnitId() != null) {
+                Optional<UnitEntity> optionalUnit = unitRepository.findById(product.getUnitId());
+                optionalUnit.ifPresent(productEntity::setUnitId);
+            }
+
+            if (product.getUserId() != null) {
+                Optional<AccountEntity> optionalAccount = userRepository.findById(product.getUserId());
+                optionalAccount.ifPresent(productEntity::setUserId);
+            }
+
+            if (product.getSupplierId() != null) {
+                Optional<SupplierEntity> optionalSupplier = supplierRepository.findById(product.getSupplierId());
+                optionalSupplier.ifPresent(productEntity::setSupplierId);
+            }
+            if (product.getCategoryId() != null) {
+                Optional<CategoryEntity> optionalCategory = categoryRepository.findById(product.getCategoryId());
+                optionalCategory.ifPresent(productEntity::setCategoryId);
+            }
+
+            productEntity.setProductName(product.getProductName());
+            productEntity.setCreatedDate(product.getCreatedDate());
+            productEntity.setProductCode(product.getProductCode());
+            productEntity.setBarCode(product.getBarCode());
+            productEntity.setUnitPrice(product.getUnitPrice());
+            productEntity.setRetailPrice(product.getRetailPrice());
+            productEntity.setWholesalePrice(product.getWholesalePrice());
+            productEntity.setModifyCreate(product.getModifyCreate());
+            productEntity.setDescription(product.getDescription());
+            productEntity.setTag(product.getTag());
+            productEntity.setSale(product.isSale());
+            productEntity.setSaleQuantity(product.getSaleQuantity());
+            productEntity.setStockQuantity(product.getStockQuantity());
+            productEntity.setColor(product.getColor());
+            productEntity.setImage(product.getImage());
+            productEntity.setStatus(product.getSttId());
+            productEntity.setClassifyId(product.getClassifyId());
+            if (product.getProductId() != null) {
+                productEntity.setProductId(product.getProductId());
+            }
+            list.add(productEntity);
+            try {
+                productRepository.save(productEntity);
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        }
+        return true;
+    }
+
+    @Override
     public Boolean deleteProductById(Long id) {
         try {
             productRepository.deleteById(id);

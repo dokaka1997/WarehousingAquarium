@@ -103,6 +103,7 @@ public class ProductMapper {
         dto.setModifyCreate(entity.getModifyCreate());
         dto.setDescription(entity.getDescription());
         dto.setTag(entity.getTag());
+        dto.setImage(entity.getImage());
         dto.setSale(entity.isSale());
         dto.setSaleQuantity(entity.getSaleQuantity());
         dto.setStockQuantity(entity.getStockQuantity());

@@ -20,7 +20,11 @@ public class ImportController {
 
     @PostMapping
     public ResponseEntity<Boolean> addImport(@RequestBody ImportRequest importList) {
+        return ResponseEntity.ok(importService.addListImport(importList));
+    }
 
+    @GetMapping
+    public ResponseEntity<Boolean> getAllImport(@RequestBody ImportRequest importList) {
         return ResponseEntity.ok(importService.addListImport(importList));
     }
 

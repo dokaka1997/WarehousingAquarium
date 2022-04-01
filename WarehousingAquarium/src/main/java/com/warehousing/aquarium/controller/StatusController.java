@@ -27,4 +27,5 @@ public class StatusController {
     public ResponseEntity<List<StatusEntity>> getAllStatus() {
         return ResponseEntity.ok(statusService.getAllService());
     }
+
 }

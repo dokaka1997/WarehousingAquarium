@@ -37,4 +37,17 @@ public class ProductController {
         return ResponseEntity.ok(productService.deleteProductById(id));
     }
 
+    @DeleteMapping("list")
+    public ResponseEntity<Boolean> deleteListProdcutByIds(@RequestBody List<Long> ids) {
+        for (Long id : ids) {
+            productService.deleteProductById(id);
+        }
+        return ResponseEntity.ok(true);
+    }
+
+    @PutMapping
+    public ResponseEntity<Boolean> updateListProduct(@RequestBody List<ProductRequest> productRequest) {
+        return ResponseEntity.ok(productService.updateListProduct(productRequest));
+    }
+
 }
