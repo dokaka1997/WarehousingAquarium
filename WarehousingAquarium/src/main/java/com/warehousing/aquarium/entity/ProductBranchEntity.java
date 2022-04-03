@@ -12,9 +12,11 @@ public class ProductBranchEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long proBranchID;
+    private Long importId;
     private Long branchID;
     private Long productID;
     private Long saleQuantity;
     private Long quantityOnHand;
+    private Double totalPrice;
 
 }

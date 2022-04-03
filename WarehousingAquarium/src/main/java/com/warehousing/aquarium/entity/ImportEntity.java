@@ -20,7 +20,7 @@ public class ImportEntity {
     private Long paymentID;
     private Long taxID;
     private Long UserID;
-    private Long proBranchID;
+    private Long branchID;
     private Long status;
     private Long sttStore;
     private Long statusPayment;

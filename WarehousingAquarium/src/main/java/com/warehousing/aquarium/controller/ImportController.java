@@ -1,10 +1,13 @@
 package com.warehousing.aquarium.controller;
 
 import com.warehousing.aquarium.model.request.ImportRequest;
+import com.warehousing.aquarium.model.response.ImportDTO;
 import com.warehousing.aquarium.service.ImportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -24,8 +27,19 @@ public class ImportController {
     }
 
     @GetMapping
-    public ResponseEntity<Boolean> getAllImport(@RequestBody ImportRequest importList) {
-        return ResponseEntity.ok(importService.addListImport(importList));
+    public ResponseEntity<List<ImportDTO>> getAllImport(@RequestParam int pageIndex, @RequestParam int pageSize, @RequestParam String search) {
+        int id = 0;
+        try {
+            id = Integer.parseInt(search);
+        } catch (Exception exception) {
+            id = 0;
+        }
+        return ResponseEntity.ok(importService.getAllImport(pageIndex, pageSize, id));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ImportDTO> getImportById(@PathVariable Long id) {
+        return ResponseEntity.ok(importService.getImportById(id));
     }
 
 }

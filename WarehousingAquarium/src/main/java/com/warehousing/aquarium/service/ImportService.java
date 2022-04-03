@@ -1,9 +1,14 @@
 package com.warehousing.aquarium.service;
 
 import com.warehousing.aquarium.model.request.ImportRequest;
+import com.warehousing.aquarium.model.response.ImportDTO;
 
 import java.util.List;
 
 public interface ImportService {
     boolean addListImport(ImportRequest importList);
+
+    List<ImportDTO> getAllImport(int pageIndex, int pageSize, int search);
+
+    ImportDTO getImportById(Long id);
 }
