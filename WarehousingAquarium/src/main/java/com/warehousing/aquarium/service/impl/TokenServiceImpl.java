@@ -44,10 +44,6 @@ public class TokenServiceImpl implements TokenService {
         this.authenticationManager = authenticationManager;
     }
 
-    @Override
-    public String getRefreshTokenById(Long id) {
-        return null;
-    }
 
     @Override
     public JwtResponse generateToken(JwtRequest authenticationRequest) throws Exception {

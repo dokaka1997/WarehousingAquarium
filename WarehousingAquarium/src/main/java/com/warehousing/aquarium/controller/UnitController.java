@@ -4,10 +4,7 @@ import com.warehousing.aquarium.model.response.UnitDTO;
 import com.warehousing.aquarium.service.UnitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,5 +23,10 @@ public class UnitController {
     @GetMapping
     public ResponseEntity<List<UnitDTO>> getAllCategory() {
         return ResponseEntity.ok(unitService.getAllUnit());
+    }
+
+    @PostMapping
+    public ResponseEntity<Boolean> addNewUnit(@RequestBody UnitDTO unitDTO) {
+        return ResponseEntity.ok(unitService.addnewUnit(unitDTO));
     }
 }

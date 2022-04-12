@@ -12,4 +12,5 @@ public class SupplierDTO {
     private String phone;
     private boolean status;
     private int taxIdentificationNumber;
+    private Double dept;
 }

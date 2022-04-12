@@ -4,10 +4,7 @@ import com.warehousing.aquarium.model.response.SupplierDTO;
 import com.warehousing.aquarium.service.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,5 +23,15 @@ public class SupplierController {
     @GetMapping
     public ResponseEntity<List<SupplierDTO>> getAllSupplier() {
         return ResponseEntity.ok(supplierService.getAllSupplier());
+    }
+
+    @PostMapping
+    public ResponseEntity<Boolean> addNewSupplier(@RequestBody SupplierDTO supplierDTO) {
+        return ResponseEntity.ok(supplierService.addNewSupplier(supplierDTO));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Boolean> deleteSupplier(@PathVariable Long id) {
+        return ResponseEntity.ok(supplierService.deleteSupplier(id));
     }
 }

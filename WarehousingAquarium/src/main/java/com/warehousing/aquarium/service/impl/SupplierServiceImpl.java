@@ -4,6 +4,7 @@ import com.warehousing.aquarium.entity.SupplierEntity;
 import com.warehousing.aquarium.model.response.SupplierDTO;
 import com.warehousing.aquarium.repository.SupplierRepository;
 import com.warehousing.aquarium.service.SupplierService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,8 +35,31 @@ public class SupplierServiceImpl implements SupplierService {
             supplierDTO.setPhone(supplierEntity.getPhone());
             supplierDTO.setStatus(supplierEntity.isStatus());
             supplierDTO.setTaxIdentificationNumber(supplierEntity.getTaxIdentificationNumber());
+            supplierDTO.setDept(supplierEntity.getDept());
             supplierDTOS.add(supplierDTO);
         }
         return supplierDTOS;
+    }
+
+    @Override
+    public Boolean addNewSupplier(SupplierDTO supplierDTO) {
+        try {
+            ModelMapper mapper = new ModelMapper();
+            SupplierEntity entity = mapper.map(supplierDTO, SupplierEntity.class);
+            supplierRepository.save(entity);
+            return true;
+        } catch (Exception exception) {
+            return false;
+        }
+    }
+
+    @Override
+    public Boolean deleteSupplier(Long id) {
+        try {
+            supplierRepository.deleteById(id);
+            return true;
+        } catch (Exception exception) {
+            return false;
+        }
     }
 }

@@ -32,4 +32,17 @@ public class UnitServiceImpl implements UnitService {
         }
         return unitDTOS;
     }
+
+    @Override
+    public Boolean addnewUnit(UnitDTO unitDTO) {
+        try {
+            UnitEntity unitEntity = new UnitEntity();
+            unitEntity.setUnitId(unitDTO.getUnitId());
+            unitEntity.setUnitName(unitDTO.getUnitName());
+            unitRepository.save(unitEntity);
+            return true;
+        } catch (Exception exception) {
+            return false;
+        }
+    }
 }

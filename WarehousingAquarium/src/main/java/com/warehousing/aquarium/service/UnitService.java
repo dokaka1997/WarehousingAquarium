@@ -9,4 +9,6 @@ public interface UnitService {
 
     List<UnitDTO> getAllUnit();
 
+    Boolean addnewUnit(UnitDTO unitDTO);
+
 }

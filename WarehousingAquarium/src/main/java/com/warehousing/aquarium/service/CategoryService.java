@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface CategoryService {
     List<CategoryDTO> getAllCategory();
+    Boolean addNewCategory(CategoryDTO categoryDTO);
 }

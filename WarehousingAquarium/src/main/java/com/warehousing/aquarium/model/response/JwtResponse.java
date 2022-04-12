@@ -1,6 +1,5 @@
 package com.warehousing.aquarium.model.response;
 
-import com.warehousing.aquarium.entity.AccountEntity;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -12,12 +11,8 @@ public class JwtResponse implements Serializable {
     private final String jwtToken;
     AccountDTO account;
 
-
     public JwtResponse(String jwtToken, AccountDTO account) {
         this.jwtToken = jwtToken;
         this.account = account;
     }
-
-
-
 }
