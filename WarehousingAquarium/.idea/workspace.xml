@@ -83,6 +83,19 @@
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RunManager" selected="Spring Boot.WarehousingAquarium (1)">
+    <configuration name="main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.warehousing.aquarium.entity.main" />
+      <module name="WarehousingAquarium" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.warehousing.aquarium.entity.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="WarehousingAquarium (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="WarehousingAquarium" />
       <extension name="coverage">
@@ -125,6 +138,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.WarehousingAquarium (1)" />
+        <item itemvalue="Application.main" />
         <item itemvalue="Spring Boot.WarehousingAquarium" />
         <item itemvalue="Spring Boot.WarehousingAquarium" />
       </list>
@@ -181,7 +195,8 @@
       <workItem from="1648997074943" duration="9937000" />
       <workItem from="1649089089610" duration="858000" />
       <workItem from="1649695220010" duration="1563000" />
-      <workItem from="1649779383669" duration="4823000" />
+      <workItem from="1649779383669" duration="4948000" />
+      <workItem from="1649865745556" duration="7225000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1626413618569</created>
@@ -381,6 +396,11 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/warehousing/aquarium/controller/BranchController.java</url>
           <line>30</line>
           <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/warehousing/aquarium/controller/TopicController.java</url>
+          <line>35</line>
+          <option name="timeStamp" value="15" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
