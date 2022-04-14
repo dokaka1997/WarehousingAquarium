@@ -22,7 +22,7 @@ public class TopicController {
     }
 
     @PostMapping
-    ResponseEntity<Boolean> addNewTopic(@RequestBody TopicEntity topicEntity) {
+    ResponseEntity<TopicDTO> addNewTopic(@RequestBody TopicEntity topicEntity) {
         return ResponseEntity.ok(topicService.addNewTopic(topicEntity));
     }
 

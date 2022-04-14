@@ -1,11 +1,14 @@
 package com.warehousing.aquarium.model.response;
 
-import java.util.Date;
+import lombok.Data;
 
+import java.util.Date;
+@Data
 public class CommentDTO {
+    private Long commentId;
     private Long topicId;
-    private String createBy;
+    private String content;
     private Date createdDate;
-    private String title;
-    private String assignTo;
+    private Long createBy;
+    private String file;
 }

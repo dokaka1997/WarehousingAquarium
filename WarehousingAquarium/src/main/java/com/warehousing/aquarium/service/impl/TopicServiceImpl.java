@@ -28,14 +28,18 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public Boolean addNewTopic(TopicEntity topicEntity) {
-        try {
-            topicEntity.setCreatedDate(new Date());
-            topicRepository.save(topicEntity);
-            return true;
-        } catch (Exception exception) {
-            return false;
-        }
+    public TopicDTO addNewTopic(TopicEntity topicEntity) {
+        TopicDTO topicDTO = new TopicDTO();
+        topicEntity.setCreatedDate(new Date());
+        topicRepository.save(topicEntity);
+        topicDTO.setTopicId(topicEntity.getTopicId());
+        topicDTO.setCreatedDate(topicEntity.getCreatedDate());
+        topicDTO.setTitle(topicEntity.getTitle());
+        Optional<AccountEntity> createBy = userRepository.findById(topicEntity.getCreateBy());
+        createBy.ifPresent(accountEntity -> topicDTO.setCreateBy(accountEntity.getName()));
+        Optional<AccountEntity> assignTo = userRepository.findById(topicEntity.getAssignTo());
+        assignTo.ifPresent(accountEntity -> topicDTO.setAssignTo(accountEntity.getName()));
+        return topicDTO;
     }
 
     @Override

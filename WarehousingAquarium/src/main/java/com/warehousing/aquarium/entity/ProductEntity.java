@@ -48,6 +48,8 @@ public class ProductEntity {
 
     private int status;
 
+    private Double priceImport;
+
     @ManyToOne()
     @JoinColumn(name = "brandId")
     BrandEntity brandId;

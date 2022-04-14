@@ -3,6 +3,7 @@ package com.warehousing.aquarium.service.impl;
 import com.warehousing.aquarium.entity.AccountEntity;
 import com.warehousing.aquarium.model.request.CreateUserRequest;
 import com.warehousing.aquarium.model.request.LoginUserRequest;
+import com.warehousing.aquarium.model.response.UserResponse;
 import com.warehousing.aquarium.repository.UserRepository;
 import com.warehousing.aquarium.service.UserService;
 import org.modelmapper.ModelMapper;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Service;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -84,6 +87,19 @@ public class UserServiceImpl implements UserService {
             }
         }
         return false;
+    }
+
+    @Override
+    public List<UserResponse> getAllUser() {
+        List<AccountEntity> accountEntities = userRepository.findAll();
+        List<UserResponse> list = new ArrayList<>();
+        for (AccountEntity account : accountEntities) {
+            UserResponse userResponse = new UserResponse();
+            userResponse.setUsername(account.getUsername());
+            userResponse.setId(account.getUserId());
+            list.add(userResponse);
+        }
+        return list;
     }
 
     public void sendEmail(String recipientEmail, String token) throws MessagingException, UnsupportedEncodingException {

@@ -6,7 +6,7 @@ import com.warehousing.aquarium.model.response.TopicDTO;
 import java.util.List;
 
 public interface TopicService {
-    Boolean addNewTopic(TopicEntity topicEntity);
+    TopicDTO addNewTopic(TopicEntity topicEntity);
 
     List<TopicDTO> getAllTopic(int pageIndex, int pageSize);
 

@@ -26,6 +26,9 @@ public class ImportMapper {
         if (accountEntity != null) {
             importDTO.setUser(accountEntity.getName());
         }
+        if (importEntity.getImportPrice() != null) {
+            importDTO.setImportPrice(importEntity.getImportPrice());
+        }
 
         for (StatusEntity statusEntity : statusEntitys) {
             if (Objects.equals(statusEntity.getSttId(), importEntity.getStatus())) {
@@ -37,6 +40,7 @@ public class ImportMapper {
             if (Objects.equals(statusEntity.getSttId(), importEntity.getStatusPayment())) {
                 importDTO.setStatusPayment(statusEntity.getStatusName());
             }
+
         }
         return importDTO;
     }

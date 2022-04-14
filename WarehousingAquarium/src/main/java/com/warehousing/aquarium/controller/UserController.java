@@ -1,11 +1,14 @@
 package com.warehousing.aquarium.controller;
 
 import com.warehousing.aquarium.model.request.CreateUserRequest;
+import com.warehousing.aquarium.model.response.UserResponse;
 import com.warehousing.aquarium.service.UserService;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -31,8 +34,13 @@ public class UserController {
     }
 
     @PostMapping("/change_password")
-    public ResponseEntity<Boolean> forgotPassword(@RequestParam String email, @RequestParam String password, @RequestParam String token ) {
+    public ResponseEntity<Boolean> forgotPassword(@RequestParam String email, @RequestParam String password, @RequestParam String token) {
         return ResponseEntity.ok(userService.changePassword(email, password, token));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<UserResponse>> getAllUser() {
+        return ResponseEntity.ok(userService.getAllUser());
     }
 
 }
