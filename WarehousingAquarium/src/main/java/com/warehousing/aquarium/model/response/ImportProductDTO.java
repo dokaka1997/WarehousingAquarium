@@ -19,5 +19,5 @@ public class ImportProductDTO {
 
     private Long quantity;
 
-    private double price;
+    private double unitPrice;
 }

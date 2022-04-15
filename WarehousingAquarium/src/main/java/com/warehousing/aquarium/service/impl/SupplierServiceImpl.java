@@ -36,6 +36,7 @@ public class SupplierServiceImpl implements SupplierService {
             supplierDTO.setStatus(supplierEntity.isStatus());
             supplierDTO.setTaxIdentificationNumber(supplierEntity.getTaxIdentificationNumber());
             supplierDTO.setDept(supplierEntity.getDept());
+            supplierDTO.setAddress(supplierEntity.getAddress());
             supplierDTOS.add(supplierDTO);
         }
         return supplierDTOS;

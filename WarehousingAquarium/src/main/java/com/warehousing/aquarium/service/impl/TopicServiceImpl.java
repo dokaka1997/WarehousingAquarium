@@ -76,4 +76,14 @@ public class TopicServiceImpl implements TopicService {
         }
         return topicDTO;
     }
+
+    @Override
+    public Boolean deleteTopicById(Long id) {
+        try {
+            topicRepository.deleteById(id);
+            return true;
+        } catch (Exception exception) {
+            return false;
+        }
+    }
 }

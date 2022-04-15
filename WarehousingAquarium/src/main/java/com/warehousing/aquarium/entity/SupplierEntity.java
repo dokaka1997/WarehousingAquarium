@@ -28,5 +28,6 @@ public class SupplierEntity {
     @ToString.Exclude
     private Set<ProductEntity> products;
     private Double dept;
+    String address;
 
 }

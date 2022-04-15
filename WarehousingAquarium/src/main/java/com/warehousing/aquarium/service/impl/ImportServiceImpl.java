@@ -134,8 +134,8 @@ public class ImportServiceImpl implements ImportService {
                     productEntity.ifPresent(product -> importProductDTO.setSaleQuantity(product.getSaleQuantity()));
                     productEntity.ifPresent(product -> importProductDTO.setImage(product.getImage()));
                     productEntity.ifPresent(product -> importProductDTO.setColor(product.getColor()));
-
-                    productEntity.ifPresent(product -> importProductDTO.setPrice(entity.getSaleQuantity() * product.getUnitPrice()));
+                    productEntity.ifPresent(product -> importProductDTO.setQuantity(entity.getQuantityOnHand()));
+                    productEntity.ifPresent(product -> importProductDTO.setUnitPrice(entity.getQuantityOnHand() * product.getUnitPrice()));
                     importProductDTOS.add(importProductDTO);
                 }
                 ImportDTO importDTO = ImportMapper.mapImportEntityToDTO(importEntity, branchEntity, supplierEntity, account, statusEntities);
@@ -158,13 +158,22 @@ public class ImportServiceImpl implements ImportService {
         AccountEntity account = new AccountEntity();
         List<ProductBranchEntity> productBranchEntities;
         if (importEntities.get().getBranchID() != null) {
-            branchEntity = branchRepository.getOne(importEntities.get().getBranchID());
+            Optional<BranchEntity> optionalBranch = branchRepository.findById(importEntities.get().getBranchID());
+            if (optionalBranch.isPresent()) {
+                branchEntity = optionalBranch.get();
+            }
         }
         if (importEntities.get().getSupplierID() != null) {
-            supplierEntity = supplierRepository.getOne(importEntities.get().getSupplierID());
+            Optional<SupplierEntity> optionalSupplier = supplierRepository.findById(importEntities.get().getSupplierID());
+            if (optionalSupplier.isPresent()) {
+                supplierEntity = optionalSupplier.get();
+            }
         }
         if (importEntities.get().getUserID() != null) {
-            account = userRepository.getOne(importEntities.get().getUserID());
+            Optional<AccountEntity> optionalAccount = userRepository.findById(importEntities.get().getUserID());
+            if (optionalAccount.isPresent()) {
+                account = optionalAccount.get();
+            }
         }
         productBranchEntities = productBranchRepository.findAllByImportId(importEntities.get().getImportID());
         List<ImportProductDTO> importProductDTOS = new ArrayList<>();
@@ -178,8 +187,7 @@ public class ImportServiceImpl implements ImportService {
             productEntity.ifPresent(product -> importProductDTO.setImage(product.getImage()));
             productEntity.ifPresent(product -> importProductDTO.setColor(product.getColor()));
             productEntity.ifPresent(product -> importProductDTO.setQuantity(entity.getQuantityOnHand()));
-            importEntities.ifPresent(product -> importProductDTO.setPrice(product.getImportPrice()));
-            productEntity.ifPresent(product -> importProductDTO.setPrice(entity.getQuantityOnHand() * product.getUnitPrice()));
+            productEntity.ifPresent(product -> importProductDTO.setUnitPrice(entity.getQuantityOnHand() * product.getUnitPrice()));
             importProductDTOS.add(importProductDTO);
         }
         ImportDTO importDTO = ImportMapper.mapImportEntityToDTO(importEntities.get(), branchEntity, supplierEntity, account, statusEntities);

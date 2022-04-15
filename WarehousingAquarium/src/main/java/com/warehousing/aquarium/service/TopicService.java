@@ -11,4 +11,6 @@ public interface TopicService {
     List<TopicDTO> getAllTopic(int pageIndex, int pageSize);
 
     TopicDTO getTopicById(Long id);
+
+    Boolean deleteTopicById(Long id);
 }

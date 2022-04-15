@@ -35,4 +35,10 @@ public class TopicController {
     ResponseEntity<TopicDTO> getTopicById(@PathVariable Long id) {
         return ResponseEntity.ok(topicService.getTopicById(id));
     }
+
+
+    @DeleteMapping("/{id}")
+    ResponseEntity<Boolean> deleteTopic(@PathVariable Long id) {
+        return ResponseEntity.ok(topicService.deleteTopicById(id));
+    }
 }

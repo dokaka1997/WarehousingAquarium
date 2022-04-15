@@ -13,4 +13,5 @@ public class SupplierDTO {
     private boolean status;
     private int taxIdentificationNumber;
     private Double dept;
+    String address;
 }
