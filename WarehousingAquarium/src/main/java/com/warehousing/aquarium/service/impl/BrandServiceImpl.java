@@ -31,4 +31,17 @@ public class BrandServiceImpl implements BrandService {
         }
         return brandDTOS;
     }
+
+    @Override
+    public Boolean addNewBrand(BrandDTO brandDTO) {
+        try {
+            BrandEntity brand = new BrandEntity();
+            brand.setBrandId(brandDTO.getBrandId());
+            brand.setBrandName(brandDTO.getBrandName());
+            brandRepository.save(brand);
+        } catch (Exception exception) {
+            return false;
+        }
+        return true;
+    }
 }

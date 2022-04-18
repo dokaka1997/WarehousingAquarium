@@ -26,8 +26,8 @@ public class CommentController {
         return ResponseEntity.ok(commentService.addNewComment(commentEntity));
     }
 
-//    @GetMapping
-//    ResponseEntity<List<TopicDTO>> getCommentByTopic(@RequestParam Long topicId, @RequestParam int pageIndex, @RequestParam int pageSize) {
-//        return ResponseEntity.ok(topicService.getAllTopic(pageIndex, pageSize));
-//    }
+    @GetMapping
+    ResponseEntity<List<CommentDTO>> getCommentByTopic(@RequestParam Long topicId, @RequestParam int pageIndex, @RequestParam int pageSize) {
+        return ResponseEntity.ok(commentService.getAllComment(pageIndex, pageSize, topicId));
+    }
 }

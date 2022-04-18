@@ -9,6 +9,6 @@ public class CommentDTO {
     private Long topicId;
     private String content;
     private Date createdDate;
-    private Long createBy;
+    private String createBy;
     private String file;
 }
