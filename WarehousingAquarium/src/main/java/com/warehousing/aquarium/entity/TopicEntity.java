@@ -14,6 +14,7 @@ public class TopicEntity {
     private Long topicId;
     private Long createBy;
     private Date createdDate;
+    private Date updatedDate;
     private String title;
     private Long assignTo;
 }

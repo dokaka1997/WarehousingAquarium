@@ -31,7 +31,11 @@ public class TopicServiceImpl implements TopicService {
     @Override
     public TopicDTO addNewTopic(TopicEntity topicEntity) {
         TopicDTO topicDTO = new TopicDTO();
-        topicEntity.setCreatedDate(new Date());
+        if (topicEntity.getTopicId() == null) {
+            topicEntity.setCreatedDate(new Date());
+        } else {
+            topicEntity.setUpdatedDate(new Date());
+        }
         topicRepository.save(topicEntity);
         topicDTO.setTopicId(topicEntity.getTopicId());
         topicDTO.setCreatedDate(topicEntity.getCreatedDate());
