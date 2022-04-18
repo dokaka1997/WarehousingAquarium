@@ -1,6 +1,7 @@
 package com.warehousing.aquarium.controller;
 
 import com.warehousing.aquarium.entity.TopicEntity;
+import com.warehousing.aquarium.model.response.ListTopicResponse;
 import com.warehousing.aquarium.model.response.TopicDTO;
 import com.warehousing.aquarium.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class TopicController {
     }
 
     @GetMapping
-    ResponseEntity<List<TopicDTO>> getAllTopic(@RequestParam int pageIndex, @RequestParam int pageSize) {
+    ResponseEntity<ListTopicResponse> getAllTopic(@RequestParam int pageIndex, @RequestParam int pageSize) {
         return ResponseEntity.ok(topicService.getAllTopic(pageIndex, pageSize));
     }
 

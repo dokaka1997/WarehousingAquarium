@@ -97,6 +97,7 @@ public class UserServiceImpl implements UserService {
             UserResponse userResponse = new UserResponse();
             userResponse.setUsername(account.getUsername());
             userResponse.setId(account.getUserId());
+            userResponse.setName(account.getName());
             list.add(userResponse);
         }
         return list;

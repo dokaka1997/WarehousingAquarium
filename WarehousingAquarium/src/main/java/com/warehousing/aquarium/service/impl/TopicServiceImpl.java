@@ -2,6 +2,7 @@ package com.warehousing.aquarium.service.impl;
 
 import com.warehousing.aquarium.entity.AccountEntity;
 import com.warehousing.aquarium.entity.TopicEntity;
+import com.warehousing.aquarium.model.response.ListTopicResponse;
 import com.warehousing.aquarium.model.response.TopicDTO;
 import com.warehousing.aquarium.repository.TopicRepository;
 import com.warehousing.aquarium.repository.UserRepository;
@@ -43,7 +44,8 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public List<TopicDTO> getAllTopic(int pageIndex, int pageSize) {
+    public ListTopicResponse getAllTopic(int pageIndex, int pageSize) {
+        ListTopicResponse listTopicResponse = new ListTopicResponse();
         List<TopicDTO> topicDTOS = new ArrayList<>();
         List<TopicEntity> topicEntities = topicRepository.findAll(PageRequest.of(pageIndex, pageSize)).getContent();
         for (TopicEntity topicEntity : topicEntities) {
@@ -58,7 +60,10 @@ public class TopicServiceImpl implements TopicService {
             topicDTOS.add(topicDTO);
 
         }
-        return topicDTOS;
+        List<TopicEntity> list = topicRepository.findAll();
+        listTopicResponse.setTopics(topicDTOS);
+        listTopicResponse.setTotal(list.size());
+        return listTopicResponse;
     }
 
     @Override
