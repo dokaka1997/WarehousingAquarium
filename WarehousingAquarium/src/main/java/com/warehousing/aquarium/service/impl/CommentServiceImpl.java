@@ -3,6 +3,7 @@ package com.warehousing.aquarium.service.impl;
 import com.warehousing.aquarium.entity.AccountEntity;
 import com.warehousing.aquarium.entity.CommentEntity;
 import com.warehousing.aquarium.model.response.CommentDTO;
+import com.warehousing.aquarium.model.response.ListCommentResponse;
 import com.warehousing.aquarium.repository.CommentRepository;
 import com.warehousing.aquarium.repository.UserRepository;
 import com.warehousing.aquarium.service.CommentService;
@@ -12,10 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class CommentServiceImpl implements CommentService {
@@ -39,7 +37,8 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<CommentDTO> getAllComment(int pageIndex, int pageSize, Long topicId) {
+    public ListCommentResponse getAllComment(int pageIndex, int pageSize, Long topicId) {
+        ListCommentResponse listCommentResponse = new ListCommentResponse();
         Pageable firstPageWithTwoElements = PageRequest.of(pageIndex, pageSize);
         List<CommentEntity> commentEntities = commentRepository.findAllByTopicId(topicId, firstPageWithTwoElements);
         List<CommentDTO> list = new ArrayList<>();
@@ -50,9 +49,13 @@ public class CommentServiceImpl implements CommentService {
             Optional<AccountEntity> createBy = userRepository.findById(commentEntity.getCreateBy());
             createBy.ifPresent(accountEntity -> commentDTO.setCreateBy(accountEntity.getName()));
             commentDTO.setFile(commentEntity.getFile());
+            commentDTO.setCreatedDate(commentEntity.getCreatedDate());
             commentDTO.setContent(commentEntity.getContent());
             list.add(commentDTO);
         }
-        return list;
+        Collections.sort(list);
+        listCommentResponse.setComments(list);
+        listCommentResponse.setTotal(commentRepository.findAll().size());
+        return listCommentResponse;
     }
 }
