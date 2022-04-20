@@ -55,7 +55,7 @@ public class CommentServiceImpl implements CommentService {
         }
         Collections.sort(list);
         listCommentResponse.setComments(list);
-        listCommentResponse.setTotal(commentRepository.findAll().size());
+        listCommentResponse.setTotal(commentRepository.findAllByTopicId(topicId).size());
         return listCommentResponse;
     }
 }

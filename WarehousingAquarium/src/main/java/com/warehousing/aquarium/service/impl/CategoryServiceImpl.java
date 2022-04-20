@@ -38,8 +38,8 @@ public class CategoryServiceImpl implements CategoryService {
     public Boolean addNewCategory(CategoryDTO categoryDTO) {
         try {
             CategoryEntity categoryEntity = new CategoryEntity();
-            categoryEntity.setCategoryId(categoryEntity.getCategoryId());
-            categoryEntity.setCategoryName(categoryEntity.getCategoryName());
+            categoryEntity.setCategoryId(categoryDTO.getCategoryId());
+            categoryEntity.setCategoryName(categoryDTO.getCategoryName());
             categoryEntity.setCreateDate(new Date());
             categoryRepository.save(categoryEntity);
             return true;
