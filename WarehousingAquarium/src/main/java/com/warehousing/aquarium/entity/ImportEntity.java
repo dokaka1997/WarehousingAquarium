@@ -23,6 +23,6 @@ public class ImportEntity {
     private Long branchID;
     private Long status;
     private Long sttStore;
-    private Long statusPayment;
+    private Boolean statusPayment;
 
 }

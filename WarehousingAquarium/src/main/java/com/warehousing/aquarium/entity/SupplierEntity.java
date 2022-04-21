@@ -29,5 +29,7 @@ public class SupplierEntity {
     private Set<ProductEntity> products;
     private Double dept;
     private String address;
+    private Long userId;
+    private String description;
 
 }

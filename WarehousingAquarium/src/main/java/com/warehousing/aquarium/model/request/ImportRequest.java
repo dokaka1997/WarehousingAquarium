@@ -13,7 +13,7 @@ public class ImportRequest {
     private Long paymentType;
     private Double importPrice;
     private Long statusImport;
-    private Long statusPayment;
+    private Boolean statusPayment;
     private Long statusStore;
     private Long employee;
     private Double priceImport;

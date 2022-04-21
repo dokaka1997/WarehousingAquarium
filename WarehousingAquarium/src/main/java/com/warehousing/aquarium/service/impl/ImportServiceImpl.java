@@ -72,6 +72,12 @@ public class ImportServiceImpl implements ImportService {
         importEntity.setStatus(importRequest.getStatusImport());
         importEntity.setStatusPayment(importRequest.getStatusPayment());
         importEntity.setSttStore(importRequest.getStatusStore());
+        if (!importRequest.getStatusPayment()) {
+            if (supplierEntity.isPresent()) {
+                supplierEntity.get().setDept(importRequest.getImportPrice());
+                supplierRepository.save(supplierEntity.get());
+            }
+        }
         try {
             ImportEntity importId = importRepository.save(importEntity);
             for (ProductBranchEntity entity : productBranchEntities) {
