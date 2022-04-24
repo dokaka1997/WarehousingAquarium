@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface ImportRepository extends JpaRepository<ImportEntity, Long> {
     List<ImportEntity> findAllByImportIDIsLike(String value);
+
+    List<ImportEntity> findAllBySupplierID(Long id);
 }

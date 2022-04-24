@@ -12,8 +12,8 @@ public class SupplierDTO {
     private String phone;
     private boolean status;
     private int taxIdentificationNumber;
-    private Double dept;
+    private double dept;
     private String address;
-    private Long userId;
+    private String user;
     private String description;
 }

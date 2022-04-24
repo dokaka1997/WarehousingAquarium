@@ -42,4 +42,15 @@ public class ImportController {
         return ResponseEntity.ok(importService.getImportById(id));
     }
 
+    @GetMapping("supplier")
+    public ResponseEntity<List<ImportDTO>> getImportBySupplierId(@RequestParam int pageIndex, @RequestParam int pageSize, @RequestParam String supplierId) {
+        int id = 0;
+        try {
+            id = Integer.parseInt(supplierId);
+        } catch (Exception exception) {
+            id = 0;
+        }
+        return ResponseEntity.ok(importService.getImportBySupplierId(pageIndex, pageSize, id));
+    }
+
 }

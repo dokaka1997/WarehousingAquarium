@@ -200,4 +200,65 @@ public class ImportServiceImpl implements ImportService {
         importDTO.setListProduct(importProductDTOS);
         return importDTO;
     }
+
+    @Override
+    public List<ImportDTO> getImportBySupplierId(int pageIndex, int pageSize, int id) {
+        List<ImportEntity> importEntities;
+        if (id == 0) {
+            importEntities = importRepository.findAll();
+        } else {
+            importEntities = importRepository.findAllBySupplierID((long) id);
+        }
+        List<ImportDTO> list = new ArrayList<>();
+        if (importEntities.isEmpty()) {
+            return list;
+        }
+        List<StatusEntity> statusEntities = statusRepository.findAll();
+        int start = pageIndex * pageSize;
+        for (int i = 0; i < importEntities.size(); i++) {
+            ImportEntity importEntity = importEntities.get(i);
+            if (i >= start && i < start + pageSize) {
+                if (i > start + pageSize) {
+                    break;
+                }
+                BranchEntity branchEntity = new BranchEntity();
+                SupplierEntity supplierEntity = new SupplierEntity();
+                AccountEntity account = new AccountEntity();
+                List<ProductBranchEntity> productBranchEntities;
+                if (importEntity.getBranchID() != null) {
+                    branchEntity = branchRepository.getOne(importEntity.getBranchID());
+                }
+                if (importEntity.getSupplierID() != null) {
+                    supplierEntity = supplierRepository.getOne(importEntity.getSupplierID());
+                }
+                if (importEntity.getUserID() != null) {
+                    Optional<AccountEntity> optionalAccount = userRepository.findById(importEntity.getUserID());
+                    if (optionalAccount.isPresent()) {
+                        account = optionalAccount.get();
+                    }
+                }
+                productBranchEntities = productBranchRepository.findAllByImportId(importEntity.getImportID());
+                List<ImportProductDTO> importProductDTOS = new ArrayList<>();
+                for (ProductBranchEntity entity : productBranchEntities) {
+                    ImportProductDTO importProductDTO = new ImportProductDTO();
+                    importProductDTO.setProductId(entity.getProductID());
+                    Optional<ProductEntity> productEntity = productRepository.findById(entity.getProductID());
+                    productEntity.ifPresent(product -> importProductDTO.setProductCode(product.getProductCode()));
+                    productEntity.ifPresent(product -> importProductDTO.setProductName(product.getProductName()));
+                    productEntity.ifPresent(product -> importProductDTO.setSaleQuantity(product.getSaleQuantity()));
+                    productEntity.ifPresent(product -> importProductDTO.setImage(product.getImage()));
+                    productEntity.ifPresent(product -> importProductDTO.setColor(product.getColor()));
+                    productEntity.ifPresent(product -> importProductDTO.setQuantity(entity.getQuantityOnHand()));
+                    productEntity.ifPresent(product -> importProductDTO.setUnitPrice(product.getUnitPrice()));
+                    importProductDTOS.add(importProductDTO);
+                }
+                ImportDTO importDTO = ImportMapper.mapImportEntityToDTO(importEntity, branchEntity, supplierEntity, account, statusEntities);
+                importDTO.setListProduct(importProductDTOS);
+                list.add(importDTO);
+            }
+        }
+        return list;
+    }
+
+
 }

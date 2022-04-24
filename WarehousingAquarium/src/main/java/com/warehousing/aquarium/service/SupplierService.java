@@ -11,4 +11,6 @@ public interface SupplierService {
     Boolean addNewSupplier(SupplierDTO supplierDTO);
 
     Boolean deleteSupplier(Long id);
+
+    SupplierDTO getSupplierById(Long id);
 }

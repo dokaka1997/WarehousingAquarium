@@ -11,4 +11,6 @@ public interface ImportService {
     List<ImportDTO> getAllImport(int pageIndex, int pageSize, int search);
 
     ImportDTO getImportById(Long id);
+
+    List<ImportDTO> getImportBySupplierId(int pageIndex, int pageSize,int id);
 }

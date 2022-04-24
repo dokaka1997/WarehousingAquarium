@@ -27,7 +27,7 @@ public class SupplierEntity {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Set<ProductEntity> products;
-    private Double dept;
+    private double dept;
     private String address;
     private Long userId;
     private String description;
