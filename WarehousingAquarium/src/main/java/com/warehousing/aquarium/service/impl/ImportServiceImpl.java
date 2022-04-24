@@ -52,19 +52,19 @@ public class ImportServiceImpl implements ImportService {
         Optional<PaymentTypeEntity> paymentTypeEntity = paymentTypeRepository.findById(importRequest.getPaymentType());
         int number = 0;
         for (ProductImportRequest productImportRequest : importRequest.getProducts()) {
-            number += productImportRequest.getQuantity();
+            number += productImportRequest.getSaleQuantity();
             ProductBranchEntity productBranchEntity = new ProductBranchEntity();
             Optional<ProductEntity> productEntity = productRepository.findById(productImportRequest.getProductId());
             if (productEntity.isPresent()) {
                 ProductEntity entity = productEntity.get();
-                double newPrice = (entity.getStockQuantity() * entity.getUnitPrice() + productImportRequest.getQuantity() * productImportRequest.getQuantity()) / (entity.getStockQuantity() + productImportRequest.getQuantity());
-                entity.setStockQuantity((int) (entity.getStockQuantity() + productImportRequest.getQuantity()));
-                entity.setSaleQuantity((int) (entity.getSaleQuantity() + productImportRequest.getQuantity()));
+                double newPrice = (entity.getStockQuantity() * entity.getUnitPrice() + productImportRequest.getSaleQuantity() * productImportRequest.getSaleQuantity()) / (entity.getStockQuantity() + productImportRequest.getSaleQuantity());
+                entity.setStockQuantity((int) (entity.getStockQuantity() + productImportRequest.getSaleQuantity()));
+                entity.setSaleQuantity((int) (entity.getSaleQuantity() + productImportRequest.getSaleQuantity()));
                 entity.setUnitPrice(newPrice);
                 productRepository.save(entity);
             }
             productEntity.ifPresent(entity -> productBranchEntity.setProductID(entity.getProductId()));
-            productBranchEntity.setQuantityOnHand(productImportRequest.getQuantity());
+            productBranchEntity.setQuantityOnHand(productImportRequest.getSaleQuantity());
             productBranchEntity.setSaleQuantity(productImportRequest.getSaleQuantity());
             productBranchEntity.setTotalPrice(importRequest.getImportPrice());
             branchEntity.ifPresent(entity -> productBranchEntity.setBranchID(entity.getBranchId()));

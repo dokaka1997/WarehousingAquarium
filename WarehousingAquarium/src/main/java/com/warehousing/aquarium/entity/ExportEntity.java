@@ -15,12 +15,9 @@ public class ExportEntity {
     private Date exportTime;
     private Double exportPrice;
     private Long numberExport;
-    private Long supplierID;
-    private Long paymentID;
-    private Long taxID;
+    private String taxID;
     private Long UserID;
-    private Long branchID;
+    private Long CustomerID;
     private Long status;
-    private Long sttStore;
     private Boolean statusPayment;
 }

@@ -5,7 +5,6 @@ import lombok.Data;
 @Data
 public class ProductImportRequest {
     private Long productId;
-    private Long quantity;
     private Long saleQuantity;
     private Double totalPrice;
 }

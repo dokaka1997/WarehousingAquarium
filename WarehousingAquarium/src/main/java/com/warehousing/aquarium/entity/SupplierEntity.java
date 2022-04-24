@@ -21,7 +21,7 @@ public class SupplierEntity {
     private String email;
     private String phone;
     private boolean status;
-    private int taxIdentificationNumber;
+    private String taxIdentificationNumber;
 
     @OneToMany(mappedBy = "supplierId", cascade = CascadeType.ALL)
     @EqualsAndHashCode.Exclude
