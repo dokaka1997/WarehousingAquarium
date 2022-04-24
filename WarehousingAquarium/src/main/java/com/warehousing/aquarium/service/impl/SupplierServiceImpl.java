@@ -43,7 +43,7 @@ public class SupplierServiceImpl implements SupplierService {
             supplierDTO.setTaxIdentificationNumber(supplierEntity.getTaxIdentificationNumber());
             supplierDTO.setDept(supplierEntity.getDept());
             supplierDTO.setAddress(supplierEntity.getAddress());
-            if (userRepository.findById(supplierEntity.getUserId()).isPresent()) {
+            if (supplierEntity.getUserId() != null && userRepository.findById(supplierEntity.getUserId()).isPresent()) {
                 AccountEntity account = userRepository.findById(supplierEntity.getUserId()).get();
                 supplierDTO.setUser(account.getName());
             }
