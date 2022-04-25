@@ -55,14 +55,13 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
-    public Boolean addNewSupplier(SupplierDTO supplierDTO) {
+    public SupplierEntity addNewSupplier(SupplierDTO supplierDTO) {
         try {
             ModelMapper mapper = new ModelMapper();
             SupplierEntity entity = mapper.map(supplierDTO, SupplierEntity.class);
-            supplierRepository.save(entity);
-            return true;
+            return supplierRepository.save(entity);
         } catch (Exception exception) {
-            return false;
+            return null;
         }
     }
 

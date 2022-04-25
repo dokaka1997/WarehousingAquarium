@@ -1,5 +1,6 @@
 package com.warehousing.aquarium.controller;
 
+import com.warehousing.aquarium.entity.SupplierEntity;
 import com.warehousing.aquarium.model.response.SupplierDTO;
 import com.warehousing.aquarium.service.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class SupplierController {
     }
 
     @PostMapping
-    public ResponseEntity<Boolean> addNewSupplier(@RequestBody SupplierDTO supplierDTO) {
+    public ResponseEntity<SupplierEntity> addNewSupplier(@RequestBody SupplierDTO supplierDTO) {
         return ResponseEntity.ok(supplierService.addNewSupplier(supplierDTO));
     }
 
