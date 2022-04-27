@@ -37,10 +37,7 @@ public class ImportMapper {
             if (Objects.equals(statusEntity.getSttId(), importEntity.getSttStore())) {
                 importDTO.setSttStore(statusEntity.getStatusName());
             }
-            if (Objects.equals(statusEntity.getSttId(), importEntity.getStatusPayment())) {
-                importDTO.setStatusPayment(statusEntity.getStatusName());
-            }
-
+            importDTO.setStatusPayment(importEntity.getStatusPayment());
         }
         return importDTO;
     }

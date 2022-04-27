@@ -121,15 +121,21 @@ public class ImportServiceImpl implements ImportService {
                 if (i > start + pageSize) {
                     break;
                 }
-                BranchEntity branchEntity = new BranchEntity();
-                SupplierEntity supplierEntity = new SupplierEntity();
-                AccountEntity account = new AccountEntity();
+                BranchEntity branchEntity = null;
+                SupplierEntity supplierEntity = null;
+                AccountEntity account = null;
                 List<ProductBranchEntity> productBranchEntities;
                 if (importEntity.getBranchID() != null) {
-                    branchEntity = branchRepository.getOne(importEntity.getBranchID());
+                    Optional<BranchEntity> optionalBranch = branchRepository.findById(importEntity.getBranchID());
+                    if (optionalBranch.isPresent()) {
+                        branchEntity = optionalBranch.get();
+                    }
                 }
                 if (importEntity.getSupplierID() != null) {
-                    supplierEntity = supplierRepository.getOne(importEntity.getSupplierID());
+                    Optional<SupplierEntity> optionalSupplierEntity = supplierRepository.findById(importEntity.getSupplierID());
+                    if (optionalSupplierEntity.isPresent()) {
+                        supplierEntity = optionalSupplierEntity.get();
+                    }
                 }
                 if (importEntity.getUserID() != null) {
                     Optional<AccountEntity> optionalAccount = userRepository.findById(importEntity.getUserID());

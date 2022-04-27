@@ -14,6 +14,7 @@ public class SupplierDTO {
     private String taxIdentificationNumber;
     private double dept;
     private String address;
+    private String user;
     private Long userId;
     private String description;
 }

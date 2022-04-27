@@ -15,6 +15,6 @@ public class ImportDTO {
     private String User;
     private String status;
     private String sttStore;
-    private String statusPayment;
+    private boolean statusPayment;
     List<ImportProductDTO> listProduct;
 }

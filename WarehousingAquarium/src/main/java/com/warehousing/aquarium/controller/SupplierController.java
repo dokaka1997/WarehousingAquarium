@@ -22,8 +22,8 @@ public class SupplierController {
     }
 
     @GetMapping
-    public ResponseEntity<List<SupplierDTO>> getAllSupplier() {
-        return ResponseEntity.ok(supplierService.getAllSupplier());
+    public ResponseEntity<List<SupplierDTO>> getAllSupplier(@RequestParam int pageIndex, @RequestParam int pageSize) {
+        return ResponseEntity.ok(supplierService.getAllSupplier(pageIndex, pageSize));
     }
 
     @PostMapping

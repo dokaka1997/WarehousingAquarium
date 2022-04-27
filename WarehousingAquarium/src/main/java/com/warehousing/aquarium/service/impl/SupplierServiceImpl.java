@@ -8,6 +8,7 @@ import com.warehousing.aquarium.repository.UserRepository;
 import com.warehousing.aquarium.service.SupplierService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -28,9 +29,9 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
-    public List<SupplierDTO> getAllSupplier() {
+    public List<SupplierDTO> getAllSupplier(int pageIndex, int pageSize) {
         List<SupplierDTO> supplierDTOS = new ArrayList<>();
-        List<SupplierEntity> supplierEntities = supplierRepository.findAll();
+        List<SupplierEntity> supplierEntities = supplierRepository.findAll(PageRequest.of(pageIndex, pageSize)).getContent();
         for (SupplierEntity supplierEntity : supplierEntities) {
             SupplierDTO supplierDTO = new SupplierDTO();
             supplierDTO.setSupplierId(supplierEntity.getSupplierId());
