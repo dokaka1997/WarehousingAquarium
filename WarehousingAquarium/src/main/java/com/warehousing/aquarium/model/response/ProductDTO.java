@@ -19,6 +19,8 @@ public class ProductDTO {
 
     private double unitPrice;
 
+    private String unitName;
+
     private double retailPrice;
 
     private double wholesalePrice;

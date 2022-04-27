@@ -24,6 +24,8 @@ public class ProductEntity {
 
     private double unitPrice;
 
+    private String unitName;
+
     private double retailPrice;
 
     private double wholesalePrice;

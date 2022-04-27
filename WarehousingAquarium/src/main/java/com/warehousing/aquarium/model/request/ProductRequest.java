@@ -16,6 +16,8 @@ public class ProductRequest {
 
     private String barCode;
 
+    private String unitName;
+
     private double unitPrice;
 
     private double retailPrice;

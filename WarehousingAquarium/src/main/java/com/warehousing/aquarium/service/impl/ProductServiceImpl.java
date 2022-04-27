@@ -111,6 +111,7 @@ public class ProductServiceImpl implements ProductService {
         productEntity.setImage(product.getImage());
         productEntity.setStatus(product.getSttId());
         productEntity.setClassifyId(product.getClassifyId());
+        productEntity.setUnitName(product.getUnitName());
         if (product.getProductId() != null) {
             productEntity.setProductId(product.getProductId());
         }

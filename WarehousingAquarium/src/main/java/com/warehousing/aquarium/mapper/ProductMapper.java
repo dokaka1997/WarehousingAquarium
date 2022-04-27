@@ -57,7 +57,7 @@ public class ProductMapper {
             dto.setColor(entity.getColor());
             dto.setSttId(entity.getStatus());
             dto.setClassifyId(entity.getClassifyId());
-
+            dto.setUnitName(entity.getUnitName());
             products.add(dto);
         }
         return products;
@@ -106,6 +106,7 @@ public class ProductMapper {
         dto.setImage(entity.getImage());
         dto.setSale(entity.isSale());
         dto.setSaleQuantity(entity.getSaleQuantity());
+        dto.setUnitName(entity.getUnitName());
         dto.setStockQuantity(entity.getStockQuantity());
         return dto;
     }

@@ -17,7 +17,7 @@ public class ImportProductDTO {
 
     private String color;
 
-    private Long quantity;
-
     private double unitPrice;
+
+    private String unitName;
 }
