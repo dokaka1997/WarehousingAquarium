@@ -46,7 +46,7 @@ public class TokenServiceImpl implements TokenService {
 
 
     @Override
-    public JwtResponse generateToken(JwtRequest authenticationRequest) throws Exception {
+    public JwtResponse generateToken(JwtRequest authenticationRequest) {
 //        authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
         LoginUserRequest userRequest = new LoginUserRequest();
         userRequest.setUsername(authenticationRequest.getUsername());

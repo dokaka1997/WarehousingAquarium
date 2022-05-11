@@ -1,20 +1,15 @@
 package com.warehousing.aquarium.service.impl;
 
-import com.warehousing.aquarium.entity.CustomerEntity;
-import com.warehousing.aquarium.entity.ExportEntity;
-import com.warehousing.aquarium.entity.ProductBranchEntity;
-import com.warehousing.aquarium.entity.ProductEntity;
+import com.warehousing.aquarium.entity.*;
 import com.warehousing.aquarium.model.request.ExportRequest;
 import com.warehousing.aquarium.model.request.ProductImportRequest;
-import com.warehousing.aquarium.repository.CustomerRepository;
-import com.warehousing.aquarium.repository.ExportRepository;
-import com.warehousing.aquarium.repository.ImportRepository;
-import com.warehousing.aquarium.repository.ProductRepository;
+import com.warehousing.aquarium.repository.*;
 import com.warehousing.aquarium.service.ExportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,13 +18,16 @@ public class ExportServiceImpl implements ExportService {
     ExportRepository exportRepository;
     ProductRepository productRepository;
     CustomerRepository customerRepository;
+    WarehouseRepository warehouseRepository;
 
     @Autowired
-    public ExportServiceImpl(ImportRepository importRepository, ExportRepository exportRepository, ProductRepository productRepository, CustomerRepository customerRepository) {
+    public ExportServiceImpl(ImportRepository importRepository, ExportRepository exportRepository, ProductRepository productRepository,
+                             CustomerRepository customerRepository, WarehouseRepository warehouseRepository) {
         this.importRepository = importRepository;
         this.exportRepository = exportRepository;
         this.productRepository = productRepository;
         this.customerRepository = customerRepository;
+        this.warehouseRepository = warehouseRepository;
     }
 
 
@@ -41,8 +39,21 @@ public class ExportServiceImpl implements ExportService {
             Optional<ProductEntity> productEntity = productRepository.findById(productExportRequest.getProductId());
             if (productEntity.isPresent()) {
                 ProductEntity entity = productEntity.get();
-                entity.setStockQuantity((int) (entity.getStockQuantity() - productExportRequest.getSaleQuantity()));
-                entity.setSaleQuantity((int) (entity.getSaleQuantity() - productExportRequest.getSaleQuantity()));
+                if (entity.getSaleQuantity() < productExportRequest.getSaleQuantity()) {
+                    entity.setSaleQuantity(0);
+                } else {
+                    entity.setSaleQuantity((int) (entity.getSaleQuantity() - productExportRequest.getSaleQuantity()));
+                }
+                if (productExportRequest.getCanExpire() != null && productExportRequest.getCanExpire()) {
+                    List<WarehouseEntity> warehouseEntities = warehouseRepository.findAllByProductId(productExportRequest.getProductId());
+                    Double price = 0D;
+                    Double quantity = 0D;
+                    for (WarehouseEntity warehouseEntity : warehouseEntities) {
+                        quantity += warehouseEntity.getQuantity();
+                        price += (warehouseEntity.getQuantity() * warehouseEntity.getPrice());
+                    }
+                    entity.setUnitPrice(price / quantity);
+                }
                 productRepository.save(entity);
             }
         }
@@ -57,13 +68,13 @@ public class ExportServiceImpl implements ExportService {
 
         ExportEntity exportEntity = new ExportEntity();
         exportEntity.setExportTime(new Date());
-        exportEntity.setExportPrice(exportEntity.getExportPrice());
+        exportEntity.setExportPrice(exportRequest.getExportPrice());
         exportEntity.setNumberExport((long) number);
-        exportEntity.setTaxID(exportEntity.getTaxID());
-        exportEntity.setUserID(exportEntity.getUserID());
-        exportEntity.setCustomerID(exportEntity.getCustomerID());
-        exportEntity.setStatus(exportEntity.getStatus());
-        exportEntity.setStatusPayment(exportEntity.getStatusPayment());
+        exportEntity.setTaxID(exportRequest.getTaxId());
+        exportEntity.setUserID(exportRequest.getEmployee());
+        exportEntity.setCustomerID(exportRequest.getCustomer());
+        exportEntity.setStatus(exportRequest.getStatus());
+        exportEntity.setStatusPayment(exportRequest.getStatusPayment());
         exportRepository.save(exportEntity);
         return true;
     }

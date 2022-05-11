@@ -13,6 +13,7 @@ public class ExportRequest {
     private Boolean statusPayment;
     private Long employee;
     private Long customer;
+    private Long status;
     private Double priceImport;
     List<ProductImportRequest> products;
 }

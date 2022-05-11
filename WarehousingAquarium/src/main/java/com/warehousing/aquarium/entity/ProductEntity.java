@@ -50,6 +50,8 @@ public class ProductEntity {
 
     private int status;
 
+    private boolean canExpired;
+
     private Double priceImport;
 
     @ManyToOne()

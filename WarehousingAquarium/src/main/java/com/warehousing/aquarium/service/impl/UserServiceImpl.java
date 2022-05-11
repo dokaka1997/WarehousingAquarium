@@ -42,6 +42,7 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("Username existed");
         }
         try {
+            userEntity.setRoleId(0);
             userRepository.save(userEntity);
             return true;
         } catch (Exception exception) {

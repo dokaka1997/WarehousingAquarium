@@ -53,4 +53,7 @@ public class ProductRequest {
     Long supplierId;
 
     Long categoryId;
+
+    private boolean canExpired;
+
 }

@@ -28,7 +28,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<Boolean> getProductById(@RequestBody ProductRequest productRequest) {
+    public ResponseEntity<Boolean> createProduct(@RequestBody ProductRequest productRequest) {
         return ResponseEntity.ok(productService.createProduct(productRequest));
     }
 

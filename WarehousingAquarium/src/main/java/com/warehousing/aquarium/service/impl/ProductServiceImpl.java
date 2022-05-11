@@ -112,6 +112,7 @@ public class ProductServiceImpl implements ProductService {
         productEntity.setStatus(product.getSttId());
         productEntity.setClassifyId(product.getClassifyId());
         productEntity.setUnitName(product.getUnitName());
+        productEntity.setCanExpired(product.isCanExpired());
         if (product.getProductId() != null) {
             productEntity.setProductId(product.getProductId());
         }

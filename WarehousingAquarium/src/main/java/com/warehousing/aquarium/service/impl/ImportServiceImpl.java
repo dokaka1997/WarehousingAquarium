@@ -26,13 +26,14 @@ public class ImportServiceImpl implements ImportService {
     PaymentTypeRepository paymentTypeRepository;
     StatusRepository statusRepository;
     UserRepository userRepository;
+    WarehouseRepository warehouseRepository;
 
     @Autowired
     public ImportServiceImpl(ImportRepository importRepository, ProductBranchRepository productBranchRepository,
                              ProductRepository productRepository, BranchRepository branchRepository,
                              SupplierRepository supplierRepository, PaymentTypeRepository paymentTypeRepository,
                              StatusRepository statusRepository,
-                             UserRepository userRepository) {
+                             UserRepository userRepository, WarehouseRepository warehouseRepository) {
         this.importRepository = importRepository;
         this.productBranchRepository = productBranchRepository;
         this.productRepository = productRepository;
@@ -41,6 +42,7 @@ public class ImportServiceImpl implements ImportService {
         this.paymentTypeRepository = paymentTypeRepository;
         this.statusRepository = statusRepository;
         this.userRepository = userRepository;
+        this.warehouseRepository = warehouseRepository;
     }
 
     @Override
@@ -52,6 +54,30 @@ public class ImportServiceImpl implements ImportService {
         Optional<PaymentTypeEntity> paymentTypeEntity = paymentTypeRepository.findById(importRequest.getPaymentType());
         int number = 0;
         for (ProductImportRequest productImportRequest : importRequest.getProducts()) {
+
+            if (productImportRequest.getCanExpire()) {
+                WarehouseEntity entity = new WarehouseEntity();
+                entity.setUpdatedBy(importRequest.getEmployee());
+                entity.setSupplierId(importRequest.getSupplierId());
+                if (productImportRequest.getWareHouseId() != null) {
+                    Optional<WarehouseEntity> warehouseEntity = warehouseRepository.findById(productImportRequest.getWareHouseId());
+                    if (warehouseEntity.isPresent()) {
+                        entity = warehouseEntity.get();
+                        Double price = (entity.getPrice() + productImportRequest.getPrice()) / (entity.getQuantity() + productImportRequest.getSaleQuantity());
+                        entity.setPrice(price);
+                        entity.setQuantity((int) (entity.getQuantity() + productImportRequest.getSaleQuantity()));
+                    }
+                } else {
+                    entity.setPrice(productImportRequest.getPrice());
+                    entity.setQuantity(productImportRequest.getSaleQuantity().intValue());
+                    entity.setCreatedDate(new java.sql.Date(System.currentTimeMillis()));
+                    entity.setCreatedBy(importRequest.getEmployee());
+                    entity.setExpiredDate(productImportRequest.getExpireDate());
+                }
+                warehouseRepository.save(entity);
+            }
+
+
             number += productImportRequest.getSaleQuantity();
             ProductBranchEntity productBranchEntity = new ProductBranchEntity();
             Optional<ProductEntity> productEntity = productRepository.findById(productImportRequest.getProductId());
