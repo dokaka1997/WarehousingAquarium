@@ -231,6 +231,7 @@
       <workItem from="1652106590693" duration="1728000" />
       <workItem from="1652117618514" duration="926000" />
       <workItem from="1652288581094" duration="3892000" />
+      <workItem from="1652459100841" duration="3320000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1626413618569</created>
@@ -445,21 +446,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/warehousing/aquarium/service/impl/SupplierServiceImpl.java</url>
           <line>71</line>
           <option name="timeStamp" value="35" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/warehousing/aquarium/service/impl/ImportServiceImpl.java</url>
-          <line>159</line>
-          <option name="timeStamp" value="37" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/warehousing/aquarium/mapper/ImportMapper.java</url>
-          <line>32</line>
-          <option name="timeStamp" value="39" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/warehousing/aquarium/service/impl/ImportServiceImpl.java</url>
-          <line>49</line>
-          <option name="timeStamp" value="41" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/warehousing/aquarium/service/impl/ExportServiceImpl.java</url>

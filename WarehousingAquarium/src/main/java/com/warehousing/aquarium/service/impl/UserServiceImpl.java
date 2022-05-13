@@ -104,6 +104,12 @@ public class UserServiceImpl implements UserService {
         return list;
     }
 
+    @Override
+    public boolean checkToken(String token, Long userId) {
+        Optional<AccountEntity> optionalAccount = userRepository.findById(userId);
+        return optionalAccount.map(accountEntity -> accountEntity.getToken().equals(token)).orElse(false);
+    }
+
     public void sendEmail(String recipientEmail, String token) throws MessagingException, UnsupportedEncodingException {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);

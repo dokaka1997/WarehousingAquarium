@@ -12,9 +12,10 @@ public class ImportDTO {
     private Double importPrice;
     private String branch;
     private String supplier;
+    private Long supplierId;
     private String User;
     private String status;
-    private String sttStore;
-    private boolean statusPayment;
+    private Boolean sttStore;
+    private Boolean statusPayment;
     List<ImportProductDTO> listProduct;
 }

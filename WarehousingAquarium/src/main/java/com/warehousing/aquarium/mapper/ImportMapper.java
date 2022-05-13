@@ -11,8 +11,7 @@ public class ImportMapper {
     public static ImportDTO mapImportEntityToDTO(ImportEntity importEntity,
                                                  BranchEntity branchEntity,
                                                  SupplierEntity supplierEntity,
-                                                 AccountEntity accountEntity,
-                                                 List<StatusEntity> statusEntitys) {
+                                                 AccountEntity accountEntity) {
         ImportDTO importDTO = new ImportDTO();
         importDTO.setImportID(importEntity.getImportID());
         importDTO.setImportTime(importEntity.getImportTime());
@@ -22,6 +21,7 @@ public class ImportMapper {
         }
         if (supplierEntity != null) {
             importDTO.setSupplier(supplierEntity.getSupplierName());
+            importDTO.setSupplierId(supplierEntity.getSupplierId());
         }
         if (accountEntity != null) {
             importDTO.setUser(accountEntity.getName());
@@ -29,16 +29,8 @@ public class ImportMapper {
         if (importEntity.getImportPrice() != null) {
             importDTO.setImportPrice(importEntity.getImportPrice());
         }
-
-        for (StatusEntity statusEntity : statusEntitys) {
-            if (Objects.equals(statusEntity.getSttId(), importEntity.getStatus())) {
-                importDTO.setStatus(statusEntity.getStatusName());
-            }
-            if (Objects.equals(statusEntity.getSttId(), importEntity.getSttStore())) {
-                importDTO.setSttStore(statusEntity.getStatusName());
-            }
-            importDTO.setStatusPayment(importEntity.getStatusPayment());
-        }
+        importDTO.setSttStore(importEntity.getSttStore());
+        importDTO.setStatusPayment(importEntity.getStatusPayment());
         return importDTO;
     }
 }

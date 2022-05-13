@@ -24,7 +24,6 @@ public class ImportServiceImpl implements ImportService {
     BranchRepository branchRepository;
     SupplierRepository supplierRepository;
     PaymentTypeRepository paymentTypeRepository;
-    StatusRepository statusRepository;
     UserRepository userRepository;
     WarehouseRepository warehouseRepository;
 
@@ -32,7 +31,6 @@ public class ImportServiceImpl implements ImportService {
     public ImportServiceImpl(ImportRepository importRepository, ProductBranchRepository productBranchRepository,
                              ProductRepository productRepository, BranchRepository branchRepository,
                              SupplierRepository supplierRepository, PaymentTypeRepository paymentTypeRepository,
-                             StatusRepository statusRepository,
                              UserRepository userRepository, WarehouseRepository warehouseRepository) {
         this.importRepository = importRepository;
         this.productBranchRepository = productBranchRepository;
@@ -40,7 +38,6 @@ public class ImportServiceImpl implements ImportService {
         this.branchRepository = branchRepository;
         this.supplierRepository = supplierRepository;
         this.paymentTypeRepository = paymentTypeRepository;
-        this.statusRepository = statusRepository;
         this.userRepository = userRepository;
         this.warehouseRepository = warehouseRepository;
     }
@@ -139,7 +136,6 @@ public class ImportServiceImpl implements ImportService {
         if (importEntities.isEmpty()) {
             return list;
         }
-        List<StatusEntity> statusEntities = statusRepository.findAll();
         int start = pageIndex * pageSize;
         for (int i = 0; i < importEntities.size(); i++) {
             ImportEntity importEntity = importEntities.get(i);
@@ -183,7 +179,7 @@ public class ImportServiceImpl implements ImportService {
                     productEntity.ifPresent(product -> importProductDTO.setUnitPrice(product.getUnitPrice()));
                     importProductDTOS.add(importProductDTO);
                 }
-                ImportDTO importDTO = ImportMapper.mapImportEntityToDTO(importEntity, branchEntity, supplierEntity, account, statusEntities);
+                ImportDTO importDTO = ImportMapper.mapImportEntityToDTO(importEntity, branchEntity, supplierEntity, account);
                 importDTO.setListProduct(importProductDTOS);
                 list.add(importDTO);
             }
@@ -194,7 +190,6 @@ public class ImportServiceImpl implements ImportService {
     @Override
     public ImportDTO getImportById(Long id) {
         Optional<ImportEntity> importEntities = importRepository.findById(id);
-        List<StatusEntity> statusEntities = statusRepository.findAll();
         if (!importEntities.isPresent()) {
             return null;
         }
@@ -235,7 +230,7 @@ public class ImportServiceImpl implements ImportService {
             productEntity.ifPresent(product -> importProductDTO.setUnitName(product.getUnitName()));
             importProductDTOS.add(importProductDTO);
         }
-        ImportDTO importDTO = ImportMapper.mapImportEntityToDTO(importEntities.get(), branchEntity, supplierEntity, account, statusEntities);
+        ImportDTO importDTO = ImportMapper.mapImportEntityToDTO(importEntities.get(), branchEntity, supplierEntity, account);
         importDTO.setListProduct(importProductDTOS);
         return importDTO;
     }
@@ -252,7 +247,6 @@ public class ImportServiceImpl implements ImportService {
         if (importEntities.isEmpty()) {
             return list;
         }
-        List<StatusEntity> statusEntities = statusRepository.findAll();
         int start = pageIndex * pageSize;
         for (int i = 0; i < importEntities.size(); i++) {
             ImportEntity importEntity = importEntities.get(i);
@@ -290,7 +284,7 @@ public class ImportServiceImpl implements ImportService {
                     productEntity.ifPresent(product -> importProductDTO.setUnitPrice(product.getUnitPrice()));
                     importProductDTOS.add(importProductDTO);
                 }
-                ImportDTO importDTO = ImportMapper.mapImportEntityToDTO(importEntity, branchEntity, supplierEntity, account, statusEntities);
+                ImportDTO importDTO = ImportMapper.mapImportEntityToDTO(importEntity, branchEntity, supplierEntity, account);
                 importDTO.setListProduct(importProductDTOS);
                 list.add(importDTO);
             }

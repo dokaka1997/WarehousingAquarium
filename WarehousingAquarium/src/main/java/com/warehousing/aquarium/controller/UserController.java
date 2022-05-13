@@ -43,4 +43,10 @@ public class UserController {
         return ResponseEntity.ok(userService.getAllUser());
     }
 
+    @GetMapping("/token")
+    public ResponseEntity<Boolean> checkToken(@RequestParam String token, @RequestParam Long userId) {
+        return ResponseEntity.ok(userService.checkToken(token, userId));
+    }
+
+
 }

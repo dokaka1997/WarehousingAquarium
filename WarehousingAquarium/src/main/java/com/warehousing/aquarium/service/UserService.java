@@ -17,4 +17,6 @@ public interface UserService {
     boolean changePassword(String email, String newPassword, String token);
 
     List<UserResponse> getAllUser();
+
+    boolean checkToken(String token, Long userId);
 }

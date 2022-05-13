@@ -14,7 +14,7 @@ public class ImportRequest {
     private Double importPrice;
     private Long statusImport;
     private Boolean statusPayment;
-    private Long statusStore;
+    private Boolean statusStore;
     private Long employee;
     private Double priceImport;
     List<ProductImportRequest> products;
