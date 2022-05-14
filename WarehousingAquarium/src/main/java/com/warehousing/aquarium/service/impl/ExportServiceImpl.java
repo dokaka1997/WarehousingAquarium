@@ -32,7 +32,7 @@ public class ExportServiceImpl implements ExportService {
 
 
     @Override
-    public Boolean addExport(ExportRequest exportRequest) {
+    public ExportEntity addExport(ExportRequest exportRequest) {
         int number = 0;
         for (ProductImportRequest productExportRequest : exportRequest.getProducts()) {
             number += productExportRequest.getSaleQuantity();
@@ -76,6 +76,6 @@ public class ExportServiceImpl implements ExportService {
         exportEntity.setStatus(exportRequest.getStatus());
         exportEntity.setStatusPayment(exportRequest.getStatusPayment());
         exportRepository.save(exportEntity);
-        return true;
+        return exportEntity;
     }
 }

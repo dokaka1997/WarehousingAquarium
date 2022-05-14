@@ -1,5 +1,6 @@
 package com.warehousing.aquarium.controller;
 
+import com.warehousing.aquarium.entity.ExportEntity;
 import com.warehousing.aquarium.model.request.ExportRequest;
 import com.warehousing.aquarium.service.ExportService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class ExportController {
     }
 
     @PostMapping
-    public ResponseEntity<Boolean> addExport(@RequestBody ExportRequest exportRequest) {
+    public ResponseEntity<ExportEntity> addExport(@RequestBody ExportRequest exportRequest) {
         return ResponseEntity.ok(exportService.addExport(exportRequest));
     }
 }
