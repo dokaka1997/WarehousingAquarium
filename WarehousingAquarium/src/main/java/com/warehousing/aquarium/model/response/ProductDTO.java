@@ -55,4 +55,6 @@ public class ProductDTO {
 
     CategoryDTO categoryId;
 
+    Boolean canExpired;
+
 }

@@ -58,6 +58,7 @@ public class ProductMapper {
             dto.setSttId(entity.getStatus());
             dto.setClassifyId(entity.getClassifyId());
             dto.setUnitName(entity.getUnitName());
+            dto.setCanExpired(entity.getCanExpired());
             products.add(dto);
         }
         return products;

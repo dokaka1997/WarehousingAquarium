@@ -50,7 +50,7 @@ public class ProductEntity {
 
     private int status;
 
-    private boolean canExpired;
+    private Boolean canExpired;
 
     private Double priceImport;
 
