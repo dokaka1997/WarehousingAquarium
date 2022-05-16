@@ -70,6 +70,7 @@ public class WarehouseServiceImpl implements WarehouseService {
                 SupplierEntity supplierEntity = optionalSupplier.get();
                 warehouseResponse.setSupplier(supplierEntity.getSupplierName());
             }
+            warehouseResponse.setWarehouseId(warehouseEntity.getWarehouseId());
             warehouseResponse.setExpiredDate(warehouseEntity.getExpiredDate());
             responseList.add(warehouseResponse);
         }

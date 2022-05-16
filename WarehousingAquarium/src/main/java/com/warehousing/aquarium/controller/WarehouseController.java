@@ -1,7 +1,6 @@
 package com.warehousing.aquarium.controller;
 
 import com.warehousing.aquarium.entity.WarehouseEntity;
-import com.warehousing.aquarium.model.response.UnitDTO;
 import com.warehousing.aquarium.model.response.WarehouseResponse;
 import com.warehousing.aquarium.service.WarehouseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +26,7 @@ public class WarehouseController {
         return ResponseEntity.ok(warehouseService.addNewWarehouse(warehouseEntity));
     }
 
-    @GetMapping("{/id}")
+    @GetMapping("/{id}")
     public ResponseEntity<List<WarehouseResponse>> getAllWarehouse(@PathVariable Long id) {
         return ResponseEntity.ok(warehouseService.getAllWarehouse(id));
     }
