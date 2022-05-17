@@ -87,7 +87,6 @@ public class ImportServiceImpl implements ImportService {
                 productRepository.save(entity);
             }
             productEntity.ifPresent(entity -> productBranchEntity.setProductID(entity.getProductId()));
-            productBranchEntity.setQuantityOnHand(productImportRequest.getSaleQuantity());
             productBranchEntity.setSaleQuantity(productImportRequest.getSaleQuantity());
             productBranchEntity.setTotalPrice(importRequest.getImportPrice());
             branchEntity.ifPresent(entity -> productBranchEntity.setBranchID(entity.getBranchId()));

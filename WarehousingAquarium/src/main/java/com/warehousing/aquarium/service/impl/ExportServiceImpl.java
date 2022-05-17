@@ -6,8 +6,10 @@ import com.warehousing.aquarium.model.request.ProductImportRequest;
 import com.warehousing.aquarium.repository.*;
 import com.warehousing.aquarium.service.ExportService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -19,22 +21,33 @@ public class ExportServiceImpl implements ExportService {
     ProductRepository productRepository;
     CustomerRepository customerRepository;
     WarehouseRepository warehouseRepository;
+    ProductBranchRepository productBranchRepository;
+    BranchRepository branchRepository;
 
     @Autowired
     public ExportServiceImpl(ImportRepository importRepository, ExportRepository exportRepository, ProductRepository productRepository,
-                             CustomerRepository customerRepository, WarehouseRepository warehouseRepository) {
+                             CustomerRepository customerRepository, WarehouseRepository warehouseRepository,
+                             ProductBranchRepository productBranchRepository, BranchRepository branchRepository) {
         this.importRepository = importRepository;
         this.exportRepository = exportRepository;
         this.productRepository = productRepository;
         this.customerRepository = customerRepository;
         this.warehouseRepository = warehouseRepository;
+        this.branchRepository = branchRepository;
+        this.productBranchRepository = productBranchRepository;
     }
 
 
     @Override
     public ExportEntity addExport(ExportRequest exportRequest) {
+        List<ProductBranchEntity> productBranchEntities = new ArrayList<>();
         int number = 0;
         for (ProductImportRequest productExportRequest : exportRequest.getProducts()) {
+            ProductBranchEntity productBranchEntity = new ProductBranchEntity();
+            productBranchEntity.setSaleQuantity(productExportRequest.getSaleQuantity());
+            productBranchEntity.setTotalPrice(productExportRequest.getPrice());
+            productBranchEntity.setProductID(productExportRequest.getProductId());
+            productBranchEntities.add(productBranchEntity);
             number += productExportRequest.getSaleQuantity();
             Optional<ProductEntity> productEntity = productRepository.findById(productExportRequest.getProductId());
             if (productEntity.isPresent()) {
@@ -75,7 +88,24 @@ public class ExportServiceImpl implements ExportService {
         exportEntity.setCustomerID(exportRequest.getCustomer());
         exportEntity.setStatus(exportRequest.getStatus());
         exportEntity.setStatusPayment(exportRequest.getStatusPayment());
-        exportRepository.save(exportEntity);
+        exportEntity = exportRepository.save(exportEntity);
+        for (ProductBranchEntity productBranchEntity : productBranchEntities) {
+            productBranchEntity.setExportId(exportEntity.getExportID());
+        }
+        productBranchRepository.saveAll(productBranchEntities);
         return exportEntity;
     }
+
+    @Override
+    public List<ExportEntity> getAllExport(int pageIndex, int pageSize) {
+        return exportRepository.findAll(PageRequest.of(pageIndex, pageSize)).getContent();
+    }
+
+    @Override
+    public ExportEntity getExportById(Long id) {
+        Optional<ExportEntity> optional = exportRepository.findById(id);
+        return optional.orElse(null);
+    }
+
+
 }

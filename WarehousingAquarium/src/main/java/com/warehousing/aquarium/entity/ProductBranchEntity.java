@@ -13,6 +13,7 @@ public class ProductBranchEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long proBranchID;
     private Long importId;
+    private Long exportId;
     private Long branchID;
     private Long productID;
     private Long saleQuantity;

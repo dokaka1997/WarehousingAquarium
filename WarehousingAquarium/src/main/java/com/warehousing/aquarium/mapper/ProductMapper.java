@@ -109,6 +109,7 @@ public class ProductMapper {
         dto.setSaleQuantity(entity.getSaleQuantity());
         dto.setUnitName(entity.getUnitName());
         dto.setStockQuantity(entity.getStockQuantity());
+        dto.setCanExpired(entity.getCanExpired());
         return dto;
     }
 }
