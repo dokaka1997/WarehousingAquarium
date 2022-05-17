@@ -5,9 +5,9 @@ import lombok.Data;
 import java.sql.Date;
 
 @Data
-public class WarehouseResponse {
+public class ProductBatchResponse {
 
-    private Long warehouseId;
+    private Long productBatchId;
 
     private Long productId;
 

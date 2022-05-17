@@ -7,11 +7,11 @@ import java.sql.Date;
 
 @Entity
 @Data
-@Table(name = "warehouse")
-public class WarehouseEntity {
+@Table(name = "product_batch")
+public class ProductBatchEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long warehouseId;
+    private Long productBatchId;
 
     private Long productId;
 
@@ -20,6 +20,10 @@ public class WarehouseEntity {
     private int quantity;
 
     private Date createdDate;
+
+    private Date updatedDate;
+
+    private Date manufactureDate;
 
     private Long createdBy;
 

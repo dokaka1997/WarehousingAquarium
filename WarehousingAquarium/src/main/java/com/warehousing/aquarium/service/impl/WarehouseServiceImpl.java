@@ -3,13 +3,13 @@ package com.warehousing.aquarium.service.impl;
 import com.warehousing.aquarium.entity.AccountEntity;
 import com.warehousing.aquarium.entity.ProductEntity;
 import com.warehousing.aquarium.entity.SupplierEntity;
-import com.warehousing.aquarium.entity.WarehouseEntity;
-import com.warehousing.aquarium.model.response.WarehouseResponse;
+import com.warehousing.aquarium.entity.ProductBatchEntity;
+import com.warehousing.aquarium.model.response.ProductBatchResponse;
 import com.warehousing.aquarium.repository.ProductRepository;
 import com.warehousing.aquarium.repository.SupplierRepository;
 import com.warehousing.aquarium.repository.UserRepository;
 import com.warehousing.aquarium.repository.WarehouseRepository;
-import com.warehousing.aquarium.service.WarehouseService;
+import com.warehousing.aquarium.service.ProductBatchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class WarehouseServiceImpl implements WarehouseService {
+public class WarehouseServiceImpl implements ProductBatchService {
 
     WarehouseRepository warehouseRepository;
 
@@ -38,17 +38,22 @@ public class WarehouseServiceImpl implements WarehouseService {
     }
 
     @Override
-    public WarehouseEntity addNewWarehouse(WarehouseEntity warehouseEntity) {
+    public ProductBatchEntity addNewProductBatch(ProductBatchEntity warehouseEntity) {
+        if (warehouseEntity.getProductBatchId() != null) {
+            warehouseEntity.setCreatedDate(new java.sql.Date(System.currentTimeMillis()));
+        } else {
+            warehouseEntity.setUpdatedDate(new java.sql.Date(System.currentTimeMillis()));
+        }
         return warehouseRepository.save(warehouseEntity);
     }
 
     @Override
-    public List<WarehouseResponse> getAllWarehouse(Long productId) {
-        List<WarehouseEntity> warehouseList = warehouseRepository.findAllByProductId(productId);
+    public List<ProductBatchResponse> getAllProductBatch(Long productId) {
+        List<ProductBatchEntity> warehouseList = warehouseRepository.findAllByProductId(productId);
 
-        List<WarehouseResponse> responseList = new ArrayList<>();
-        for (WarehouseEntity warehouseEntity : warehouseList) {
-            WarehouseResponse warehouseResponse = new WarehouseResponse();
+        List<ProductBatchResponse> responseList = new ArrayList<>();
+        for (ProductBatchEntity warehouseEntity : warehouseList) {
+            ProductBatchResponse warehouseResponse = new ProductBatchResponse();
             Optional<ProductEntity> optionalProduct = productRepository.findById(warehouseEntity.getProductId());
             if (optionalProduct.isPresent()) {
                 ProductEntity product = optionalProduct.get();
@@ -70,7 +75,7 @@ public class WarehouseServiceImpl implements WarehouseService {
                 SupplierEntity supplierEntity = optionalSupplier.get();
                 warehouseResponse.setSupplier(supplierEntity.getSupplierName());
             }
-            warehouseResponse.setWarehouseId(warehouseEntity.getWarehouseId());
+            warehouseResponse.setProductBatchId(warehouseEntity.getProductBatchId());
             warehouseResponse.setExpiredDate(warehouseEntity.getExpiredDate());
             responseList.add(warehouseResponse);
         }

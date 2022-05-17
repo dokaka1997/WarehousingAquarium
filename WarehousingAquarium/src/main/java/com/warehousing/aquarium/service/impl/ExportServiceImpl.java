@@ -45,10 +45,10 @@ public class ExportServiceImpl implements ExportService {
                     entity.setSaleQuantity((int) (entity.getSaleQuantity() - productExportRequest.getSaleQuantity()));
                 }
                 if (productExportRequest.getCanExpire() != null && productExportRequest.getCanExpire()) {
-                    List<WarehouseEntity> warehouseEntities = warehouseRepository.findAllByProductId(productExportRequest.getProductId());
+                    List<ProductBatchEntity> warehouseEntities = warehouseRepository.findAllByProductId(productExportRequest.getProductId());
                     Double price = 0D;
                     Double quantity = 0D;
-                    for (WarehouseEntity warehouseEntity : warehouseEntities) {
+                    for (ProductBatchEntity warehouseEntity : warehouseEntities) {
                         quantity += warehouseEntity.getQuantity();
                         price += (warehouseEntity.getQuantity() * warehouseEntity.getPrice());
                     }

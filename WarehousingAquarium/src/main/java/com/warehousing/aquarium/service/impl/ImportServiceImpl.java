@@ -53,11 +53,11 @@ public class ImportServiceImpl implements ImportService {
         for (ProductImportRequest productImportRequest : importRequest.getProducts()) {
 
             if (productImportRequest.getCanExpire()) {
-                WarehouseEntity entity = new WarehouseEntity();
+                ProductBatchEntity entity = new ProductBatchEntity();
                 entity.setUpdatedBy(importRequest.getEmployee());
                 entity.setSupplierId(importRequest.getSupplierId());
                 if (productImportRequest.getWareHouseId() != null) {
-                    Optional<WarehouseEntity> warehouseEntity = warehouseRepository.findById(productImportRequest.getWareHouseId());
+                    Optional<ProductBatchEntity> warehouseEntity = warehouseRepository.findById(productImportRequest.getWareHouseId());
                     if (warehouseEntity.isPresent()) {
                         entity = warehouseEntity.get();
                         Double price = (entity.getPrice() + productImportRequest.getPrice()) / (entity.getQuantity() + productImportRequest.getSaleQuantity());
