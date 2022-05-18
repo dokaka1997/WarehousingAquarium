@@ -11,6 +11,6 @@ public interface ExportService {
 
     List<ExportEntity> getAllExport(int pageIndex, int pageSize);
 
-    ExportEntity getExportById(Long id);
+    ExportDTO getExportById(Long id);
 
 }

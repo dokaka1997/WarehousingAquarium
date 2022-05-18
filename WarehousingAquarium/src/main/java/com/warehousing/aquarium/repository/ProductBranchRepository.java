@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface ProductBranchRepository extends JpaRepository<ProductBranchEntity, Long> {
     List<ProductBranchEntity> findAllByImportId(Long id);
+
+    List<ProductBranchEntity> findAllByExportId(Long id);
 }

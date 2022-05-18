@@ -3,6 +3,8 @@ package com.warehousing.aquarium.service.impl;
 import com.warehousing.aquarium.entity.*;
 import com.warehousing.aquarium.model.request.ExportRequest;
 import com.warehousing.aquarium.model.request.ProductImportRequest;
+import com.warehousing.aquarium.model.response.ExportDTO;
+import com.warehousing.aquarium.model.response.ImportProductDTO;
 import com.warehousing.aquarium.repository.*;
 import com.warehousing.aquarium.service.ExportService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +25,14 @@ public class ExportServiceImpl implements ExportService {
     WarehouseRepository warehouseRepository;
     ProductBranchRepository productBranchRepository;
     BranchRepository branchRepository;
+    UserRepository userRepository;
+    StatusRepository statusRepository;
 
     @Autowired
     public ExportServiceImpl(ImportRepository importRepository, ExportRepository exportRepository, ProductRepository productRepository,
                              CustomerRepository customerRepository, WarehouseRepository warehouseRepository,
-                             ProductBranchRepository productBranchRepository, BranchRepository branchRepository) {
+                             ProductBranchRepository productBranchRepository, BranchRepository branchRepository,
+                             UserRepository userRepository, StatusRepository statusRepository) {
         this.importRepository = importRepository;
         this.exportRepository = exportRepository;
         this.productRepository = productRepository;
@@ -35,6 +40,8 @@ public class ExportServiceImpl implements ExportService {
         this.warehouseRepository = warehouseRepository;
         this.branchRepository = branchRepository;
         this.productBranchRepository = productBranchRepository;
+        this.userRepository = userRepository;
+        this.statusRepository = statusRepository;
     }
 
 
@@ -53,9 +60,9 @@ public class ExportServiceImpl implements ExportService {
             if (productEntity.isPresent()) {
                 ProductEntity entity = productEntity.get();
                 if (entity.getSaleQuantity() < productExportRequest.getSaleQuantity()) {
-                    entity.setSaleQuantity(0);
+                    entity.setSaleQuantity(0L);
                 } else {
-                    entity.setSaleQuantity((int) (entity.getSaleQuantity() - productExportRequest.getSaleQuantity()));
+                    entity.setSaleQuantity(entity.getSaleQuantity() - productExportRequest.getSaleQuantity());
                 }
                 if (productExportRequest.getCanExpire() != null && productExportRequest.getCanExpire()) {
                     List<ProductBatchEntity> warehouseEntities = warehouseRepository.findAllByProductId(productExportRequest.getProductId());
@@ -102,9 +109,53 @@ public class ExportServiceImpl implements ExportService {
     }
 
     @Override
-    public ExportEntity getExportById(Long id) {
+    public ExportDTO getExportById(Long id) {
+        ExportDTO dto = new ExportDTO();
         Optional<ExportEntity> optional = exportRepository.findById(id);
-        return optional.orElse(null);
+
+        if (!optional.isPresent()) {
+            return dto;
+        }
+        ExportEntity entity = optional.get();
+        dto.setExportID(entity.getExportID());
+        dto.setExportTime(entity.getExportTime());
+        dto.setExportPrice(entity.getExportPrice());
+
+        if (entity.getUserID() != null) {
+            Optional<AccountEntity> optionalAccount = userRepository.findById(entity.getUserID());
+            optionalAccount.ifPresent(accountEntity -> dto.setUser(accountEntity.getName()));
+        }
+        if (entity.getCustomerID() != null) {
+            Optional<CustomerEntity> optionalCustomerEntity = customerRepository.findById(entity.getCustomerID());
+            if (optionalCustomerEntity.isPresent()) {
+                dto.setCustomerID(optionalCustomerEntity.get().getCustomerId());
+                dto.setCustomerName(optionalCustomerEntity.get().getCustomerName());
+            }
+        }
+        if (entity.getStatus() != null) {
+            Optional<StatusEntity> optionalStatusEntity = statusRepository.findById(entity.getStatus());
+            optionalStatusEntity.ifPresent(statusEntity -> dto.setStatus(statusEntity.getStatusName()));
+        }
+        dto.setStatusPayment(entity.getStatusPayment());
+
+        List<ProductBranchEntity> productBatchEntities = productBranchRepository.findAllByExportId(id);
+
+        List<ImportProductDTO> listProduct = new ArrayList<>();
+
+        for (ProductBranchEntity productBranchEntity : productBatchEntities) {
+            ImportProductDTO importProductDTO = new ImportProductDTO();
+            importProductDTO.setProductId(productBranchEntity.getProductID());
+            Optional<ProductEntity> optionalProduct = productRepository.findById(productBranchEntity.getProductID());
+            optionalProduct.ifPresent(productEntity -> importProductDTO.setProductCode(productEntity.getProductName()));
+            optionalProduct.ifPresent(productEntity -> importProductDTO.setImage(productEntity.getImage()));
+            optionalProduct.ifPresent(productEntity -> importProductDTO.setColor(productEntity.getColor()));
+            optionalProduct.ifPresent(productEntity -> importProductDTO.setUnitPrice(productEntity.getUnitPrice()));
+            optionalProduct.ifPresent(productEntity -> importProductDTO.setUnitName(productEntity.getUnitName()));
+            listProduct.add(importProductDTO);
+        }
+        dto.setListProduct(listProduct);
+
+        return dto;
     }
 
 

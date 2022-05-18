@@ -2,6 +2,7 @@ package com.warehousing.aquarium.controller;
 
 import com.warehousing.aquarium.entity.ExportEntity;
 import com.warehousing.aquarium.model.request.ExportRequest;
+import com.warehousing.aquarium.model.response.ExportDTO;
 import com.warehousing.aquarium.service.ExportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +33,7 @@ public class ExportController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ExportEntity> getImportById(@PathVariable Long id) {
+    public ResponseEntity<ExportDTO> getImportById(@PathVariable Long id) {
         return ResponseEntity.ok(exportService.getExportById(id));
     }
 }

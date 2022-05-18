@@ -104,7 +104,7 @@ public class ProductServiceImpl implements ProductService {
         productEntity.setModifyCreate(product.getModifyCreate());
         productEntity.setDescription(product.getDescription());
         productEntity.setTag(product.getTag());
-        productEntity.setSale(product.isSale());
+        productEntity.setIsSale(product.getIsSale());
         productEntity.setSaleQuantity(product.getSaleQuantity());
         productEntity.setStockQuantity(product.getStockQuantity());
         productEntity.setColor(product.getColor());
@@ -112,6 +112,7 @@ public class ProductServiceImpl implements ProductService {
         productEntity.setStatus(product.getSttId());
         productEntity.setClassifyId(product.getClassifyId());
         productEntity.setUnitName(product.getUnitName());
+        productEntity.setStatus(product.getSttId());
         productEntity.setCanExpired(product.getCanExpired());
         if (product.getProductId() != null) {
             productEntity.setProductId(product.getProductId());
@@ -162,7 +163,7 @@ public class ProductServiceImpl implements ProductService {
             productEntity.setModifyCreate(product.getModifyCreate());
             productEntity.setDescription(product.getDescription());
             productEntity.setTag(product.getTag());
-            productEntity.setSale(product.isSale());
+            productEntity.setIsSale(product.getIsSale());
             productEntity.setSaleQuantity(product.getSaleQuantity());
             productEntity.setStockQuantity(product.getStockQuantity());
             productEntity.setColor(product.getColor());

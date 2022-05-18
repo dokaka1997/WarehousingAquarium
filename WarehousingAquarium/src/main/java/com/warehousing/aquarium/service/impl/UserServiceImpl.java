@@ -41,6 +41,10 @@ public class UserServiceImpl implements UserService {
         if (userRepository.getByUsername(userRequest.getUsername()).isPresent()) {
             throw new RuntimeException("Username existed");
         }
+        Optional<AccountEntity> accountEntity = userRepository.getFirstByEmail(userRequest.getEmail());
+        if (accountEntity.isPresent()) {
+            throw new RuntimeException("Email existed");
+        }
         try {
             userEntity.setRoleId(0);
             userRepository.save(userEntity);

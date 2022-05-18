@@ -74,6 +74,7 @@ public class WarehouseServiceImpl implements ProductBatchService {
             if (optionalSupplier.isPresent()) {
                 SupplierEntity supplierEntity = optionalSupplier.get();
                 warehouseResponse.setSupplier(supplierEntity.getSupplierName());
+                warehouseResponse.setSupplierId(supplierEntity.getSupplierId());
             }
             warehouseResponse.setProductBatchId(warehouseEntity.getProductBatchId());
             warehouseResponse.setExpiredDate(warehouseEntity.getExpiredDate());

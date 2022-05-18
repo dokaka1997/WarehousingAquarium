@@ -43,7 +43,7 @@ public class ImportServiceImpl implements ImportService {
     }
 
     @Override
-    public boolean addListImport(ImportRequest importRequest) {
+    public ImportEntity addListImport(ImportRequest importRequest) {
         List<ProductBranchEntity> productBranchEntities = new ArrayList<>();
         ImportEntity importEntity = new ImportEntity();
         Optional<BranchEntity> branchEntity = branchRepository.findById(importRequest.getBranchId());
@@ -81,8 +81,8 @@ public class ImportServiceImpl implements ImportService {
             if (productEntity.isPresent()) {
                 ProductEntity entity = productEntity.get();
                 double newPrice = (entity.getStockQuantity() * entity.getUnitPrice() + productImportRequest.getSaleQuantity() * productImportRequest.getSaleQuantity()) / (entity.getStockQuantity() + productImportRequest.getSaleQuantity());
-                entity.setStockQuantity((int) (entity.getStockQuantity() + productImportRequest.getSaleQuantity()));
-                entity.setSaleQuantity((int) (entity.getSaleQuantity() + productImportRequest.getSaleQuantity()));
+                entity.setStockQuantity(entity.getStockQuantity() + productImportRequest.getSaleQuantity());
+                entity.setSaleQuantity(entity.getSaleQuantity() + productImportRequest.getSaleQuantity());
                 entity.setUnitPrice(newPrice);
                 productRepository.save(entity);
             }
@@ -108,16 +108,13 @@ public class ImportServiceImpl implements ImportService {
                 supplierRepository.save(supplierEntity.get());
             }
         }
-        try {
-            ImportEntity importId = importRepository.save(importEntity);
-            for (ProductBranchEntity entity : productBranchEntities) {
-                entity.setImportId(importId.getImportID());
-            }
-            productBranchRepository.saveAll(productBranchEntities);
-            return true;
-        } catch (Exception exception) {
-            return false;
+        ImportEntity importId = importRepository.save(importEntity);
+        for (ProductBranchEntity entity : productBranchEntities) {
+            entity.setImportId(importId.getImportID());
         }
+        productBranchRepository.saveAll(productBranchEntities);
+        return importId;
+
     }
 
     @Override

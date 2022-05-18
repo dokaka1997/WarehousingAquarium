@@ -11,10 +11,9 @@ public class ExportDTO {
     private Long exportID;
     private Date exportTime;
     private Double exportPrice;
-    private String branch;
-    private String supplier;
-    private Long supplierId;
     private String User;
+    private Long CustomerID;
+    private String CustomerName;
     private String status;
     private Boolean sttStore;
     private Boolean statusPayment;

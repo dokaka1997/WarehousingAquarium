@@ -11,13 +11,13 @@ public class ImportProductDTO {
 
     private String productCode;
 
-    private int saleQuantity;
+    private Long saleQuantity;
 
     private String image;
 
     private String color;
 
-    private double unitPrice;
+    private Double unitPrice;
 
     private String unitName;
 }

@@ -1,5 +1,6 @@
 package com.warehousing.aquarium.controller;
 
+import com.warehousing.aquarium.entity.ImportEntity;
 import com.warehousing.aquarium.model.request.ImportRequest;
 import com.warehousing.aquarium.model.response.ImportDTO;
 import com.warehousing.aquarium.service.ImportService;
@@ -22,7 +23,7 @@ public class ImportController {
     }
 
     @PostMapping
-    public ResponseEntity<Boolean> addImport(@RequestBody ImportRequest importList) {
+    public ResponseEntity<ImportEntity> addImport(@RequestBody ImportRequest importList) {
         return ResponseEntity.ok(importService.addListImport(importList));
     }
 

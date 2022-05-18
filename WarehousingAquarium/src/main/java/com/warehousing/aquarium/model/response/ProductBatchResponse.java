@@ -25,5 +25,7 @@ public class ProductBatchResponse {
 
     private String supplier;
 
+    private Long supplierId;
+
     private Date expiredDate;
 }

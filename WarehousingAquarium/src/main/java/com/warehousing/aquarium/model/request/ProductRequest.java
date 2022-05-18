@@ -18,11 +18,11 @@ public class ProductRequest {
 
     private String unitName;
 
-    private double unitPrice;
+    private Double unitPrice;
 
-    private double retailPrice;
+    private Double retailPrice;
 
-    private double wholesalePrice;
+    private Double wholesalePrice;
 
     private Date modifyCreate;
 
@@ -30,29 +30,29 @@ public class ProductRequest {
 
     private String tag;
 
-    private boolean isSale;
+    private Boolean isSale;
 
-    private int saleQuantity;
+    private Long saleQuantity;
 
-    private int stockQuantity;
+    private Long stockQuantity;
 
     private String image;
 
     private String color;
 
-    private int classifyId;
+    private Long classifyId;
 
-    private int sttId;
+    private Long sttId;
 
-    Long brandId;
+    private Long brandId;
 
-    Long unitId;
+    private Long unitId;
 
-    Long userId;
+    private Long userId;
 
-    Long supplierId;
+    private Long supplierId;
 
-    Long categoryId;
+    private Long categoryId;
 
     private Boolean canExpired;
 
