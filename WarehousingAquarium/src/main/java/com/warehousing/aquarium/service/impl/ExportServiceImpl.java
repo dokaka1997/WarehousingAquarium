@@ -11,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ExportServiceImpl implements ExportService {
@@ -64,7 +61,7 @@ public class ExportServiceImpl implements ExportService {
                 } else {
                     entity.setSaleQuantity(entity.getSaleQuantity() - productExportRequest.getSaleQuantity());
                 }
-                if (productExportRequest.getCanExpire() != null && productExportRequest.getCanExpire()) {
+                if (productExportRequest.getCanExpired() != null && productExportRequest.getCanExpired()) {
                     List<ProductBatchEntity> warehouseEntities = warehouseRepository.findAllByProductId(productExportRequest.getProductId());
                     Double price = 0D;
                     Double quantity = 0D;
@@ -105,7 +102,9 @@ public class ExportServiceImpl implements ExportService {
 
     @Override
     public List<ExportEntity> getAllExport(int pageIndex, int pageSize) {
-        return exportRepository.findAll(PageRequest.of(pageIndex, pageSize)).getContent();
+        List<ExportEntity> list = exportRepository.findAll(PageRequest.of(pageIndex, pageSize)).getContent();
+        Collections.sort(list);
+        return list;
     }
 
     @Override
@@ -120,6 +119,7 @@ public class ExportServiceImpl implements ExportService {
         dto.setExportID(entity.getExportID());
         dto.setExportTime(entity.getExportTime());
         dto.setExportPrice(entity.getExportPrice());
+        dto.setStatusPayment(entity.getStatusPayment());
 
         if (entity.getUserID() != null) {
             Optional<AccountEntity> optionalAccount = userRepository.findById(entity.getUserID());
@@ -132,10 +132,7 @@ public class ExportServiceImpl implements ExportService {
                 dto.setCustomerName(optionalCustomerEntity.get().getCustomerName());
             }
         }
-        if (entity.getStatus() != null) {
-            Optional<StatusEntity> optionalStatusEntity = statusRepository.findById(entity.getStatus());
-            optionalStatusEntity.ifPresent(statusEntity -> dto.setStatus(statusEntity.getStatusName()));
-        }
+        dto.setStatus(entity.getStatus());
         dto.setStatusPayment(entity.getStatusPayment());
 
         List<ProductBranchEntity> productBatchEntities = productBranchRepository.findAllByExportId(id);
@@ -153,7 +150,7 @@ public class ExportServiceImpl implements ExportService {
             optionalProduct.ifPresent(productEntity -> importProductDTO.setUnitName(productEntity.getUnitName()));
             listProduct.add(importProductDTO);
         }
-        dto.setListProduct(listProduct);
+        dto.setProducts(listProduct);
 
         return dto;
     }
