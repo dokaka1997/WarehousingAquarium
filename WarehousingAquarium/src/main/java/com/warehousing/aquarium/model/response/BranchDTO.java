@@ -19,4 +19,6 @@ public class BranchDTO {
     private String province;
 
     private boolean isActive;
+
+
 }

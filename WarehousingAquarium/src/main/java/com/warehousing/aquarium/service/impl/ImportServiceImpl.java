@@ -176,6 +176,7 @@ public class ImportServiceImpl implements ImportService {
                     productEntity.ifPresent(product -> importProductDTO.setColor(product.getColor()));
                     productEntity.ifPresent(product -> importProductDTO.setCanExpired(product.getCanExpired()));
                     productEntity.ifPresent(product -> importProductDTO.setUnitPrice(product.getUnitPrice()));
+                    productEntity.ifPresent(product -> importProductDTO.setUnitName(product.getUnitName()));
                     importProductDTOS.add(importProductDTO);
                 }
                 ImportDTO importDTO = ImportMapper.mapImportEntityToDTO(importEntity, branchEntity, supplierEntity, account);
@@ -230,6 +231,7 @@ public class ImportServiceImpl implements ImportService {
             productEntity.ifPresent(product -> importProductDTO.setUnitPrice(product.getUnitPrice()));
             productEntity.ifPresent(product -> importProductDTO.setCanExpired(product.getCanExpired()));
             productEntity.ifPresent(product -> importProductDTO.setUnitName(product.getUnitName()));
+
             importProductDTOS.add(importProductDTO);
         }
         ImportDTO importDTO = ImportMapper.mapImportEntityToDTO(importEntities.get(), branchEntity, supplierEntity, account);
@@ -288,6 +290,7 @@ public class ImportServiceImpl implements ImportService {
                     productEntity.ifPresent(product -> importProductDTO.setImage(product.getImage()));
                     productEntity.ifPresent(product -> importProductDTO.setColor(product.getColor()));
                     productEntity.ifPresent(product -> importProductDTO.setCanExpired(product.getCanExpired()));
+                    productEntity.ifPresent(product -> importProductDTO.setUnitName(product.getUnitName()));
                     productEntity.ifPresent(product -> importProductDTO.setUnitPrice(product.getUnitPrice()));
                     importProductDTOS.add(importProductDTO);
                 }

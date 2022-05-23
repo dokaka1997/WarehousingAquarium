@@ -111,6 +111,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean checkToken(String token, Long userId) {
         Optional<AccountEntity> optionalAccount = userRepository.findById(userId);
+        if(!optionalAccount.isPresent()){
+            return false;
+        }
+        if(optionalAccount.get().getToken() == null){
+            return false;
+        }
         return optionalAccount.map(accountEntity -> accountEntity.getToken().equals(token)).orElse(false);
     }
 
