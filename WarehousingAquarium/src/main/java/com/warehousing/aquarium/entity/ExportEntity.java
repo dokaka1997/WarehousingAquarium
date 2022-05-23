@@ -8,7 +8,7 @@ import java.util.Date;
 @Entity
 @Data
 @Table(name = "export")
-public class ExportEntity implements Comparable<ExportEntity> {
+public class ExportEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long exportID;
@@ -21,8 +21,4 @@ public class ExportEntity implements Comparable<ExportEntity> {
     private Long status;
     private Boolean statusPayment;
 
-    @Override
-    public int compareTo(ExportEntity o) {
-        return this.exportTime.compareTo(o.exportTime);
-    }
 }

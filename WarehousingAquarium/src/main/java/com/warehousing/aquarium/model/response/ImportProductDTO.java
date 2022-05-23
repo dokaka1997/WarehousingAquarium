@@ -20,4 +20,6 @@ public class ImportProductDTO {
     private Double unitPrice;
 
     private String unitName;
+
+    private Boolean canExpired;
 }

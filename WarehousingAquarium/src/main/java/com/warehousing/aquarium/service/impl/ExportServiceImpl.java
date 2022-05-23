@@ -103,7 +103,7 @@ public class ExportServiceImpl implements ExportService {
     @Override
     public List<ExportEntity> getAllExport(int pageIndex, int pageSize) {
         List<ExportEntity> list = exportRepository.findAll(PageRequest.of(pageIndex, pageSize)).getContent();
-        Collections.sort(list);
+//        Collections.sort(list, Comparator.comparing(ExportEntity::getExportTime));
         return list;
     }
 
@@ -143,7 +143,11 @@ public class ExportServiceImpl implements ExportService {
             ImportProductDTO importProductDTO = new ImportProductDTO();
             importProductDTO.setProductId(productBranchEntity.getProductID());
             Optional<ProductEntity> optionalProduct = productRepository.findById(productBranchEntity.getProductID());
-            optionalProduct.ifPresent(productEntity -> importProductDTO.setProductCode(productEntity.getProductName()));
+            optionalProduct.ifPresent(productEntity -> importProductDTO.setProductCode(productEntity.getProductCode()));
+
+            optionalProduct.ifPresent(productEntity -> importProductDTO.setProductName(productEntity.getProductName()));
+            optionalProduct.ifPresent(productEntity -> importProductDTO.setSaleQuantity(productEntity.getSaleQuantity()));
+
             optionalProduct.ifPresent(productEntity -> importProductDTO.setImage(productEntity.getImage()));
             optionalProduct.ifPresent(productEntity -> importProductDTO.setColor(productEntity.getColor()));
             optionalProduct.ifPresent(productEntity -> importProductDTO.setUnitPrice(productEntity.getUnitPrice()));

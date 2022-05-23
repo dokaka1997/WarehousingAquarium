@@ -17,5 +17,5 @@ public class ImportDTO {
     private Long status;
     private Boolean sttStore;
     private Boolean statusPayment;
-    List<ImportProductDTO> listProduct;
+    List<ImportProductDTO> products;
 }
