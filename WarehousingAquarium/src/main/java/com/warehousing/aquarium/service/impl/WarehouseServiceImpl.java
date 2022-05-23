@@ -48,8 +48,45 @@ public class WarehouseServiceImpl implements ProductBatchService {
     }
 
     @Override
-    public List<ProductBatchResponse> getAllProductBatch(Long productId) {
+    public List<ProductBatchResponse> getAllProductBatchById(Long productId) {
         List<ProductBatchEntity> warehouseList = warehouseRepository.findAllByProductId(productId);
+
+        List<ProductBatchResponse> responseList = new ArrayList<>();
+        for (ProductBatchEntity warehouseEntity : warehouseList) {
+            ProductBatchResponse warehouseResponse = new ProductBatchResponse();
+            Optional<ProductEntity> optionalProduct = productRepository.findById(warehouseEntity.getProductId());
+            if (optionalProduct.isPresent()) {
+                ProductEntity product = optionalProduct.get();
+                warehouseResponse.setProductId(product.getProductId());
+                warehouseResponse.setProductName(product.getProductName());
+                warehouseResponse.setProductImg(product.getImage());
+            }
+            warehouseResponse.setPrice(warehouseEntity.getPrice());
+            warehouseResponse.setQuantity(warehouseEntity.getQuantity());
+            warehouseResponse.setCreatedDate(warehouseEntity.getCreatedDate());
+            Optional<AccountEntity> optionalAccount = userRepository.findById(warehouseEntity.getCreatedBy());
+            if (optionalAccount.isPresent()) {
+                AccountEntity account = optionalAccount.get();
+                warehouseResponse.setCreatedBy(account.getName());
+            }
+
+            Optional<SupplierEntity> optionalSupplier = supplierRepository.findById(warehouseEntity.getSupplierId());
+            if (optionalSupplier.isPresent()) {
+                SupplierEntity supplierEntity = optionalSupplier.get();
+                warehouseResponse.setSupplier(supplierEntity.getSupplierName());
+                warehouseResponse.setSupplierId(supplierEntity.getSupplierId());
+            }
+            warehouseResponse.setProductBatchId(warehouseEntity.getProductBatchId());
+            warehouseResponse.setExpiredDate(warehouseEntity.getExpiredDate());
+            responseList.add(warehouseResponse);
+        }
+
+        return responseList;
+    }
+
+    @Override
+    public List<ProductBatchResponse> getAllProductBatch() {
+        List<ProductBatchEntity> warehouseList = warehouseRepository.findAll();
 
         List<ProductBatchResponse> responseList = new ArrayList<>();
         for (ProductBatchEntity warehouseEntity : warehouseList) {

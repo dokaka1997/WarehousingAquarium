@@ -14,7 +14,7 @@ public class ImportDTO {
     private String supplier;
     private Long supplierId;
     private String User;
-    private String status;
+    private Long status;
     private Boolean sttStore;
     private Boolean statusPayment;
     List<ImportProductDTO> listProduct;

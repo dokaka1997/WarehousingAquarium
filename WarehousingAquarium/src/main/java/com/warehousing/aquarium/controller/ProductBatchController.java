@@ -27,7 +27,12 @@ public class ProductBatchController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<List<ProductBatchResponse>> getAllProductBatch(@PathVariable Long id) {
-        return ResponseEntity.ok(productBatchService.getAllProductBatch(id));
+    public ResponseEntity<List<ProductBatchResponse>> getAllProductBatchById(@PathVariable Long id) {
+        return ResponseEntity.ok(productBatchService.getAllProductBatchById(id));
+    }
+
+    @GetMapping()
+    public ResponseEntity<List<ProductBatchResponse>> getAllProductBatch() {
+        return ResponseEntity.ok(productBatchService.getAllProductBatch());
     }
 }

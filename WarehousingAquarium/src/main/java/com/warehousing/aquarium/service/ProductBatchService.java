@@ -9,6 +9,8 @@ public interface ProductBatchService {
 
     ProductBatchEntity addNewProductBatch(ProductBatchEntity productBatchEntity);
 
-    List<ProductBatchResponse> getAllProductBatch(Long productId);
+    List<ProductBatchResponse> getAllProductBatchById(Long productId);
+
+    List<ProductBatchResponse> getAllProductBatch();
 
 }
