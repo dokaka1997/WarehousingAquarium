@@ -76,7 +76,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../LAB/TimeCalculator/TimeCalculator" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../LabJava/J1.S.P0070/J1.S.P0070" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
@@ -265,7 +265,8 @@
       <workItem from="1653299222577" duration="199000" />
       <workItem from="1653321670821" duration="2544000" />
       <workItem from="1653401247517" duration="2978000" />
-      <workItem from="1653408127518" duration="829000" />
+      <workItem from="1653408127518" duration="1379000" />
+      <workItem from="1653410032012" duration="258000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1626413618569</created>

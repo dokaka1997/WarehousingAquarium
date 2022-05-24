@@ -149,7 +149,7 @@ public class ExportServiceImpl implements ExportService {
             optionalProduct.ifPresent(productEntity -> importProductDTO.setProductCode(productEntity.getProductCode()));
 
             optionalProduct.ifPresent(productEntity -> importProductDTO.setProductName(productEntity.getProductName()));
-            optionalProduct.ifPresent(productEntity -> importProductDTO.setSaleQuantity(productEntity.getSaleQuantity()));
+            optionalProduct.ifPresent(productEntity -> importProductDTO.setSaleQuantity(productBranchEntity.getSaleQuantity()));
 
             optionalProduct.ifPresent(productEntity -> importProductDTO.setImage(productEntity.getImage()));
             optionalProduct.ifPresent(productEntity -> importProductDTO.setColor(productEntity.getColor()));
