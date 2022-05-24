@@ -87,6 +87,7 @@ public class ExportServiceImpl implements ExportService {
         }
 
         ExportEntity exportEntity = new ExportEntity();
+        exportEntity.setExportID(exportRequest.getExportID());
         exportEntity.setExportTime(new Date());
         exportEntity.setExportPrice(exportRequest.getExportPrice());
         exportEntity.setNumberExport((long) number);

@@ -6,6 +6,7 @@ import java.util.List;
 
 @Data
 public class ExportRequest {
+    private Long exportID;
     private String taxId;
     private Long paymentType;
     private Double exportPrice;
