@@ -34,13 +34,9 @@ public class ProductRequest {
 
     private Long saleQuantity;
 
-    private Long stockQuantity;
-
     private String image;
 
     private String color;
-
-    private Long classifyId;
 
     private Long sttId;
 

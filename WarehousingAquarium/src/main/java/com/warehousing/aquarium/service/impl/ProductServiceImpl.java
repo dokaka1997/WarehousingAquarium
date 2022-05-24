@@ -70,6 +70,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductRequest createProduct(ProductRequest product) {
+        if (product.getSaleQuantity() == null || product.getSaleQuantity() < 0) {
+            product.setSaleQuantity(0L);
+        }
         ProductEntity productEntity = new ProductEntity();
         if (product.getBrandId() != null) {
             Optional<BrandEntity> optionalBrand = brandRepository.findById(product.getBrandId());
