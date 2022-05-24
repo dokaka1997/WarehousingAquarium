@@ -48,13 +48,14 @@ public class ImportServiceImpl implements ImportService {
     public ImportEntity addListImport(ImportRequest importRequest) {
         List<ProductBranchEntity> productBranchEntities = new ArrayList<>();
         ImportEntity importEntity = new ImportEntity();
+        importEntity.setImportID(importRequest.getImportId());
         Optional<BranchEntity> branchEntity = branchRepository.findById(importRequest.getBranchId());
         Optional<SupplierEntity> supplierEntity = supplierRepository.findById(importRequest.getSupplierId());
         Optional<PaymentTypeEntity> paymentTypeEntity = paymentTypeRepository.findById(importRequest.getPaymentType());
         int number = 0;
         for (ProductImportRequest productImportRequest : importRequest.getProducts()) {
 
-            if (productImportRequest.getCanExpired()) {
+            if (productImportRequest.getCanExpired() != null && productImportRequest.getCanExpired()) {
                 ProductBatchEntity entity = new ProductBatchEntity();
                 entity.setUpdatedBy(importRequest.getEmployee());
                 entity.setSupplierId(importRequest.getSupplierId());
@@ -82,8 +83,7 @@ public class ImportServiceImpl implements ImportService {
             Optional<ProductEntity> productEntity = productRepository.findById(productImportRequest.getProductId());
             if (productEntity.isPresent()) {
                 ProductEntity entity = productEntity.get();
-                double newPrice = (entity.getStockQuantity() * entity.getUnitPrice() + productImportRequest.getSaleQuantity() * productImportRequest.getSaleQuantity()) / (entity.getStockQuantity() + productImportRequest.getSaleQuantity());
-                entity.setStockQuantity(entity.getStockQuantity() + productImportRequest.getSaleQuantity());
+                double newPrice = (entity.getSaleQuantity() * entity.getUnitPrice() + productImportRequest.getSaleQuantity() * productImportRequest.getSaleQuantity()) / (entity.getSaleQuantity() + productImportRequest.getSaleQuantity());
                 entity.setSaleQuantity(entity.getSaleQuantity() + productImportRequest.getSaleQuantity());
                 entity.setUnitPrice(newPrice);
                 productRepository.save(entity);
@@ -110,6 +110,8 @@ public class ImportServiceImpl implements ImportService {
                 supplierRepository.save(supplierEntity.get());
             }
         }
+        importEntity.setTaxID(importRequest.getTaxId());
+        importEntity.setBranchID(importEntity.getBranchID());
         ImportEntity importId = importRepository.save(importEntity);
         for (ProductBranchEntity entity : productBranchEntities) {
             entity.setImportId(importId.getImportID());

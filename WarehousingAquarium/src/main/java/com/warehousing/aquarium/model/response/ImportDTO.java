@@ -1,5 +1,6 @@
 package com.warehousing.aquarium.model.response;
 
+import com.warehousing.aquarium.entity.SupplierEntity;
 import lombok.Data;
 
 import java.util.Date;
@@ -11,8 +12,7 @@ public class ImportDTO {
     private Date importTime;
     private Double importPrice;
     private String branch;
-    private String supplier;
-    private Long supplierId;
+    private SupplierEntity supplierId;
     private String User;
     private Long status;
     private Boolean sttStore;

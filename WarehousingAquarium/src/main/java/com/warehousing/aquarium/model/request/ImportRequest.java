@@ -7,6 +7,7 @@ import java.util.List;
 
 @Data
 public class ImportRequest {
+    private Long importId;
     private Long supplierId;
     private Long branchId;
     private Long taxId;

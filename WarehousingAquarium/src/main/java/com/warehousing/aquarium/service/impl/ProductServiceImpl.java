@@ -69,7 +69,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Boolean createProduct(ProductRequest product) {
+    public ProductRequest createProduct(ProductRequest product) {
         ProductEntity productEntity = new ProductEntity();
         if (product.getBrandId() != null) {
             Optional<BrandEntity> optionalBrand = brandRepository.findById(product.getBrandId());
@@ -106,23 +106,18 @@ public class ProductServiceImpl implements ProductService {
         productEntity.setTag(product.getTag());
         productEntity.setIsSale(product.getIsSale());
         productEntity.setSaleQuantity(product.getSaleQuantity());
-        productEntity.setStockQuantity(product.getStockQuantity());
         productEntity.setColor(product.getColor());
         productEntity.setImage(product.getImage());
         productEntity.setStatus(product.getSttId());
-        productEntity.setClassifyId(product.getClassifyId());
         productEntity.setUnitName(product.getUnitName());
         productEntity.setStatus(product.getSttId());
         productEntity.setCanExpired(product.getCanExpired());
         if (product.getProductId() != null) {
             productEntity.setProductId(product.getProductId());
         }
-        try {
-            productRepository.save(productEntity);
-        } catch (Exception exception) {
-            exception.printStackTrace();
-        }
-        return true;
+        productEntity = productRepository.save(productEntity);
+        product.setProductId(productEntity.getProductId());
+        return product;
     }
 
     @Override
@@ -165,11 +160,9 @@ public class ProductServiceImpl implements ProductService {
             productEntity.setTag(product.getTag());
             productEntity.setIsSale(product.getIsSale());
             productEntity.setSaleQuantity(product.getSaleQuantity());
-            productEntity.setStockQuantity(product.getStockQuantity());
             productEntity.setColor(product.getColor());
             productEntity.setImage(product.getImage());
             productEntity.setStatus(product.getSttId());
-            productEntity.setClassifyId(product.getClassifyId());
             if (product.getProductId() != null) {
                 productEntity.setProductId(product.getProductId());
             }

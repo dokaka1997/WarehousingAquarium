@@ -52,11 +52,9 @@ public class ProductMapper {
             dto.setTag(entity.getTag());
             dto.setIsSale(entity.getIsSale());
             dto.setSaleQuantity(entity.getSaleQuantity());
-            dto.setStockQuantity(entity.getStockQuantity());
             dto.setImage(entity.getImage());
             dto.setColor(entity.getColor());
             dto.setSttId(entity.getStatus());
-            dto.setClassifyId(entity.getClassifyId());
             dto.setUnitName(entity.getUnitName());
             dto.setCanExpired(entity.getCanExpired());
             products.add(dto);
@@ -108,7 +106,6 @@ public class ProductMapper {
         dto.setIsSale(entity.getIsSale());
         dto.setSaleQuantity(entity.getSaleQuantity());
         dto.setUnitName(entity.getUnitName());
-        dto.setStockQuantity(entity.getStockQuantity());
         dto.setCanExpired(entity.getCanExpired());
         return dto;
     }

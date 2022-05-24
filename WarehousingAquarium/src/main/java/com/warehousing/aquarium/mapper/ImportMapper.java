@@ -1,10 +1,10 @@
 package com.warehousing.aquarium.mapper;
 
-import com.warehousing.aquarium.entity.*;
+import com.warehousing.aquarium.entity.AccountEntity;
+import com.warehousing.aquarium.entity.BranchEntity;
+import com.warehousing.aquarium.entity.ImportEntity;
+import com.warehousing.aquarium.entity.SupplierEntity;
 import com.warehousing.aquarium.model.response.ImportDTO;
-
-import java.util.List;
-import java.util.Objects;
 
 public class ImportMapper {
 
@@ -20,8 +20,7 @@ public class ImportMapper {
             importDTO.setBranch(branchEntity.getBranchName());
         }
         if (supplierEntity != null) {
-            importDTO.setSupplier(supplierEntity.getSupplierName());
-            importDTO.setSupplierId(supplierEntity.getSupplierId());
+            importDTO.setSupplierId(supplierEntity);
         }
         if (accountEntity != null) {
             importDTO.setUser(accountEntity.getName());

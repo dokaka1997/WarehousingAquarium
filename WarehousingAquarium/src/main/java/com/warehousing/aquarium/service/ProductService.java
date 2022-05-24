@@ -11,7 +11,7 @@ public interface ProductService {
 
     ProductDTO getProductById(Long id);
 
-    Boolean createProduct (ProductRequest product) throws MissingFieldException;
+    ProductRequest createProduct (ProductRequest product) throws MissingFieldException;
 
     Boolean updateListProduct(List<ProductRequest> productRequests);
 

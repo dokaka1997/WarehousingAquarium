@@ -2,7 +2,6 @@ package com.warehousing.aquarium.service.impl;
 
 import com.warehousing.aquarium.entity.BranchEntity;
 import com.warehousing.aquarium.model.response.BranchDTO;
-import com.warehousing.aquarium.model.response.BrandDTO;
 import com.warehousing.aquarium.repository.BranchRepository;
 import com.warehousing.aquarium.service.BranchService;
 import org.modelmapper.ModelMapper;
