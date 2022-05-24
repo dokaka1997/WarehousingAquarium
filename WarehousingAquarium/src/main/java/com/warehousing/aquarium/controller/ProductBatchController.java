@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("warehouse")
+@RequestMapping("product_batch")
 public class ProductBatchController {
 
     ProductBatchService productBatchService;
