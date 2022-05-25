@@ -78,7 +78,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../LabJava/J1.S.P0070/J1.S.P0070" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunManager" selected="Spring Boot.WarehousingAquarium (1)">
     <configuration name="JavaApplication28" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -161,11 +161,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Spring Boot.WarehousingAquarium" />
         <item itemvalue="Spring Boot.WarehousingAquarium (1)" />
+        <item itemvalue="Application.main" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.JavaApplication29" />
-        <item itemvalue="Application.JavaApplication28" />
-        <item itemvalue="Application.main" />
       </list>
     </recent_temporary>
   </component>
@@ -266,7 +266,9 @@
       <workItem from="1653321670821" duration="2544000" />
       <workItem from="1653401247517" duration="2978000" />
       <workItem from="1653408127518" duration="1379000" />
-      <workItem from="1653410032012" duration="439000" />
+      <workItem from="1653410032012" duration="1130000" />
+      <workItem from="1653497262200" duration="58000" />
+      <workItem from="1653497340814" duration="1037000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1626413618569</created>
