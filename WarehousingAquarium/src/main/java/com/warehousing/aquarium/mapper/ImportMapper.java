@@ -5,6 +5,7 @@ import com.warehousing.aquarium.entity.BranchEntity;
 import com.warehousing.aquarium.entity.ImportEntity;
 import com.warehousing.aquarium.entity.SupplierEntity;
 import com.warehousing.aquarium.model.response.ImportDTO;
+import com.warehousing.aquarium.model.response.SupplierDTO;
 
 public class ImportMapper {
 
@@ -20,7 +21,19 @@ public class ImportMapper {
             importDTO.setBranch(branchEntity.getBranchName());
         }
         if (supplierEntity != null) {
-            importDTO.setSupplierId(supplierEntity);
+            SupplierDTO supplierDTO = new SupplierDTO();
+            supplierDTO.setSupplierId(supplierEntity.getSupplierId());
+            supplierDTO.setSupplierCode(supplierEntity.getSupplierCode());
+            supplierDTO.setSupplierName(supplierEntity.getSupplierName());
+            supplierDTO.setEmail(supplierEntity.getEmail());
+            supplierDTO.setGroup(supplierEntity.getGroup());
+            supplierDTO.setPhone(supplierEntity.getPhone());
+            supplierDTO.setStatus(supplierEntity.isStatus());
+            supplierDTO.setTaxIdentificationNumber(supplierEntity.getTaxIdentificationNumber());
+            supplierDTO.setDept(supplierEntity.getDept());
+            supplierDTO.setAddress(supplierEntity.getAddress());
+            supplierDTO.setDescription(supplierEntity.getDescription());
+            importDTO.setSupplierId(supplierDTO);
         }
         if (accountEntity != null) {
             importDTO.setUser(accountEntity.getName());

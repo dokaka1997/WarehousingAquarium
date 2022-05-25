@@ -238,6 +238,12 @@ public class ImportServiceImpl implements ImportService {
         }
         ImportDTO importDTO = ImportMapper.mapImportEntityToDTO(importEntities.get(), branchEntity, supplierEntity, account);
         Optional<StatusEntity> statusOptional = statusRepository.findById(importEntities.get().getStatus());
+
+
+
+
+
+
         statusOptional.ifPresent(statusEntity -> importDTO.setStatus(statusEntity.getSttId()));
         importDTO.setProducts(importProductDTOS);
         importDTO.setSttStore(importEntities.get().getSttStore());

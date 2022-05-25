@@ -138,9 +138,7 @@ public class ExportServiceImpl implements ExportService {
         }
         dto.setStatus(entity.getStatus());
         dto.setStatusPayment(entity.getStatusPayment());
-
         List<ProductBranchEntity> productBatchEntities = productBranchRepository.findAllByExportId(id);
-
         List<ImportProductDTO> listProduct = new ArrayList<>();
 
         for (ProductBranchEntity productBranchEntity : productBatchEntities) {
@@ -160,6 +158,5 @@ public class ExportServiceImpl implements ExportService {
 
         return dto;
     }
-
 
 }
