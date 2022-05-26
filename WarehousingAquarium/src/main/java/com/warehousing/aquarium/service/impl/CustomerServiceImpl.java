@@ -18,6 +18,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerEntity addNewCustomer(CustomerEntity customerEntity) {
+        if (customerRepository.findAllByCustomerEmailOrCustomerPhone(customerEntity.getCustomerEmail(), customerEntity.getCustomerPhone()) != null) {
+            throw new RuntimeException("Email or Phone existed");
+        }
         return customerRepository.save(customerEntity);
     }
 

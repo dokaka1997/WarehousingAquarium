@@ -57,6 +57,10 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     public SupplierEntity addNewSupplier(SupplierDTO supplierDTO) {
+        if (supplierRepository.findAllByEmailOrPhone(supplierDTO.getEmail(), supplierDTO.getPhone()) != null) {
+            throw new RuntimeException("Email or Phone existed");
+        }
+
         try {
             ModelMapper mapper = new ModelMapper();
             SupplierEntity entity = mapper.map(supplierDTO, SupplierEntity.class);

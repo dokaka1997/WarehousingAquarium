@@ -28,7 +28,6 @@ public class ExportController {
 
     @GetMapping
     public ResponseEntity<List<ExportEntity>> getAllExport(@RequestParam int pageIndex, @RequestParam int pageSize) {
-
         return ResponseEntity.ok(exportService.getAllExport(pageIndex, pageSize));
     }
 
