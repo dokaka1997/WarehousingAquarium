@@ -77,13 +77,12 @@ public class ImportServiceImpl implements ImportService {
                 warehouseRepository.save(entity);
             }
 
-
             number += productImportRequest.getSaleQuantity();
             ProductBranchEntity productBranchEntity = new ProductBranchEntity();
             Optional<ProductEntity> productEntity = productRepository.findById(productImportRequest.getProductId());
             if (productEntity.isPresent()) {
                 ProductEntity entity = productEntity.get();
-                double newPrice = (entity.getSaleQuantity() * entity.getUnitPrice() + productImportRequest.getSaleQuantity() * productImportRequest.getSaleQuantity()) / (entity.getSaleQuantity() + productImportRequest.getSaleQuantity());
+                double newPrice = (entity.getSaleQuantity() * entity.getUnitPrice() + productImportRequest.getSaleQuantity() * productImportRequest.getPrice()) / (entity.getSaleQuantity() + productImportRequest.getSaleQuantity());
                 entity.setSaleQuantity(entity.getSaleQuantity() + productImportRequest.getSaleQuantity());
                 entity.setUnitPrice(newPrice);
                 productRepository.save(entity);
@@ -238,10 +237,6 @@ public class ImportServiceImpl implements ImportService {
         }
         ImportDTO importDTO = ImportMapper.mapImportEntityToDTO(importEntities.get(), branchEntity, supplierEntity, account);
         Optional<StatusEntity> statusOptional = statusRepository.findById(importEntities.get().getStatus());
-
-
-
-
 
 
         statusOptional.ifPresent(statusEntity -> importDTO.setStatus(statusEntity.getSttId()));
