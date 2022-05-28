@@ -7,6 +7,7 @@ import java.sql.Date;
 @Data
 public class ProductImportRequest {
     private Long productId;
+    private Long productBranchId;
     private Long saleQuantity;
     private Double price;
     private Boolean canExpired;

@@ -7,6 +7,8 @@ import lombok.Data;
 public class ImportProductDTO {
     private Long productId;
 
+    private Long productBranchId;
+
     private String productName;
 
     private String productCode;
