@@ -10,14 +10,12 @@ import com.warehousing.aquarium.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class ImportMapper {
-    @Autowired
-    UserRepository userRepository;
 
 
     public static ImportDTO mapImportEntityToDTO(ImportEntity importEntity,
                                                  BranchEntity branchEntity,
                                                  SupplierEntity supplierEntity,
-                                                 AccountEntity accountEntity) {
+                                                 AccountEntity accountEntity, UserRepository userRepository) {
         ImportDTO importDTO = new ImportDTO();
         importDTO.setImportID(importEntity.getImportID());
         importDTO.setImportTime(importEntity.getImportTime());
@@ -26,7 +24,6 @@ public class ImportMapper {
             importDTO.setBranch(branchEntity.getBranchName());
         }
         if (supplierEntity != null) {
-            ImportMapper importMapper = new ImportMapper();
             SupplierDTO supplierDTO = new SupplierDTO();
             supplierDTO.setSupplierId(supplierEntity.getSupplierId());
             supplierDTO.setSupplierCode(supplierEntity.getSupplierCode());
@@ -39,8 +36,8 @@ public class ImportMapper {
             supplierDTO.setDept(supplierEntity.getDept());
             supplierDTO.setAddress(supplierEntity.getAddress());
             supplierDTO.setDescription(supplierEntity.getDescription());
-            if (supplierEntity.getUserId() != null && importMapper.userRepository.findById(supplierEntity.getUserId()).isPresent()) {
-                AccountEntity account = importMapper.userRepository.findById(supplierEntity.getUserId()).get();
+            if (supplierEntity.getUserId() != null && userRepository.findById(supplierEntity.getUserId()).isPresent()) {
+                AccountEntity account = userRepository.findById(supplierEntity.getUserId()).get();
                 supplierDTO.setUser(account.getName());
             }
             importDTO.setSupplierId(supplierDTO);
@@ -56,11 +53,4 @@ public class ImportMapper {
         return importDTO;
     }
 
-    public SupplierDTO mapSupplier(SupplierEntity supplierEntity, SupplierDTO supplierDTO) {
-        if (supplierEntity.getUserId() != null && userRepository.findById(supplierEntity.getUserId()).isPresent()) {
-            AccountEntity account = userRepository.findById(supplierEntity.getUserId()).get();
-            supplierDTO.setUser(account.getName());
-        }
-        return supplierDTO;
-    }
 }

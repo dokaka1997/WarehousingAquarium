@@ -180,7 +180,7 @@ public class ImportServiceImpl implements ImportService {
                     productEntity.ifPresent(product -> importProductDTO.setUnitName(product.getUnitName()));
                     importProductDTOS.add(importProductDTO);
                 }
-                ImportDTO importDTO = ImportMapper.mapImportEntityToDTO(importEntity, branchEntity, supplierEntity, account);
+                ImportDTO importDTO = ImportMapper.mapImportEntityToDTO(importEntity, branchEntity, supplierEntity, account, userRepository);
                 importDTO.setProducts(importProductDTOS);
                 Optional<StatusEntity> statusOptional = statusRepository.findById(importEntity.getStatus());
                 statusOptional.ifPresent(statusEntity -> importDTO.setStatus(statusEntity.getSttId()));
@@ -235,7 +235,7 @@ public class ImportServiceImpl implements ImportService {
 
             importProductDTOS.add(importProductDTO);
         }
-        ImportDTO importDTO = ImportMapper.mapImportEntityToDTO(importEntities.get(), branchEntity, supplierEntity, account);
+        ImportDTO importDTO = ImportMapper.mapImportEntityToDTO(importEntities.get(), branchEntity, supplierEntity, account, userRepository);
         Optional<StatusEntity> statusOptional = statusRepository.findById(importEntities.get().getStatus());
 
 
@@ -297,7 +297,7 @@ public class ImportServiceImpl implements ImportService {
                     productEntity.ifPresent(product -> importProductDTO.setUnitPrice(product.getUnitPrice()));
                     importProductDTOS.add(importProductDTO);
                 }
-                ImportDTO importDTO = ImportMapper.mapImportEntityToDTO(importEntity, branchEntity, supplierEntity, account);
+                ImportDTO importDTO = ImportMapper.mapImportEntityToDTO(importEntity, branchEntity, supplierEntity, account, userRepository);
                 importDTO.setProducts(importProductDTOS);
                 importDTO.setSttStore(importEntity.getSttStore());
                 importDTO.setStatusPayment(importEntity.getStatusPayment());
