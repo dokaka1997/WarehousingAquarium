@@ -251,7 +251,7 @@ public class ImportServiceImpl implements ImportService {
             Optional<ProductEntity> productEntity = productRepository.findById(entity.getProductID());
             productEntity.ifPresent(product -> importProductDTO.setProductCode(product.getProductCode()));
             productEntity.ifPresent(product -> importProductDTO.setProductName(product.getProductName()));
-            productEntity.ifPresent(product -> importProductDTO.setSaleQuantity(product.getSaleQuantity()));
+            productEntity.ifPresent(product -> importProductDTO.setSaleQuantity(entity.getSaleQuantity()));
             productEntity.ifPresent(product -> importProductDTO.setImage(product.getImage()));
             productEntity.ifPresent(product -> importProductDTO.setColor(product.getColor()));
             productEntity.ifPresent(product -> importProductDTO.setUnitPrice(product.getUnitPrice()));
@@ -324,7 +324,7 @@ public class ImportServiceImpl implements ImportService {
                     Optional<ProductEntity> productEntity = productRepository.findById(entity.getProductID());
                     productEntity.ifPresent(product -> importProductDTO.setProductCode(product.getProductCode()));
                     productEntity.ifPresent(product -> importProductDTO.setProductName(product.getProductName()));
-                    productEntity.ifPresent(product -> importProductDTO.setSaleQuantity(product.getSaleQuantity()));
+                    productEntity.ifPresent(product -> importProductDTO.setSaleQuantity(entity.getSaleQuantity()));
                     productEntity.ifPresent(product -> importProductDTO.setImage(product.getImage()));
                     productEntity.ifPresent(product -> importProductDTO.setColor(product.getColor()));
                     productEntity.ifPresent(product -> importProductDTO.setCanExpired(product.getCanExpired()));
