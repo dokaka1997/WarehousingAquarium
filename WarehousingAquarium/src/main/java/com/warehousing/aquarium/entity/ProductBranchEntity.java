@@ -3,6 +3,7 @@ package com.warehousing.aquarium.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 @Entity
 @Data
@@ -19,5 +20,8 @@ public class ProductBranchEntity {
     private Long saleQuantity;
     private Long quantityOnHand;
     private Double totalPrice;
+    private Date createdDate;
+    private Long productBatchId;
+
 
 }

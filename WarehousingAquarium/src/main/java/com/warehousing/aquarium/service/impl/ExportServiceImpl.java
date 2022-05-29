@@ -59,6 +59,9 @@ public class ExportServiceImpl implements ExportService {
             Optional<ProductEntity> productEntity = productRepository.findById(productExportRequest.getProductId());
             if (productEntity.isPresent()) {
                 ProductEntity entity = productEntity.get();
+                if (entity.getSaleQuantity() <= 0) {
+                    throw new RuntimeException("Quantity not enough");
+                }
                 if (entity.getSaleQuantity() < productExportRequest.getSaleQuantity()) {
                     entity.setSaleQuantity(0L);
                 } else {
@@ -66,12 +69,13 @@ public class ExportServiceImpl implements ExportService {
                 }
                 if (productExportRequest.getCanExpired() != null && productExportRequest.getCanExpired()) {
                     List<ProductBatchEntity> warehouseEntities = warehouseRepository.findAllByProductId(productExportRequest.getProductId());
-                    Double price = 0D;
-                    Double quantity = 0D;
+                    double price = 0D;
+                    double quantity = 0D;
                     for (ProductBatchEntity warehouseEntity : warehouseEntities) {
                         quantity += warehouseEntity.getQuantity();
                         price += (warehouseEntity.getQuantity() * warehouseEntity.getPrice());
                     }
+                    quantity = Math.ceil(quantity * 100) / 100;
                     entity.setUnitPrice(price / quantity);
                 }
                 productRepository.save(entity);

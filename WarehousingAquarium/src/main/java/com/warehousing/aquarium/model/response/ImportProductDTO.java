@@ -1,5 +1,6 @@
 package com.warehousing.aquarium.model.response;
 
+import com.warehousing.aquarium.entity.ProductBatchEntity;
 import lombok.Data;
 
 
@@ -24,4 +25,6 @@ public class ImportProductDTO {
     private String unitName;
 
     private Boolean canExpired;
+
+    private ProductBatchEntity productBatch;
 }

@@ -48,35 +48,33 @@ public class ImportServiceImpl implements ImportService {
     public ImportEntity addListImport(ImportRequest importRequest) {
         List<ProductBranchEntity> productBranchEntities = new ArrayList<>();
         ImportEntity importEntity = new ImportEntity();
-        importEntity.setImportID(importRequest.getImportId());
+        importEntity.setImportID(importRequest.getImportID());
         Optional<BranchEntity> branchEntity = branchRepository.findById(importRequest.getBranchId());
         Optional<SupplierEntity> supplierEntity = supplierRepository.findById(importRequest.getSupplierId());
         Optional<PaymentTypeEntity> paymentTypeEntity = paymentTypeRepository.findById(importRequest.getPaymentType());
         int number = 0;
 
         for (ProductImportRequest productImportRequest : importRequest.getProducts()) {
-
-
+            ProductBatchEntity productBatchEntity = new ProductBatchEntity();
             if (productImportRequest.getCanExpired() != null && productImportRequest.getCanExpired()) {
-                ProductBatchEntity entity = new ProductBatchEntity();
-                entity.setUpdatedBy(importRequest.getEmployee());
-                entity.setSupplierId(importRequest.getSupplierId());
+                productBatchEntity.setUpdatedBy(importRequest.getEmployee());
+                productBatchEntity.setSupplierId(importRequest.getSupplierId());
                 if (productImportRequest.getWareHouseId() != null) {
                     Optional<ProductBatchEntity> warehouseEntity = warehouseRepository.findById(productImportRequest.getWareHouseId());
                     if (warehouseEntity.isPresent()) {
-                        entity = warehouseEntity.get();
-                        Double price = (entity.getPrice() + productImportRequest.getPrice()) / (entity.getQuantity() + productImportRequest.getSaleQuantity());
-                        entity.setPrice(price);
-                        entity.setQuantity((int) (entity.getQuantity() + productImportRequest.getSaleQuantity()));
+                        productBatchEntity = warehouseEntity.get();
+                        Double price = (productBatchEntity.getPrice() + productImportRequest.getPrice()) / (productBatchEntity.getQuantity() + productImportRequest.getSaleQuantity());
+                        productBatchEntity.setPrice(price);
+                        productBatchEntity.setQuantity((int) (productBatchEntity.getQuantity() + productImportRequest.getSaleQuantity()));
                     }
                 } else {
-                    entity.setPrice(productImportRequest.getPrice());
-                    entity.setQuantity(productImportRequest.getSaleQuantity().intValue());
-                    entity.setCreatedDate(new java.sql.Date(System.currentTimeMillis()));
-                    entity.setCreatedBy(importRequest.getEmployee());
-                    entity.setExpiredDate(productImportRequest.getExpireDate());
+                    productBatchEntity.setPrice(productImportRequest.getPrice());
+                    productBatchEntity.setQuantity(productImportRequest.getSaleQuantity().intValue());
+                    productBatchEntity.setCreatedDate(new java.sql.Date(System.currentTimeMillis()));
+                    productBatchEntity.setCreatedBy(importRequest.getEmployee());
+                    productBatchEntity.setExpiredDate(productImportRequest.getExpireDate());
                 }
-                warehouseRepository.save(entity);
+                productBatchEntity = warehouseRepository.save(productBatchEntity);
             }
 
             number += productImportRequest.getSaleQuantity();
@@ -88,6 +86,7 @@ public class ImportServiceImpl implements ImportService {
             if (productEntity.isPresent()) {
                 ProductEntity entity = productEntity.get();
                 double newPrice = (entity.getSaleQuantity() * entity.getUnitPrice() + productImportRequest.getSaleQuantity() * productImportRequest.getPrice()) / (entity.getSaleQuantity() + productImportRequest.getSaleQuantity());
+                newPrice = Math.ceil(newPrice * 100) / 100;
                 entity.setSaleQuantity(entity.getSaleQuantity() + productImportRequest.getSaleQuantity());
                 entity.setUnitPrice(newPrice);
                 productRepository.save(entity);
@@ -95,6 +94,7 @@ public class ImportServiceImpl implements ImportService {
             productEntity.ifPresent(entity -> productBranchEntity.setProductID(entity.getProductId()));
             productBranchEntity.setSaleQuantity(productImportRequest.getSaleQuantity());
             productBranchEntity.setTotalPrice(importRequest.getImportPrice());
+            productBranchEntity.setProductBatchId(productBatchEntity.getProductBatchId());
             branchEntity.ifPresent(entity -> productBranchEntity.setBranchID(entity.getBranchId()));
             productBranchEntities.add(productBranchEntity);
         }
@@ -120,6 +120,7 @@ public class ImportServiceImpl implements ImportService {
         ImportEntity importId = importRepository.save(importEntity);
         for (ProductBranchEntity entity : productBranchEntities) {
             entity.setImportId(importId.getImportID());
+            entity.setCreatedDate(new java.sql.Date(System.currentTimeMillis()));
         }
         productBranchRepository.saveAll(productBranchEntities);
         return importId;
@@ -175,6 +176,16 @@ public class ImportServiceImpl implements ImportService {
                 for (ProductBranchEntity entity : productBranchEntities) {
                     ImportProductDTO importProductDTO = new ImportProductDTO();
                     importProductDTO.setProductId(entity.getProductID());
+
+                    if (entity.getProductBatchId() != null) {
+                        Optional<ProductBatchEntity> optionalProductBatchEntity = warehouseRepository.findById(entity.getProductBatchId());
+                        if (optionalProductBatchEntity.isPresent()) {
+                            ProductBatchEntity productBatchEntity = optionalProductBatchEntity.get();
+                            importProductDTO.setProductBatch(productBatchEntity);
+                        }
+                    }
+
+
                     Optional<ProductEntity> productEntity = productRepository.findById(entity.getProductID());
                     productEntity.ifPresent(product -> importProductDTO.setProductCode(product.getProductCode()));
                     productEntity.ifPresent(product -> importProductDTO.setProductName(product.getProductName()));
@@ -228,6 +239,14 @@ public class ImportServiceImpl implements ImportService {
         List<ImportProductDTO> importProductDTOS = new ArrayList<>();
         for (ProductBranchEntity entity : productBranchEntities) {
             ImportProductDTO importProductDTO = new ImportProductDTO();
+
+            if (entity.getProductBatchId() != null) {
+                Optional<ProductBatchEntity> optionalProductBatchEntity = warehouseRepository.findById(entity.getProductBatchId());
+                if (optionalProductBatchEntity.isPresent()) {
+                    ProductBatchEntity productBatchEntity = optionalProductBatchEntity.get();
+                    importProductDTO.setProductBatch(productBatchEntity);
+                }
+            }
             importProductDTO.setProductId(entity.getProductID());
             Optional<ProductEntity> productEntity = productRepository.findById(entity.getProductID());
             productEntity.ifPresent(product -> importProductDTO.setProductCode(product.getProductCode()));
@@ -292,6 +311,15 @@ public class ImportServiceImpl implements ImportService {
                 List<ImportProductDTO> importProductDTOS = new ArrayList<>();
                 for (ProductBranchEntity entity : productBranchEntities) {
                     ImportProductDTO importProductDTO = new ImportProductDTO();
+
+                    if (entity.getProductBatchId() != null) {
+                        Optional<ProductBatchEntity> optionalProductBatchEntity = warehouseRepository.findById(entity.getProductBatchId());
+                        if (optionalProductBatchEntity.isPresent()) {
+                            ProductBatchEntity productBatchEntity = optionalProductBatchEntity.get();
+                            importProductDTO.setProductBatch(productBatchEntity);
+                        }
+                    }
+
                     importProductDTO.setProductId(entity.getProductID());
                     Optional<ProductEntity> productEntity = productRepository.findById(entity.getProductID());
                     productEntity.ifPresent(product -> importProductDTO.setProductCode(product.getProductCode()));
