@@ -12,5 +12,5 @@ public class ProductImportRequest {
     private Double price;
     private Boolean canExpired;
     private Date expireDate;
-    private Long wareHouseId;
+    private Long productBatchId;
 }
