@@ -69,7 +69,7 @@ public class ImportServiceImpl implements ImportService {
                     }
                 } else {
                     productBatchEntity.setPrice(productImportRequest.getPrice());
-                    if(productImportRequest.getSaleQuantity() == null){
+                    if (productImportRequest.getSaleQuantity() == null) {
                         productImportRequest.setSaleQuantity(0L);
                     }
                     productBatchEntity.setQuantity(productImportRequest.getSaleQuantity().intValue());
@@ -242,7 +242,7 @@ public class ImportServiceImpl implements ImportService {
         List<ImportProductDTO> importProductDTOS = new ArrayList<>();
         for (ProductBranchEntity entity : productBranchEntities) {
             ImportProductDTO importProductDTO = new ImportProductDTO();
-            ProductBatchEntity productBatchEntity = new ProductBatchEntity();
+            ProductBatchEntity productBatchEntity;
             if (entity.getProductBatchId() != null) {
                 Optional<ProductBatchEntity> optionalProductBatchEntity = warehouseRepository.findById(entity.getProductBatchId());
                 if (optionalProductBatchEntity.isPresent()) {
@@ -257,7 +257,7 @@ public class ImportServiceImpl implements ImportService {
             productEntity.ifPresent(product -> importProductDTO.setSaleQuantity(entity.getSaleQuantity()));
             productEntity.ifPresent(product -> importProductDTO.setImage(product.getImage()));
             productEntity.ifPresent(product -> importProductDTO.setColor(product.getColor()));
-            importProductDTO.setUnitPrice(productBatchEntity.getPrice());
+            importProductDTO.setUnitPrice(entity.getTotalPrice());
             productEntity.ifPresent(product -> importProductDTO.setCanExpired(product.getCanExpired()));
             productEntity.ifPresent(product -> importProductDTO.setUnitName(product.getUnitName()));
             productEntity.ifPresent(product -> importProductDTO.setProductBranchId(entity.getProBranchID()));
