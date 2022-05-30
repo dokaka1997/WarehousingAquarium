@@ -143,10 +143,10 @@ public class ExportServiceImpl implements ExportService {
         }
         dto.setStatus(entity.getStatus());
         dto.setStatusPayment(entity.getStatusPayment());
-        List<ProductBranchEntity> productBatchEntities = productBranchRepository.findAllByExportId(id);
+        List<ProductBranchEntity> productBranchEntities = productBranchRepository.findAllByExportId(id);
         List<ImportProductDTO> listProduct = new ArrayList<>();
 
-        for (ProductBranchEntity productBranchEntity : productBatchEntities) {
+        for (ProductBranchEntity productBranchEntity : productBranchEntities) {
             ImportProductDTO importProductDTO = new ImportProductDTO();
             importProductDTO.setProductId(productBranchEntity.getProductID());
             Optional<ProductEntity> optionalProduct = productRepository.findById(productBranchEntity.getProductID());
@@ -157,6 +157,7 @@ public class ExportServiceImpl implements ExportService {
             optionalProduct.ifPresent(productEntity -> importProductDTO.setColor(productEntity.getColor()));
             optionalProduct.ifPresent(productEntity -> importProductDTO.setUnitPrice(productBranchEntity.getTotalPrice()));
             optionalProduct.ifPresent(productEntity -> importProductDTO.setUnitName(productEntity.getUnitName()));
+            optionalProduct.ifPresent(productEntity -> importProductDTO.setCanExpired(productEntity.getCanExpired()));
             importProductDTO.setProductBranchId(productBranchEntity.getProBranchID());
             listProduct.add(importProductDTO);
         }

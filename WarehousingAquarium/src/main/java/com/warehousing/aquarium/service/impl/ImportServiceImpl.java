@@ -69,6 +69,9 @@ public class ImportServiceImpl implements ImportService {
                     }
                 } else {
                     productBatchEntity.setPrice(productImportRequest.getPrice());
+                    if(productImportRequest.getSaleQuantity() == null){
+                        productImportRequest.setSaleQuantity(0L);
+                    }
                     productBatchEntity.setQuantity(productImportRequest.getSaleQuantity().intValue());
                     productBatchEntity.setCreatedDate(new java.sql.Date(System.currentTimeMillis()));
                     productBatchEntity.setCreatedBy(importRequest.getEmployee());
