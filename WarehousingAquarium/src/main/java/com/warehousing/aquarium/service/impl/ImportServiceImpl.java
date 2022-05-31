@@ -65,14 +65,14 @@ public class ImportServiceImpl implements ImportService {
                         productBatchEntity = warehouseEntity.get();
                         Double price = (productBatchEntity.getPrice() + productImportRequest.getPrice()) / (productBatchEntity.getQuantity() + productImportRequest.getSaleQuantity());
                         productBatchEntity.setPrice(price);
-                        productBatchEntity.setQuantity((int) (productBatchEntity.getQuantity() + productImportRequest.getSaleQuantity()));
+                        productBatchEntity.setQuantity((long) (productBatchEntity.getQuantity() + productImportRequest.getSaleQuantity()));
                     }
                 } else {
                     productBatchEntity.setPrice(productImportRequest.getPrice());
                     if (productImportRequest.getSaleQuantity() == null) {
                         productImportRequest.setSaleQuantity(0L);
                     }
-                    productBatchEntity.setQuantity(productImportRequest.getSaleQuantity().intValue());
+                    productBatchEntity.setQuantity((long) productImportRequest.getSaleQuantity().intValue());
                     productBatchEntity.setCreatedDate(new java.sql.Date(System.currentTimeMillis()));
                     productBatchEntity.setCreatedBy(importRequest.getEmployee());
                     productBatchEntity.setExpiredDate(productImportRequest.getExpireDate());

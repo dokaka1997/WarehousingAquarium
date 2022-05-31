@@ -23,5 +23,4 @@ public class ProductBranchEntity {
     private Date createdDate;
     private Long productBatchId;
 
-
 }

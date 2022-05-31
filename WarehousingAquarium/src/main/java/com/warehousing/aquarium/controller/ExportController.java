@@ -35,4 +35,9 @@ public class ExportController {
     public ResponseEntity<ExportDTO> getImportById(@PathVariable Long id) {
         return ResponseEntity.ok(exportService.getExportById(id));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Boolean> deleteExportById(@PathVariable Long id) {
+        return ResponseEntity.ok(exportService.deleteExportById(id));
+    }
 }

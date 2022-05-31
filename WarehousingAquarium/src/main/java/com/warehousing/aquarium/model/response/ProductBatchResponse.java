@@ -17,7 +17,7 @@ public class ProductBatchResponse {
 
     private Double price;
 
-    private int quantity;
+    private Long quantity;
 
     private Date createdDate;
 

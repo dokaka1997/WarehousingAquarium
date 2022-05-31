@@ -13,4 +13,5 @@ public interface ExportService {
 
     ExportDTO getExportById(Long id);
 
+    Boolean deleteExportById(Long id);
 }

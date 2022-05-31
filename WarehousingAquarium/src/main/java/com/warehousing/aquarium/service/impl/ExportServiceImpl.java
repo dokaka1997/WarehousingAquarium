@@ -69,15 +69,24 @@ public class ExportServiceImpl implements ExportService {
                     entity.setSaleQuantity(entity.getSaleQuantity() - productExportRequest.getSaleQuantity());
                 }
                 if (productExportRequest.getCanExpired() != null && productExportRequest.getCanExpired()) {
-                    List<ProductBatchEntity> warehouseEntities = warehouseRepository.findAllByProductId(productExportRequest.getProductId());
+                    List<ProductBatchEntity> productBatchEntities = warehouseRepository.findAllByProductId(productExportRequest.getProductId());
                     double price = 0D;
                     double quantity = 0D;
-                    for (ProductBatchEntity warehouseEntity : warehouseEntities) {
+                    for (ProductBatchEntity warehouseEntity : productBatchEntities) {
                         quantity += warehouseEntity.getQuantity();
                         price += (warehouseEntity.getQuantity() * warehouseEntity.getPrice());
                     }
                     quantity = Math.ceil(quantity * 100) / 100;
                     entity.setUnitPrice(price / quantity);
+                }
+                Optional<ProductBatchEntity> optionalProductBatch = warehouseRepository.findById(productExportRequest.getProductBatchId());
+                if (optionalProductBatch.isPresent()) {
+                    ProductBatchEntity productBatchEntity = optionalProductBatch.get();
+                    if (productBatchEntity.getQuantity() < productExportRequest.getSaleQuantity()) {
+                        throw new RuntimeException("Quantity not enough");
+                    }
+                    productBatchEntity.setQuantity(productBatchEntity.getQuantity() - productExportRequest.getSaleQuantity());
+                    warehouseRepository.save(productBatchEntity);
                 }
                 productRepository.save(entity);
             }
@@ -163,6 +172,36 @@ public class ExportServiceImpl implements ExportService {
         }
         dto.setProducts(listProduct);
         return dto;
+    }
+
+    @Override
+    public Boolean deleteExportById(Long id) {
+        Optional<ExportEntity> optionalExport = exportRepository.findById(id);
+        if (!optionalExport.isPresent()) {
+            throw new RuntimeException("Not found export");
+        }
+        ExportEntity exportEntity = optionalExport.get();
+
+        List<ProductBranchEntity> productBranchEntities = productBranchRepository.findAllByExportId(exportEntity.getExportID());
+        productBranchRepository.deleteAll(productBranchEntities);
+        if (!productBranchEntities.isEmpty()) {
+            for (ProductBranchEntity productBranchEntitie : productBranchEntities) {
+                Optional<ProductBatchEntity> optionalProductBatch = warehouseRepository.findById(productBranchEntitie.getProductBatchId());
+                if (optionalProductBatch.isPresent()) {
+                    ProductBatchEntity productBatchEntity = optionalProductBatch.get();
+                    productBatchEntity.setQuantity(productBatchEntity.getQuantity() + productBranchEntitie.getSaleQuantity());
+                    warehouseRepository.save(productBatchEntity);
+                }
+                Optional<ProductEntity> optionalProduct = productRepository.findById(productBranchEntitie.getProductID());
+                if (optionalProduct.isPresent()) {
+                    ProductEntity productEntity = optionalProduct.get();
+                    productEntity.setSaleQuantity(productEntity.getSaleQuantity() + productBranchEntitie.getSaleQuantity());
+                    productRepository.save(productEntity);
+                }
+            }
+        }
+        exportRepository.delete(exportEntity);
+        return true;
     }
 
 }
