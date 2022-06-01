@@ -186,11 +186,17 @@ public class ExportServiceImpl implements ExportService {
         productBranchRepository.deleteAll(productBranchEntities);
         if (!productBranchEntities.isEmpty()) {
             for (ProductBranchEntity productBranchEntitie : productBranchEntities) {
+                if (productBranchEntitie.getProductBatchId() == null) {
+                    continue;
+                }
                 Optional<ProductBatchEntity> optionalProductBatch = warehouseRepository.findById(productBranchEntitie.getProductBatchId());
                 if (optionalProductBatch.isPresent()) {
                     ProductBatchEntity productBatchEntity = optionalProductBatch.get();
                     productBatchEntity.setQuantity(productBatchEntity.getQuantity() + productBranchEntitie.getSaleQuantity());
                     warehouseRepository.save(productBatchEntity);
+                }
+                if (productBranchEntitie.getProductID() == null) {
+                    continue;
                 }
                 Optional<ProductEntity> optionalProduct = productRepository.findById(productBranchEntitie.getProductID());
                 if (optionalProduct.isPresent()) {

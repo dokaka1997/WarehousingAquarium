@@ -111,10 +111,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean checkToken(String token, Long userId) {
         Optional<AccountEntity> optionalAccount = userRepository.findById(userId);
-        if(!optionalAccount.isPresent()){
+        if (!optionalAccount.isPresent()) {
             return false;
         }
-        if(optionalAccount.get().getToken() == null){
+        if (optionalAccount.get().getToken() == null) {
             return false;
         }
         return optionalAccount.map(accountEntity -> accountEntity.getToken().equals(token)).orElse(false);
@@ -124,7 +124,7 @@ public class UserServiceImpl implements UserService {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
 
-        helper.setFrom("contact@shopme.com", "Shopme Support");
+        helper.setFrom("warehousing@fpt.test.com", "Admin support");
         helper.setTo(recipientEmail);
 
         String subject = "Here's the link to reset your password";
