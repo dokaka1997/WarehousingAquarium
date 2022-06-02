@@ -80,7 +80,7 @@ public class ExportServiceImpl implements ExportService {
                     quantity = Math.ceil(quantity * 100) / 100;
                     entity.setUnitPrice(price / quantity);
                 }
-                if (productExportRequest.getProductBranchId() != null) {
+                if (productExportRequest.getProductBatchId() != null) {
                     Optional<ProductBatchEntity> optionalProductBatch = warehouseRepository.findById(productExportRequest.getProductBatchId());
                     if (optionalProductBatch.isPresent()) {
                         ProductBatchEntity productBatchEntity = optionalProductBatch.get();
