@@ -79,14 +79,16 @@ public class ExportServiceImpl implements ExportService {
                     quantity = Math.ceil(quantity * 100) / 100;
                     entity.setUnitPrice(price / quantity);
                 }
-                Optional<ProductBatchEntity> optionalProductBatch = warehouseRepository.findById(productExportRequest.getProductBatchId());
-                if (optionalProductBatch.isPresent()) {
-                    ProductBatchEntity productBatchEntity = optionalProductBatch.get();
-                    if (productBatchEntity.getQuantity() < productExportRequest.getSaleQuantity()) {
-                        throw new RuntimeException("Quantity not enough");
+                if (productExportRequest.getProductBranchId() != null) {
+                    Optional<ProductBatchEntity> optionalProductBatch = warehouseRepository.findById(productExportRequest.getProductBatchId());
+                    if (optionalProductBatch.isPresent()) {
+                        ProductBatchEntity productBatchEntity = optionalProductBatch.get();
+                        if (productBatchEntity.getQuantity() < productExportRequest.getSaleQuantity()) {
+                            throw new RuntimeException("Quantity not enough");
+                        }
+                        productBatchEntity.setQuantity(productBatchEntity.getQuantity() - productExportRequest.getSaleQuantity());
+                        warehouseRepository.save(productBatchEntity);
                     }
-                    productBatchEntity.setQuantity(productBatchEntity.getQuantity() - productExportRequest.getSaleQuantity());
-                    warehouseRepository.save(productBatchEntity);
                 }
                 productRepository.save(entity);
             }
@@ -168,6 +170,10 @@ public class ExportServiceImpl implements ExportService {
             optionalProduct.ifPresent(productEntity -> importProductDTO.setUnitName(productEntity.getUnitName()));
             optionalProduct.ifPresent(productEntity -> importProductDTO.setCanExpired(productEntity.getCanExpired()));
             importProductDTO.setProductBranchId(productBranchEntity.getProBranchID());
+            if (productBranchEntity.getProductBatchId() != null) {
+                Optional<ProductBatchEntity> optionalProductBatch = warehouseRepository.findById(productBranchEntity.getProductBatchId());
+                optionalProductBatch.ifPresent(importProductDTO::setProductBatch);
+            }
             listProduct.add(importProductDTO);
         }
         dto.setProducts(listProduct);
