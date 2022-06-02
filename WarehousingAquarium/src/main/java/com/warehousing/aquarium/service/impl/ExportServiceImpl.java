@@ -55,6 +55,7 @@ public class ExportServiceImpl implements ExportService {
             productBranchEntity.setTotalPrice(productExportRequest.getPrice());
             productBranchEntity.setProductID(productExportRequest.getProductId());
             productBranchEntity.setProBranchID(productExportRequest.getProductBranchId());
+            productBranchEntity.setProductBatchId(productExportRequest.getProductBatchId());
             productBranchEntities.add(productBranchEntity);
             number += productExportRequest.getSaleQuantity();
             Optional<ProductEntity> productEntity = productRepository.findById(productExportRequest.getProductId());
