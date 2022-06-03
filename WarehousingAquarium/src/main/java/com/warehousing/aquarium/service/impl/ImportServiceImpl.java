@@ -63,12 +63,12 @@ public class ImportServiceImpl implements ImportService {
                     Optional<ProductBatchEntity> warehouseEntity = warehouseRepository.findById(productImportRequest.getProductBatchId());
                     if (warehouseEntity.isPresent()) {
                         productBatchEntity = warehouseEntity.get();
-                        Double price = (productBatchEntity.getPrice() + productImportRequest.getPrice()) / (productBatchEntity.getQuantity() + productImportRequest.getSaleQuantity());
+                        Double price = (productBatchEntity.getPrice() + productImportRequest.getUnitPrice()) / (productBatchEntity.getQuantity() + productImportRequest.getSaleQuantity());
                         productBatchEntity.setPrice(price);
-                        productBatchEntity.setQuantity((long) (productBatchEntity.getQuantity() + productImportRequest.getSaleQuantity()));
+                        productBatchEntity.setQuantity(productBatchEntity.getQuantity() + productImportRequest.getSaleQuantity());
                     }
                 } else {
-                    productBatchEntity.setPrice(productImportRequest.getPrice());
+                    productBatchEntity.setPrice(productImportRequest.getUnitPrice());
                     if (productImportRequest.getSaleQuantity() == null) {
                         productImportRequest.setSaleQuantity(0L);
                     }
@@ -84,22 +84,31 @@ public class ImportServiceImpl implements ImportService {
             ProductBranchEntity productBranchEntity = new ProductBranchEntity();
             if (productImportRequest.getProductBranchId() != null) {
                 productBranchEntity.setProBranchID(productImportRequest.getProductBranchId());
+                Optional<ProductBranchEntity> optionalProductBranch = productBranchRepository.findById(productImportRequest.getProductBranchId());
+                if (optionalProductBranch.isPresent()) {
+                    productBranchEntity = optionalProductBranch.get();
+                }
             }
+
             Optional<ProductEntity> productEntity = productRepository.findById(productImportRequest.getProductId());
+
             if (productEntity.isPresent()) {
                 ProductEntity entity = productEntity.get();
-                double newPrice = (entity.getSaleQuantity() * entity.getUnitPrice() + productImportRequest.getSaleQuantity() * productImportRequest.getPrice()) / (entity.getSaleQuantity() + productImportRequest.getSaleQuantity());
+                double newPrice = (entity.getSaleQuantity() * entity.getUnitPrice() + productImportRequest.getSaleQuantity() * productImportRequest.getUnitPrice()) / (entity.getSaleQuantity() + productImportRequest.getSaleQuantity());
                 newPrice = Math.ceil(newPrice * 100) / 100;
                 entity.setSaleQuantity(entity.getSaleQuantity() + productImportRequest.getSaleQuantity());
                 entity.setUnitPrice(newPrice);
                 productRepository.save(entity);
             }
-            productEntity.ifPresent(entity -> productBranchEntity.setProductID(entity.getProductId()));
+
+            ProductBranchEntity finalProductBranchEntity = productBranchEntity;
+            productEntity.ifPresent(entity -> finalProductBranchEntity.setProductID(entity.getProductId()));
             productBranchEntity.setSaleQuantity(productImportRequest.getSaleQuantity());
-            productBranchEntity.setTotalPrice(importRequest.getImportPrice());
+            productBranchEntity.setUnitPrice(importRequest.getImportPrice());
             productBranchEntity.setProductBatchId(productBatchEntity.getProductBatchId());
-            branchEntity.ifPresent(entity -> productBranchEntity.setBranchID(entity.getBranchId()));
-            productBranchEntities.add(productBranchEntity);
+            branchEntity.ifPresent(entity -> finalProductBranchEntity.setBranchID(entity.getBranchId()));
+
+            productBranchEntities.add(finalProductBranchEntity);
         }
 
         importEntity.setImportTime(new Date());
@@ -196,7 +205,7 @@ public class ImportServiceImpl implements ImportService {
                     productEntity.ifPresent(product -> importProductDTO.setImage(product.getImage()));
                     productEntity.ifPresent(product -> importProductDTO.setColor(product.getColor()));
                     productEntity.ifPresent(product -> importProductDTO.setCanExpired(product.getCanExpired()));
-                    importProductDTO.setUnitPrice(productBatchEntity.getPrice());
+                    importProductDTO.setUnitPrice(Math.ceil(productBatchEntity.getPrice() * 100) / 100);
                     productEntity.ifPresent(product -> importProductDTO.setUnitName(product.getUnitName()));
                     importProductDTOS.add(importProductDTO);
                 }
@@ -257,7 +266,7 @@ public class ImportServiceImpl implements ImportService {
             productEntity.ifPresent(product -> importProductDTO.setSaleQuantity(entity.getSaleQuantity()));
             productEntity.ifPresent(product -> importProductDTO.setImage(product.getImage()));
             productEntity.ifPresent(product -> importProductDTO.setColor(product.getColor()));
-            importProductDTO.setUnitPrice(entity.getTotalPrice());
+            importProductDTO.setUnitPrice(entity.getUnitPrice());
             productEntity.ifPresent(product -> importProductDTO.setCanExpired(product.getCanExpired()));
             productEntity.ifPresent(product -> importProductDTO.setUnitName(product.getUnitName()));
             productEntity.ifPresent(product -> importProductDTO.setProductBranchId(entity.getProBranchID()));

@@ -19,7 +19,7 @@ public class ProductBranchEntity {
     private Long productID;
     private Long saleQuantity;
     private Long quantityOnHand;
-    private Double totalPrice;
+    private Double unitPrice;
     private Date createdDate;
     private Long productBatchId;
 

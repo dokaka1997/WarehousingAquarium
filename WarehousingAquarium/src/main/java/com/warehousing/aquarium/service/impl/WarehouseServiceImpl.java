@@ -61,7 +61,7 @@ public class WarehouseServiceImpl implements ProductBatchService {
                 warehouseResponse.setProductName(product.getProductName());
                 warehouseResponse.setProductImg(product.getImage());
             }
-            warehouseResponse.setPrice(warehouseEntity.getPrice());
+            warehouseResponse.setPrice(Math.ceil(warehouseEntity.getPrice() * 100) / 100);
             warehouseResponse.setQuantity(warehouseEntity.getQuantity());
             warehouseResponse.setCreatedDate(warehouseEntity.getCreatedDate());
             Optional<AccountEntity> optionalAccount = userRepository.findById(warehouseEntity.getCreatedBy());
@@ -98,7 +98,8 @@ public class WarehouseServiceImpl implements ProductBatchService {
                 warehouseResponse.setProductName(product.getProductName());
                 warehouseResponse.setProductImg(product.getImage());
             }
-            warehouseResponse.setPrice(warehouseEntity.getPrice());
+
+            warehouseResponse.setPrice( Math.ceil(warehouseEntity.getPrice() * 100) / 100);
             warehouseResponse.setQuantity(warehouseEntity.getQuantity());
             warehouseResponse.setCreatedDate(warehouseEntity.getCreatedDate());
             Optional<AccountEntity> optionalAccount = userRepository.findById(warehouseEntity.getCreatedBy());

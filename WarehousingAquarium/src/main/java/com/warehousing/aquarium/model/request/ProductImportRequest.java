@@ -9,7 +9,7 @@ public class ProductImportRequest {
     private Long productId;
     private Long productBranchId;
     private Long saleQuantity;
-    private Double price;
+    private Double unitPrice;
     private Boolean canExpired;
     private Date expireDate;
     private Long productBatchId;

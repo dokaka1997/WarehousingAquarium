@@ -52,7 +52,7 @@ public class ExportServiceImpl implements ExportService {
         for (ProductImportRequest productExportRequest : exportRequest.getProducts()) {
             ProductBranchEntity productBranchEntity = new ProductBranchEntity();
             productBranchEntity.setSaleQuantity(productExportRequest.getSaleQuantity());
-            productBranchEntity.setTotalPrice(productExportRequest.getPrice());
+            productBranchEntity.setUnitPrice(productExportRequest.getUnitPrice());
             productBranchEntity.setProductID(productExportRequest.getProductId());
             productBranchEntity.setProBranchID(productExportRequest.getProductBranchId());
             productBranchEntity.setProductBatchId(productExportRequest.getProductBatchId());
@@ -167,7 +167,7 @@ public class ExportServiceImpl implements ExportService {
             optionalProduct.ifPresent(productEntity -> importProductDTO.setSaleQuantity(productBranchEntity.getSaleQuantity()));
             optionalProduct.ifPresent(productEntity -> importProductDTO.setImage(productEntity.getImage()));
             optionalProduct.ifPresent(productEntity -> importProductDTO.setColor(productEntity.getColor()));
-            optionalProduct.ifPresent(productEntity -> importProductDTO.setUnitPrice(productBranchEntity.getTotalPrice()));
+            optionalProduct.ifPresent(productEntity -> importProductDTO.setUnitPrice(productBranchEntity.getUnitPrice()));
             optionalProduct.ifPresent(productEntity -> importProductDTO.setUnitName(productEntity.getUnitName()));
             optionalProduct.ifPresent(productEntity -> importProductDTO.setCanExpired(productEntity.getCanExpired()));
             importProductDTO.setProductBranchId(productBranchEntity.getProBranchID());
