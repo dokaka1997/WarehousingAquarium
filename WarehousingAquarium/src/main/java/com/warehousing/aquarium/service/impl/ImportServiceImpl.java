@@ -205,7 +205,9 @@ public class ImportServiceImpl implements ImportService {
                     productEntity.ifPresent(product -> importProductDTO.setImage(product.getImage()));
                     productEntity.ifPresent(product -> importProductDTO.setColor(product.getColor()));
                     productEntity.ifPresent(product -> importProductDTO.setCanExpired(product.getCanExpired()));
-                    importProductDTO.setUnitPrice(Math.ceil(productBatchEntity.getPrice() * 100) / 100);
+                    if(productBatchEntity.getPrice() != null){
+                        importProductDTO.setUnitPrice(Math.ceil(productBatchEntity.getPrice() * 100) / 100);
+                    }
                     productEntity.ifPresent(product -> importProductDTO.setUnitName(product.getUnitName()));
                     importProductDTOS.add(importProductDTO);
                 }

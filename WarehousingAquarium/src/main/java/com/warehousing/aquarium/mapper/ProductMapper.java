@@ -44,8 +44,14 @@ public class ProductMapper {
             dto.setProductName(entity.getProductName());
             dto.setCreatedDate(entity.getCreatedDate());
             dto.setBarCode(entity.getBarCode());
-            dto.setUnitPrice(Math.ceil(entity.getUnitPrice() * 100) / 100);
-            dto.setRetailPrice(Math.ceil(entity.getRetailPrice() * 100) / 100);
+            if (entity.getUnitPrice() != null) {
+                dto.setUnitPrice(Math.ceil(entity.getUnitPrice() * 100) / 100);
+            }
+
+            if (entity.getRetailPrice() != null) {
+                dto.setRetailPrice(Math.ceil(entity.getRetailPrice() * 100) / 100);
+            }
+
             dto.setWholesalePrice(entity.getWholesalePrice());
             dto.setModifyCreate(entity.getModifyCreate());
             dto.setDescription(entity.getDescription());
@@ -96,7 +102,9 @@ public class ProductMapper {
         dto.setProductName(entity.getProductName());
         dto.setCreatedDate(entity.getCreatedDate());
         dto.setBarCode(entity.getBarCode());
-        dto.setUnitPrice(Math.ceil(entity.getUnitPrice() * 100) / 100);
+        if (entity.getUnitPrice() != null) {
+            dto.setUnitPrice(Math.ceil(entity.getUnitPrice() * 100) / 100);
+        }
         dto.setRetailPrice(entity.getRetailPrice());
         dto.setWholesalePrice(entity.getWholesalePrice());
         dto.setModifyCreate(entity.getModifyCreate());

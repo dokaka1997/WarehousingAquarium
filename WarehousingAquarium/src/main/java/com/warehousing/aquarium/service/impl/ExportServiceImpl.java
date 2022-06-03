@@ -78,6 +78,9 @@ public class ExportServiceImpl implements ExportService {
                         price += (warehouseEntity.getQuantity() * warehouseEntity.getPrice());
                     }
                     quantity = Math.ceil(quantity * 100) / 100;
+                    if (quantity == 0D) {
+                        quantity = 1D;
+                    }
                     entity.setUnitPrice(price / quantity);
                 }
                 if (productExportRequest.getProductBatchId() != null) {
