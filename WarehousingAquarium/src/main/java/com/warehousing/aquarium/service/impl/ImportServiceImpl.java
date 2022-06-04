@@ -82,22 +82,27 @@ public class ImportServiceImpl implements ImportService {
 
             number += productImportRequest.getSaleQuantity();
             ProductBranchEntity productBranchEntity = new ProductBranchEntity();
+            Long oldQuantity = 0L;
+            Long newQuantity = 0L;
             if (productImportRequest.getProductBranchId() != null) {
                 productBranchEntity.setProBranchID(productImportRequest.getProductBranchId());
                 Optional<ProductBranchEntity> optionalProductBranch = productBranchRepository.findById(productImportRequest.getProductBranchId());
                 if (optionalProductBranch.isPresent()) {
                     productBranchEntity = optionalProductBranch.get();
+                    oldQuantity = productBranchEntity.getSaleQuantity();
                 }
             }
-
+            newQuantity = productImportRequest.getSaleQuantity() - oldQuantity;
             Optional<ProductEntity> productEntity = productRepository.findById(productImportRequest.getProductId());
 
             if (productEntity.isPresent()) {
                 ProductEntity entity = productEntity.get();
-                double newPrice = (entity.getSaleQuantity() * entity.getUnitPrice() + productImportRequest.getSaleQuantity() * productImportRequest.getUnitPrice()) / (entity.getSaleQuantity() + productImportRequest.getSaleQuantity());
-                newPrice = Math.ceil(newPrice * 100) / 100;
-                entity.setSaleQuantity(entity.getSaleQuantity() + productImportRequest.getSaleQuantity());
-                entity.setUnitPrice(newPrice);
+                if (productImportRequest.getProductBranchId() == null) {
+                    double newPrice = (entity.getSaleQuantity() * entity.getUnitPrice() + productImportRequest.getSaleQuantity() * productImportRequest.getUnitPrice()) / (entity.getSaleQuantity() + productImportRequest.getSaleQuantity());
+                    newPrice = Math.ceil(newPrice * 100) / 100;
+                    entity.setUnitPrice(newPrice);
+                }
+                entity.setSaleQuantity(entity.getSaleQuantity() + newQuantity);
                 productRepository.save(entity);
             }
 
@@ -205,7 +210,7 @@ public class ImportServiceImpl implements ImportService {
                     productEntity.ifPresent(product -> importProductDTO.setImage(product.getImage()));
                     productEntity.ifPresent(product -> importProductDTO.setColor(product.getColor()));
                     productEntity.ifPresent(product -> importProductDTO.setCanExpired(product.getCanExpired()));
-                    if(productBatchEntity.getPrice() != null){
+                    if (productBatchEntity.getPrice() != null) {
                         importProductDTO.setUnitPrice(Math.ceil(productBatchEntity.getPrice() * 100) / 100);
                     }
                     productEntity.ifPresent(product -> importProductDTO.setUnitName(product.getUnitName()));

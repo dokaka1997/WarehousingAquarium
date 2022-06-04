@@ -59,7 +59,7 @@ public class ExportServiceImpl implements ExportService {
             productBranchEntities.add(productBranchEntity);
             number += productExportRequest.getSaleQuantity();
             Optional<ProductEntity> productEntity = productRepository.findById(productExportRequest.getProductId());
-            if (productEntity.isPresent()) {
+            if (productEntity.isPresent() && productExportRequest.getProductBranchId() == null) {
                 ProductEntity entity = productEntity.get();
                 if (entity.getSaleQuantity() <= 0) {
                     throw new RuntimeException("Quantity not enough");

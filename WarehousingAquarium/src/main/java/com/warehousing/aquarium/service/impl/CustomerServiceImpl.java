@@ -52,13 +52,13 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerEntity payDebtCustomerById(Long id) {
-        CustomerEntity customerEntity = new CustomerEntity();
         Optional<CustomerEntity> optionalCustomerEntity = customerRepository.findById(id);
-        if (optionalCustomerEntity.isPresent()) {
-            customerEntity = optionalCustomerEntity.get();
-            customerEntity.setDebt(0D);
-            customerRepository.save(customerEntity);
+        if (!optionalCustomerEntity.isPresent()) {
+            throw new RuntimeException("Customer not existed ");
         }
+        CustomerEntity customerEntity = optionalCustomerEntity.get();
+        customerEntity.setDebt(0D);
+        customerRepository.save(customerEntity);
         return customerEntity;
     }
 }
