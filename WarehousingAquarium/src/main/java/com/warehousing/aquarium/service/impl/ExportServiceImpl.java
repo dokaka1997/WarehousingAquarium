@@ -49,7 +49,11 @@ public class ExportServiceImpl implements ExportService {
     public ExportEntity addExport(ExportRequest exportRequest) {
         List<ProductBranchEntity> productBranchEntities = new ArrayList<>();
         int number = 0;
+        boolean isUpdate = false;
         for (ProductImportRequest productExportRequest : exportRequest.getProducts()) {
+            if(productExportRequest.getProductBranchId() != null){
+                isUpdate = true;
+            }
             ProductBranchEntity productBranchEntity = new ProductBranchEntity();
             productBranchEntity.setSaleQuantity(productExportRequest.getSaleQuantity());
             productBranchEntity.setUnitPrice(productExportRequest.getUnitPrice());
@@ -97,7 +101,7 @@ public class ExportServiceImpl implements ExportService {
                 productRepository.save(entity);
             }
         }
-        if (!exportRequest.getStatusPayment()) {
+        if (!exportRequest.getStatusPayment() && !isUpdate) {
             Optional<CustomerEntity> optionalCustomerEntity = customerRepository.findById(exportRequest.getCustomer());
             if (optionalCustomerEntity.isPresent()) {
                 CustomerEntity customerEntity = optionalCustomerEntity.get();
