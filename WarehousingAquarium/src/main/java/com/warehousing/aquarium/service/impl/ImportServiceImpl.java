@@ -104,7 +104,8 @@ public class ImportServiceImpl implements ImportService {
             ProductBranchEntity finalProductBranchEntity = productBranchEntity;
             productEntity.ifPresent(entity -> finalProductBranchEntity.setProductID(entity.getProductId()));
             productBranchEntity.setSaleQuantity(productImportRequest.getSaleQuantity());
-            productBranchEntity.setUnitPrice(importRequest.getImportPrice());
+            productBranchEntity.setTotalPrice(importRequest.getImportPrice());
+            productBranchEntity.setUnitPrice(productImportRequest.getUnitPrice());
             productBranchEntity.setProductBatchId(productBatchEntity.getProductBatchId());
             branchEntity.ifPresent(entity -> finalProductBranchEntity.setBranchID(entity.getBranchId()));
 
@@ -205,7 +206,7 @@ public class ImportServiceImpl implements ImportService {
                     productEntity.ifPresent(product -> importProductDTO.setImage(product.getImage()));
                     productEntity.ifPresent(product -> importProductDTO.setColor(product.getColor()));
                     productEntity.ifPresent(product -> importProductDTO.setCanExpired(product.getCanExpired()));
-                    importProductDTO.setUnitPrice(Math.ceil(productBatchEntity.getPrice() * 100) / 100);
+                    importProductDTO.setUnitPrice(productBatchEntity.getPrice());
                     productEntity.ifPresent(product -> importProductDTO.setUnitName(product.getUnitName()));
                     importProductDTOS.add(importProductDTO);
                 }

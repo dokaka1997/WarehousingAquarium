@@ -44,8 +44,8 @@ public class ProductMapper {
             dto.setProductName(entity.getProductName());
             dto.setCreatedDate(entity.getCreatedDate());
             dto.setBarCode(entity.getBarCode());
-            dto.setUnitPrice(Math.ceil(entity.getUnitPrice() * 100) / 100);
-            dto.setRetailPrice(Math.ceil(entity.getRetailPrice() * 100) / 100);
+            dto.setUnitPrice(entity.getUnitPrice());
+            dto.setRetailPrice(entity.getRetailPrice());
             dto.setWholesalePrice(entity.getWholesalePrice());
             dto.setModifyCreate(entity.getModifyCreate());
             dto.setDescription(entity.getDescription());

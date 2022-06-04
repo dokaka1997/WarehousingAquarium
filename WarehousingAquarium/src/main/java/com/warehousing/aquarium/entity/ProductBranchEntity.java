@@ -22,5 +22,5 @@ public class ProductBranchEntity {
     private Double unitPrice;
     private Date createdDate;
     private Long productBatchId;
-
+    private Double totalPrice;
 }
