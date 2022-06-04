@@ -34,10 +34,15 @@ public class CustomerController {
     public ResponseEntity<List<CustomerEntity>> getAllCustomer() {
         return ResponseEntity.ok(customerService.getAllCustomer());
     }
-    
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Boolean> deleteCustomerById(@PathVariable Long id) {
         return ResponseEntity.ok(customerService.deleteCustomer(id));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<CustomerEntity> payDebtCustomerById(@PathVariable Long id) {
+        return ResponseEntity.ok(customerService.payDebtCustomerById(id));
     }
 
 }

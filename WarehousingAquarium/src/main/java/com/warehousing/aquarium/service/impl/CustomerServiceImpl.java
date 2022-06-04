@@ -6,6 +6,7 @@ import com.warehousing.aquarium.service.CustomerService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -36,11 +37,28 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerEntity getCustomerById(Long id) {
-        return customerRepository.findById(id).get();
+        CustomerEntity customerEntity = new CustomerEntity();
+        Optional<CustomerEntity> optionalCustomerEntity = customerRepository.findById(id);
+        if (optionalCustomerEntity.isPresent()) {
+            customerEntity = optionalCustomerEntity.get();
+        }
+        return customerEntity;
     }
 
     @Override
     public List<CustomerEntity> getAllCustomer() {
         return customerRepository.findAll();
+    }
+
+    @Override
+    public CustomerEntity payDebtCustomerById(Long id) {
+        CustomerEntity customerEntity = new CustomerEntity();
+        Optional<CustomerEntity> optionalCustomerEntity = customerRepository.findById(id);
+        if (optionalCustomerEntity.isPresent()) {
+            customerEntity = optionalCustomerEntity.get();
+            customerEntity.setDebt(0D);
+            customerRepository.save(customerEntity);
+        }
+        return customerEntity;
     }
 }

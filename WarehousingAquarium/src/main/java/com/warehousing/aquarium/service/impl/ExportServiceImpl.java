@@ -97,11 +97,11 @@ public class ExportServiceImpl implements ExportService {
                 productRepository.save(entity);
             }
         }
-        if (!exportRequest.getStatusPayment() || exportRequest.getAmountPaid() < exportRequest.getExportPrice() && exportRequest.getCustomer() != null) {
+        if (!exportRequest.getStatusPayment()) {
             Optional<CustomerEntity> optionalCustomerEntity = customerRepository.findById(exportRequest.getCustomer());
             if (optionalCustomerEntity.isPresent()) {
                 CustomerEntity customerEntity = optionalCustomerEntity.get();
-                customerEntity.setDebt(customerEntity.getDebt() + (exportRequest.getExportPrice() - exportRequest.getAmountPaid()));
+                customerEntity.setDebt(customerEntity.getDebt() + exportRequest.getExportPrice());
                 customerRepository.save(customerEntity);
             }
         }

@@ -13,4 +13,6 @@ public interface CustomerService {
     CustomerEntity getCustomerById(Long id);
 
     List<CustomerEntity> getAllCustomer();
+
+    CustomerEntity payDebtCustomerById(Long id);
 }
