@@ -53,6 +53,7 @@ public class ImportServiceImpl implements ImportService {
         Optional<SupplierEntity> supplierEntity = supplierRepository.findById(importRequest.getSupplierId());
         Optional<PaymentTypeEntity> paymentTypeEntity = paymentTypeRepository.findById(importRequest.getPaymentType());
         int number = 0;
+        boolean isUpdate = false;
 
         for (ProductImportRequest productImportRequest : importRequest.getProducts()) {
             ProductBatchEntity productBatchEntity = new ProductBatchEntity();
@@ -85,6 +86,7 @@ public class ImportServiceImpl implements ImportService {
             Long oldQuantity = 0L;
             Long newQuantity = 0L;
             if (productImportRequest.getProductBranchId() != null) {
+                isUpdate = true;
                 productBranchEntity.setProBranchID(productImportRequest.getProductBranchId());
                 Optional<ProductBranchEntity> optionalProductBranch = productBranchRepository.findById(productImportRequest.getProductBranchId());
                 if (optionalProductBranch.isPresent()) {
@@ -126,9 +128,10 @@ public class ImportServiceImpl implements ImportService {
         importEntity.setStatus(importRequest.getStatusImport());
         importEntity.setStatusPayment(importRequest.getStatusPayment());
         importEntity.setSttStore(importRequest.getStatusStore());
-        if (!importRequest.getStatusPayment()) {
+        if (!importRequest.getStatusPayment() && !isUpdate) {
             if (supplierEntity.isPresent()) {
-                supplierEntity.get().setDept(importRequest.getImportPrice());
+                SupplierEntity supplier = supplierEntity.get();
+                supplier.setDept(supplier.getDept() + importRequest.getImportPrice());
                 supplierRepository.save(supplierEntity.get());
             }
         }
